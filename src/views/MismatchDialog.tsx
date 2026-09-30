@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ComponentEx, Modal, selectors, util } from 'vortex-api';
+import { ComponentEx, Modal, selectors, util } from '@nexusmods/vortex-api';
 
 import { IMismatch } from '../types/interface';
 

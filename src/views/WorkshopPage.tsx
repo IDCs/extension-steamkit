@@ -2,7 +2,7 @@
 import path from 'path';
 
 import { EmptyPlaceholder, FlexLayout, FormInput, MainContext,
-  IconBar, MainPage, selectors, Spinner, types, util, Dropdown, DropdownButton } from 'vortex-api';
+  IconBar, MainPage, selectors, Spinner, types, util, Dropdown, DropdownButton } from '@nexusmods/vortex-api';
 
 import { useSelector } from 'react-redux';
 import Select from 'react-select';

@@ -1,11 +1,11 @@
-import { fs, log, selectors, types, util } from 'vortex-api';
+import { fs, log, selectors, types, util } from '@nexusmods/vortex-api';
 
 import DelegateBase from './DelegateBase';
 
-import Promise from 'bluebird';
 import minimatch from 'minimatch';
 import * as path from 'path';
-import turbowalk, { IEntry } from 'turbowalk';
+
+import { IWalkEntry, walk } from '../util/walk';
 
 export class Context extends DelegateBase {
   private gameId: string;
@@ -47,7 +47,7 @@ export class Context extends DelegateBase {
      log('debug', 'getGameFileList called');
      const fullPath = this.gameDiscovery.path;
      const modPath = this.gameInfo.queryModPath(this.gameDiscovery.path);
-     const filterFunc = (input: IEntry) => ((modPath !== '.') && (modPath !== fullPath))
+     const filterFunc = (input: IWalkEntry) => ((modPath !== '.') && (modPath !== fullPath))
       ? input.filePath.indexOf(modPath) === -1
       : true;
      this.readDir(fullPath, true, filterFunc)
@@ -61,7 +61,7 @@ export class Context extends DelegateBase {
       log('debug', 'getExistingDataFileList called', basePath);
       const fullPath = this.resolveFilePath(basePath);
 
-      const filterFunc = (input: IEntry) => minimatch(path.basename(input.filePath), pattern);
+      const filterFunc = (input: IWalkEntry) => minimatch(path.basename(input.filePath), pattern);
 
       this.readDir(fullPath, recursive, filterFunc)
         .then((fileList) => callback(null, fileList))
@@ -106,23 +106,17 @@ export class Context extends DelegateBase {
     return path.join(modPath, filePath);
   }
 
-  private readDir = (rootPath: string,
-                     recurse: boolean,
-                     filterFunc: (entry: IEntry) => boolean)
-                     : Promise<string[]> => {
-    let fileList: string[] = [];
+  private readDir = async (rootPath: string,
+                           recurse: boolean,
+                           filterFunc: (entry: IWalkEntry) => boolean)
+                           : Promise<string[]> => {
+    const entries = await walk(rootPath, { recurse });
 
-    return turbowalk(rootPath, entries => {
-      fileList = fileList.concat(
-        entries
-          .filter(iter => !iter.isDirectory)
-          .filter(filterFunc)
-          // in the past this mapped to a path relative to rootPath but NMM
-          // clearly returns absolute paths. Obviously there is no documentation
-          // for the _expected_ behavior
-          .map(iter => iter.filePath));
-    }, { recurse })
-    .then(() => fileList);
+    return entries
+      .filter(iter => !iter.isDirectory)
+      .filter(filterFunc)
+      // NMM returns absolute paths here.
+      .map(iter => iter.filePath);
   }
 }
 

@@ -1,5 +1,5 @@
 import Client from 'node-rest-client';
-import { fs, log, selectors, types, util } from 'vortex-api';
+import { fs, log, selectors, types, util } from '@nexusmods/vortex-api';
 
 import { NoSteamDataException } from '../types/errors';
 import { IModsCache, IWorkshopMod } from '../types/interface';

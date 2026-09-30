@@ -1,4 +1,4 @@
-import { log, types, util } from 'vortex-api';
+import { log, types, util } from '@nexusmods/vortex-api';
 
 import { endMismatchDialog, setMismatchState} from '../actions/session';
 import { IMismatch, IMismatchInfo, IMismatchState, IReportError, OperationType, StateCallback } from '../types/interface';

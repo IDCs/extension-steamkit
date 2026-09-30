@@ -3,7 +3,7 @@ import { IWorkshopMod } from '../types/interface';
 import { TFunction } from 'i18next';
 import * as React from 'react';
 
-import { Icon, OverlayTrigger, tooltip, util } from 'vortex-api';
+import { Icon, OverlayTrigger, tooltip, util } from '@nexusmods/vortex-api';
 import { Button, Panel, Popover } from 'react-bootstrap';
 
 const FILE_DETAILS_URL = 'https://steamcommunity.com/sharedfiles/filedetails/?id=';
@@ -77,7 +77,7 @@ export default function ModThumbnail(props: IBaseProps) {
     util.opn(FILE_DETAILS_URL + mod.publishedfileid).catch(() => null);
   }, [mod]);
 
-  const totalVotes = mod.vote_data?.votes_up ?? 0 + mod.vote_data?.votes_down ?? 0;
+  const totalVotes = (mod.vote_data?.votes_up ?? 0) + (mod.vote_data?.votes_down ?? 0);
 
   return (
     <Panel className='mod-thumbnail'>

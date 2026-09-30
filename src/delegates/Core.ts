@@ -1,4 +1,4 @@
-import { types } from 'vortex-api';
+import { types } from '@nexusmods/vortex-api';
 import Context from './Context';
 import UI from './UI';
 

@@ -1,9 +1,10 @@
 import path from 'path';
-import { actions, types, selectors, util, fs } from 'vortex-api';
+import { actions, types, selectors, util, fs } from '@nexusmods/vortex-api';
 import { IDependencyModInfo, IWorkshopMod } from '../types/interface';
 
-import turbowalk from 'turbowalk';
 import { memoize } from 'lodash';
+
+import { walk } from './walk';
 
 export function addDownloadMetaData(api: types.IExtensionApi,
                                     mod: IWorkshopMod | IDependencyModInfo,
@@ -36,14 +37,17 @@ export function addModMetaData(api: types.IExtensionApi,
 }
 
 export async function getFiles(basePath: string): Promise<string[]> {
-  let filePaths: string[] = [];
-  return turbowalk(basePath, files => {
-    const filtered = files.filter(entry => !entry.isDirectory && !entry.filePath.split(path.sep).includes('.DepotDownloader'));
-    filePaths = filePaths.concat(filtered.map(entry => entry.filePath));
-  }, { recurse: true, skipLinks: true })
-  .catch(err => ['ENOENT', 'ENOTFOUND'].includes(err.code)
-    ? Promise.resolve() : Promise.reject(err))
-  .then(() => Promise.resolve(filePaths));
+  try {
+    const entries = await walk(basePath, { recurse: true, skipLinks: true });
+    return entries
+      .filter(entry => !entry.isDirectory && !entry.filePath.split(path.sep).includes('.DepotDownloader'))
+      .map(entry => entry.filePath);
+  } catch (err) {
+    if (['ENOENT', 'ENOTFOUND'].includes(err.code)) {
+      return [];
+    }
+    throw err;
+  }
 }
 
 export async function packFiles(modPath: string, files: string[], destination: string) {

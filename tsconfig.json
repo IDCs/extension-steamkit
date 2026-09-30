@@ -1,22 +1,28 @@
 {
-    "compilerOptions": {
-        "target": "es2019",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noImplicitAny": false,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "rootDir": "src",
-        "outDir": "./out",
-        "jsx": "react",
-        "sourceMap": false,
-        "esModuleInterop": true,
-        "skipLibCheck": true
-    },
-    "exclude": [
-        "node_modules"
-    ],
-    "include": [
-        "src/index.ts"
-    ]
+  "$schema": "https://www.schemastore.org/tsconfig.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react",
+    "types": ["node"],
+    "noEmit": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": false,
+    "useUnknownInCatchVariables": false,
+    "noImplicitAny": false,
+    "noImplicitOverride": false,
+    "noImplicitThis": false,
+    "noUncheckedIndexedAccess": false,
+    "strict": false,
+    "strictFunctionTypes": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false
+  },
+  "include": ["src"]
 }

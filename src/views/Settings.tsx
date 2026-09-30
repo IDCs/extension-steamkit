@@ -1,7 +1,7 @@
 import I18next from 'i18next';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { More, tooltip, util } from 'vortex-api';
+import { More, tooltip, util } from '@nexusmods/vortex-api';
 
 import { NS } from '../constants';
 

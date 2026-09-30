@@ -1,4 +1,4 @@
-import { ComponentEx, EmptyPlaceholder, selectors, types, util } from 'vortex-api'; 
+import { ComponentEx, EmptyPlaceholder, selectors, types, util } from '@nexusmods/vortex-api';
 import { connect } from 'react-redux';
 import Promise from 'bluebird';
 import { TFunction } from 'i18next';

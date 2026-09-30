@@ -1,4 +1,4 @@
-import { actions, fs, log, selectors, types, util } from 'vortex-api';
+import { actions, fs, log, selectors, types, util } from '@nexusmods/vortex-api';
 
 import Core from './delegates/Core';
 import { IDependencyModInfo, IMismatch, ISteamKitParameters, IWorkshopMod, OperationType } from './types/interface';
@@ -588,6 +588,12 @@ export class NonSteamGame extends Error {
   }
 }
 
+// context.once is synchronous, so the icon set is installed fire-and-forget.
+function installIcons() {
+  util.installIconSet('steam', path.join(__dirname, 'icons.svg'))
+    .catch(err => log('error', 'failed to install steamkit icon set', err));
+}
+
 function init(context: types.IExtensionContext): boolean {
   context.registerReducer(['session', 'steamkit'], sessionReducer);
   let downloadQueue;
@@ -948,7 +954,7 @@ function init(context: types.IExtensionContext): boolean {
       }
     });
     context.api.setStylesheet('workshoppagestyle', path.join(__dirname, 'workshop.scss'));
-    return util.installIconSet('steam', path.join(__dirname, 'icons.svg'));
+    installIcons();
   });
 
   return true;
