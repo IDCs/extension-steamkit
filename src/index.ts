@@ -1,5 +1,6 @@
 import * as path from "path";
 
+import { mdiSteam } from "@mdi/js";
 import { actions, fs, log, selectors, types, util } from "@nexusmods/vortex-api";
 
 import bundledCatalog from "../catalog.json";
@@ -198,6 +199,7 @@ function init(context: types.IExtensionContext): boolean {
   };
   const steamPage = {
     hotkeyRaw: "F1",
+    mdi: mdiSteam,
     visible: () => {
       const state = context.api.getState();
       return offersSteamFeatures(state, selectors.activeGameId(state));

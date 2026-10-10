@@ -87,6 +87,7 @@ jobs:
           pnpm pkg set version="$VERSION"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "release $VERSION"
+          # package.json may already carry the version.
+          git diff --quiet || git commit -am "release $VERSION"
           git tag "v$VERSION"
           git push origin "HEAD:refs/heads/$BRANCH" "v$VERSION"
