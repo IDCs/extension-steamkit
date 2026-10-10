@@ -128,3 +128,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Packaged extension bundle
+*.7z
+
+# .NET build output
+[Bb]in/
+[Oo]bj/
+
+# Bridge published for the integration tests
+.test-dotnet/

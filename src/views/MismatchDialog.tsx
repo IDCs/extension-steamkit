@@ -1,14 +1,11 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { ComponentEx, Modal, selectors, util } from 'vortex-api';
+import { ComponentEx, Modal, selectors, util } from "@nexusmods/vortex-api";
+import * as React from "react";
+import { Button, Checkbox } from "react-bootstrap";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
 
-import { IMismatch } from '../types/interface';
-
-import { setMismatchState } from '../actions/session';
-
-import { withTranslation } from 'react-i18next';
-
-import { Button, Checkbox } from 'react-bootstrap';
+import { setMismatchState } from "../actions/session";
+import { IMismatch } from "../types/interface";
 
 interface IBaseProps {
   onSelect: (mismatches: IMismatch[]) => void;
@@ -42,28 +39,24 @@ class MismatchDialog extends ComponentEx<IProps, IComponentState> {
     const { mismatches, onCancel, t } = this.props;
     const { selectAll } = this.state;
     return (
-      <Modal
-        className={'common-dialog-info'}
-        show={mismatches?.length > 0}
-        onHide={onCancel}
-      >
+      <Modal className={"common-dialog-info"} show={mismatches?.length > 0} onHide={onCancel}>
         <Modal.Header>
-          <Modal.Title>{t('Steam detected mismatched files')}</Modal.Title>
+          <Modal.Title>{t("Steam detected mismatched files")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.renderContent()}
           <Checkbox
-            className='mismatch-checkbox'
-            id={'mismatch-select-all'}
+            className="mismatch-checkbox"
+            id={"mismatch-select-all"}
             checked={selectAll}
             onChange={this.onSelectAll}
           >
-            {t('Select All')}
+            {t("Select All")}
           </Checkbox>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={onCancel}>{t('Cancel')}</Button>
-          <Button onClick={this.select}>{t('Download and Replace Game Files')}</Button>
+          <Button onClick={onCancel}>{t("Cancel")}</Button>
+          <Button onClick={this.select}>{t("Download and Replace Game Files")}</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -71,22 +64,22 @@ class MismatchDialog extends ComponentEx<IProps, IComponentState> {
 
   private select = () => {
     const { mismatches, onSelect } = this.props;
-    onSelect(mismatches.filter(m => m.enabled));
-  }
+    onSelect(mismatches.filter((m) => m.enabled));
+  };
 
   private renderContent(): JSX.Element {
     const { mismatches, t } = this.props;
     return (
-      <div className='mismatch-dialog-container'>
-        <div key='dialog-content-text' className='dialog-content-text'>
-          {t('Steam file integrity verification has detected that the following original '
-          + 'games files have either been altered or are missing. Please select the '
-          + 'files you would like to restore:')}
+      <div className="mismatch-dialog-container">
+        <div key="dialog-content-text" className="dialog-content-text">
+          {t(
+            "Steam file integrity verification has detected that the following original " +
+              "games files have either been altered or are missing. Please select the " +
+              "files you would like to restore:",
+          )}
         </div>
-        <div key='mismatch-dialog-content-checkboxes' className='mismatch-dialog-content-choices'>
-          <div>
-            {mismatches.map(this.renderCheckbox)}
-          </div>
+        <div key="mismatch-dialog-content-checkboxes" className="mismatch-dialog-content-choices">
+          <div>{mismatches.map(this.renderCheckbox)}</div>
         </div>
       </div>
     );
@@ -95,7 +88,7 @@ class MismatchDialog extends ComponentEx<IProps, IComponentState> {
   private renderCheckbox = (mismatch: IMismatch) => {
     return (
       <Checkbox
-        className='mismatch-checkbox'
+        className="mismatch-checkbox"
         id={mismatch.id}
         key={mismatch.id}
         checked={mismatch.enabled}
@@ -104,7 +97,7 @@ class MismatchDialog extends ComponentEx<IProps, IComponentState> {
         {mismatch.filePath}
       </Checkbox>
     );
-  }
+  };
 
   private toggleCheckbox = (evt: React.MouseEvent<any>) => {
     const { mismatches, onSetMismatchState } = this.props;
@@ -113,17 +106,17 @@ class MismatchDialog extends ComponentEx<IProps, IComponentState> {
     });
     const newMismatches = mismatches.reduce((accum, iter, i) => {
       if (idx === i) {
-        accum.push(({
+        accum.push({
           ...iter,
           enabled: !iter.enabled,
-        }));
+        });
       } else {
         accum.push(iter);
       }
       return accum;
     }, []);
     onSetMismatchState(newMismatches);
-  }
+  };
 
   private onSelectAll = () => {
     const { mismatches, onSetMismatchState } = this.props;
@@ -131,31 +124,30 @@ class MismatchDialog extends ComponentEx<IProps, IComponentState> {
     const value = !selectAll;
     this.nextState.selectAll = value;
     const newMismatches = mismatches.reduce((accum, iter) => {
-      accum.push(({
+      accum.push({
         ...iter,
         enabled: value,
-      }));
+      });
       return accum;
     }, []);
     onSetMismatchState(newMismatches);
-  }
+  };
 }
 
 function mapStateToProps(state: any): IConnectedProps {
   return {
     gameMode: selectors.activeGameId(state),
-    mismatches: util.getSafe(state, ['session', 'steamkit', 'mismatches'], []),
+    mismatches: util.getSafe(state, ["session", "steamkit", "mismatches"], []),
   };
 }
 
 function mapDispatchToProps(dispatch: any): IActionProps {
   return {
-    onSetMismatchState: (mismatches: IMismatch[]) =>
-      dispatch(setMismatchState({ mismatches })),
+    onSetMismatchState: (mismatches: IMismatch[]) => dispatch(setMismatchState({ mismatches })),
   };
 }
 
-export default
-  connect(mapStateToProps, mapDispatchToProps)(
-    withTranslation(['steamkit'])(
-      MismatchDialog as any)) as any;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withTranslation(["steamkit"])(MismatchDialog as any)) as any;

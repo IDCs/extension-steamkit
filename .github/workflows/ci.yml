@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      version:
+        description: Version to build, written into package.json and so info.json
+        type: string
+        required: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    # steamkit runs in Vortex on Windows, and its secret protection (DPAPI) is Windows-only.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', 'global.json') }}
+
+      # pnpm from packageManager, Node from devEngines.runtime.
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v2.0.2
+        with:
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Set the release version
+        if: inputs.version != ''
+        shell: bash
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::'$VERSION' is not a semver version, e.g. 1.2.3"
+            exit 1
+          fi
+          pnpm pkg set version="$VERSION"
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
+
+      # Generated from the assemblies Build just published.
+      - name: Verify the committed bridge declarations are current
+        shell: bash
+        run: |
+          node typedefs.mjs
+          if ! git diff --exit-code -- src/types/dotnet; then
+            echo "::error::src/types/dotnet is stale. Run 'pnpm run typedefs' and commit the result."
+            exit 1
+          fi
+
+      - name: Package
+        run: pnpm run bundle7z
+
+      # Vortex offers an update only when info.json's version matches the one on Nexus Mods.
+      - name: Verify the package
+        shell: bash
+        run: |
+          paths="$(pnpm exec 7z l -ba -slt steamkit.7z | sed -n 's/^Path = //p')"
+          for required in index.js info.json; do
+            if ! grep -qx "$required" <<< "$paths"; then
+              echo "::error::$required is not at the root of steamkit.7z"
+              exit 1
+            fi
+          done
+          expected="$(pnpm pkg get version | tr -d '"')"
+          actual="$(node -p "require('./dist/info.json').version")"
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::info.json has version $actual, package.json $expected"
+            exit 1
+          fi
+
+      - name: Upload the extension package
+        uses: actions/upload-artifact@v7
+        with:
+          name: steamkit
+          path: steamkit.7z
+          if-no-files-found: error

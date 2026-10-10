@@ -1,3 +1,5 @@
+import type { ModScrubber } from "../util/Scrubber";
+
 export interface ISteamKitParameters {
   Username?: string;
   Password?: string;
@@ -5,39 +7,25 @@ export interface ISteamKitParameters {
   ManifestOnly?: boolean;
   CellId?: number;
 
-  // Files need to be separated by /r or /n
+  /** Files to verify, one per line, relative to the install directory or absolute. */
   FileList?: string;
   InstallDirectory?: string;
   VerifyAll?: boolean;
-  MaxServers?: number;
   MaxDownloads?: number;
   LoginId?: number;
 
   // Steam app id
   AppId?: number;
 
-  PubFile?: string;
-  UgcId?: string;
   Branch?: string;
   BetaBranchPassword?: string;
   DepotIdList?: number[];
-  ManifestIdList?: number[];
+  /** The manifest of each depot in DepotIdList. Strings, since manifest ids are 64-bit. */
+  ManifestIdList?: string[];
 }
 
-export interface IModsCache { [page: string]: IWorkshopMod[]; }
-
-export interface IWorkshopModInfo {
-  name: string;
-  subscriptions: number;
-  preview_url: string;
-  favorited: number;
-  time_updated: number;
-}
-
-export interface IDependencyModInfo {
-  // This is grim - we don't have a title or anything besides the ugcid...
-  publishedfileid: string;
-  creator_appid: number;
+export interface IModsCache {
+  [page: string]: IWorkshopMod[];
 }
 
 export interface IWorkshopMod {
@@ -88,14 +76,30 @@ export interface IWorkshopMod {
     score: number;
     votes_up: number;
     votes_down: number;
-  }
+  };
 }
 
-export interface IReportError {
-  title: string;
-  message: string;
-  details: string;
-}
+/** Whether the Steam Workshop can be browsed for the active game. */
+export const WorkshopAccessState = {
+  Ready: "ready",
+  NeedsApiKey: "needsApiKey",
+  NotSteam: "notSteam",
+} as const;
+export type WorkshopAccessState = (typeof WorkshopAccessState)[keyof typeof WorkshopAccessState];
+
+export type WorkshopAccess =
+  | { state: typeof WorkshopAccessState.Ready; scrubber: ModScrubber }
+  | { state: typeof WorkshopAccessState.NeedsApiKey }
+  | { state: typeof WorkshopAccessState.NotSteam };
+
+/** How the user signs in to Steam. */
+export const SignInMethod = { Password: "password", QrCode: "qrCode" } as const;
+export type SignInMethod = (typeof SignInMethod)[keyof typeof SignInMethod];
+
+/** How the user signs in; remember keeps the sign-in so later runs don't ask. */
+export type SignInAnswer =
+  | { method: typeof SignInMethod.Password; username: string; password: string; remember: boolean }
+  | { method: typeof SignInMethod.QrCode; remember: boolean };
 
 export interface IMismatch {
   id: string;
@@ -103,16 +107,9 @@ export interface IMismatch {
   enabled: boolean;
 }
 
-export type StateCallback = (mismatches: string[]) => void;
-
-export interface IMismatchInfo {
-  mismatches: string[];
-  select?: StateCallback;
-  cancel?: () => void;
-}
+/** Called with a download's progress in percent. */
+export type ProgressCallback = (percent: number) => void;
 
 export interface IMismatchState {
   mismatches: IMismatch[];
 }
-
-export type OperationType = 'file_verification' | 'mod_download';

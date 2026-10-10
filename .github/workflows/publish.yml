@@ -1,0 +1,92 @@
+name: Publish to Nexus Mods
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to publish (semver, e.g. 1.2.3)
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-nexus
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check the version is new
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Refuse a version that is already tagged
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" > /dev/null; then
+            echo "::error::v$VERSION is already released"
+            exit 1
+          fi
+
+  build:
+    needs: check
+    uses: ./.github/workflows/ci.yml
+    with:
+      version: ${{ inputs.version }}
+
+  upload:
+    name: Upload to Nexus Mods
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      ARCHIVE: steamkit-${{ inputs.version }}.7z
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: steamkit
+
+      - name: Name the archive for its version
+        run: mv steamkit.7z "$ARCHIVE"
+
+      - name: Upload to Nexus Mods
+        uses: Nexus-Mods/upload-action@v1.0.0-beta.10
+        with:
+          api_key: ${{ secrets.NEXUS_API_KEY }}
+          file_id: ${{ secrets.NEXUS_FILE_ID }}
+          display_name: Steamkit
+          filename: ${{ env.ARCHIVE }}
+          version: ${{ inputs.version }}
+          archive_existing_version: true
+          primary_mod_manager_download: true
+          allow_mod_manager_download: true
+          update_mod_version: true
+
+  record:
+    name: Record the version in the repo
+    needs: upload
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v2.0.2
+        with:
+          install: false
+
+      # Commits on top of the commit that was built, so the tag marks what Nexus Mods has.
+      - name: Commit and tag the version
+        env:
+          VERSION: ${{ inputs.version }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          pnpm pkg set version="$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "release $VERSION"
+          git tag "v$VERSION"
+          git push origin "HEAD:refs/heads/$BRANCH" "v$VERSION"
