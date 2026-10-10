@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/package.json",
   "name": "steamkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This Vortex extension interacts with the Steam Depot Downloader application, allowing game extensions to execute certain SteamAPI functionalities",
   "main": "./dist/index.js",
   "type": "commonjs",
