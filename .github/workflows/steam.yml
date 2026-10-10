@@ -1,0 +1,32 @@
+name: Steam
+
+# Runs the suites that talk to the real Steam network, signed in anonymously. Steam's availability
+# makes them unfit as a PR check, so they run on request.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  steam:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v2.0.2
+        with:
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test against Steam
+        run: pnpm run test:steam

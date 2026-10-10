@@ -1,23 +1,12 @@
-import { types, util } from '@nexusmods/vortex-api';
+import type { types } from "@nexusmods/vortex-api";
 
-import { endMismatchDialog, setCacheCounter, setMismatchState, setWorkshopModFilter } from '../actions/session';
+import { builtInCatalogLoaded, endMismatchDialog, setMismatchState } from "../actions/session";
 
 export const sessionReducer: types.IReducerSpec = {
   reducers: {
-    [setCacheCounter as any]: (state, payload) => {
-      const { totalMods, gameMode } = payload;
-      return (util.setSafe(state, ['cache', gameMode, 'totalMods'], totalMods));
-    },
-    [endMismatchDialog as any]:
-        (state, payload) => util.setSafe(state, ['mismatches'], []),
-    [setMismatchState as any]: (state, payload) => {
-      const { mismatches } = payload;
-      return util.setSafe(state, ['mismatches'], mismatches);
-    },
-    [setWorkshopModFilter as any]: (state, payload) => {
-      const { filter } = payload;
-      return util.setSafe(state, ['workshopModFilter'], filter);
-    }
+    [endMismatchDialog as any]: (state) => ({ ...state, mismatches: [] }),
+    [setMismatchState as any]: (state, payload) => ({ ...state, mismatches: payload.mismatches }),
+    [builtInCatalogLoaded.getType()]: (state, catalog) => ({ ...state, builtInCatalog: catalog }),
   },
-  defaults: {},
+  defaults: { mismatches: [] },
 };

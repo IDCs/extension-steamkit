@@ -135,3 +135,6 @@ dist
 # .NET build output
 [Bb]in/
 [Oo]bj/
+
+# Bridge published for the integration tests
+.test-dotnet/

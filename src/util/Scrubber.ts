@@ -1,10 +1,8 @@
-import Client from 'node-rest-client';
-import { fs, log, selectors, types, util } from '@nexusmods/vortex-api';
+import Client from "node-rest-client";
 
-import { NoSteamDataException } from '../types/errors';
-import { IModsCache, IWorkshopMod } from '../types/interface';
-
-import { MODS_PER_PAGE } from '../constants';
+import { MODS_PER_PAGE } from "../constants";
+import { ErrorKind, SteamkitError } from "../types/errors";
+import { IModsCache, IWorkshopMod } from "../types/interface";
 
 export enum QueryType {
   ByVote = 0,
@@ -13,57 +11,33 @@ export enum QueryType {
 }
 
 export interface IQueryFilesParameters {
-  appid?: string;
-  key?: string;
   page?: number;
-  publishedfileid?: string;
   filter?: string;
   sorting?: QueryType;
 }
 
 const MODS_PER_PAGE_PARAM = `&numperpage=${MODS_PER_PAGE}`;
-const QUERY_LINK_TEMPLATE = `https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key={{key}}&appid={{appId}}&query_type={{type}}&page={{page}}&creator_appid={{appId}}&return_children=true&return_vote_data=true&return_short_description=true${MODS_PER_PAGE_PARAM}{{fileid}}{{title}}`;
+const QUERY_LINK_TEMPLATE = `https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key={{key}}&appid={{appId}}&query_type={{type}}&page={{page}}&creator_appid={{appId}}&return_children=true&return_vote_data=true&return_short_description=true${MODS_PER_PAGE_PARAM}{{title}}`;
 
 export class ModScrubber {
   // Steam api key.
   private mApiKey: string;
 
-  private mClient;
+  private mClient = new Client.Client();
   // Steam app id
   private mAppId: string;
   private mCurrentAvailableTotal: number;
-  private mApi: types.IExtensionApi;
   private mDataArray: IModsCache;
-  private mGameMode: string;
   private mCurrentFilter: string;
-  private onChangeCallback: (gameMode: string, totalMods: number) => void;
 
-  constructor(api: types.IExtensionApi,
-              onChangeCallback: (gameMode: string, totalMods: number) => void) {
-    this.mApi = api;
-    this.mClient = new Client.Client();
-    this.onChangeCallback = onChangeCallback;
-  }
-
-  public init(appId: string, gameId: string, webApiKey: string) {
-    this.reset();
+  public init(appId: string, webApiKey: string) {
+    this.resetDataArray();
     this.mApiKey = webApiKey;
     this.mAppId = appId;
-    this.mGameMode = gameId;
-    this.mDataArray = {};
-    // this.start();
-  }
-
-  private async reset() {
-    this.mDataArray = {};
-    this.mCurrentAvailableTotal = 0;
-    this.mAppId = undefined;
-    this.mGameMode = undefined;
-    this.mApiKey = undefined;
   }
 
   private findFileIdInPage(fileId: string, page: string) {
-    return this.mDataArray[page]?.find(entry => entry.publishedfileid === fileId);
+    return this.mDataArray[page]?.find((entry) => entry.publishedfileid === fileId);
   }
 
   private isInCache(publishedfileId: string) {
@@ -77,92 +51,75 @@ export class ModScrubber {
     return false;
   }
 
-  private async scrub(qLink: string): Promise<IWorkshopMod[]> {
-    if (!qLink) {
-      return Promise.resolve([]);
-    }
+  /** A Steam Web API response; a refused key is AccessDenied, any other non-200 answer Failed. */
+  private getJson(link: string): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
-        this.mClient.get(qLink, async (data, response) => {
+        const request = this.mClient.get(link, (data, response) => {
+          if (response.statusCode === 401 || response.statusCode === 403) {
+            return reject(
+              new SteamkitError(ErrorKind.AccessDenied, "Steam did not accept the Steam Web API key"),
+            );
+          }
           if (response.statusCode !== 200) {
-            return reject(new Error('Failed to query link'));
+            return reject(
+              new SteamkitError(ErrorKind.Failed, `Steam answered with HTTP ${response.statusCode}`),
+            );
           }
-          if (this.mCurrentAvailableTotal === 0 && data.response.total === 0) {
-            return reject(new NoSteamDataException());
-          }
-          if (!this.mCurrentAvailableTotal) {
-            this.mCurrentAvailableTotal = data.response.total;
-          }
-
-          const details = [];
-          if (data.response.publishedfiledetails) {
-            for (const fileDetails of data.response.publishedfiledetails) {
-              if (fileDetails && !this.isInCache(fileDetails.publishedfileid)) {
-                details.push(fileDetails);
-              }
-            }
-          }
-          return resolve(details);
+          return resolve(data);
         });
+        request.on("error", reject);
       } catch (err) {
-        log('error', 'Failed to query link', err);
         return reject(err);
       }
     });
   }
 
-  private stringValOrDefault<T>(val: T, defaultVal: string) {
-    return (val) ? val.toString() : defaultVal;
+  private async scrub(qLink: string): Promise<IWorkshopMod[]> {
+    if (!qLink) {
+      return [];
+    }
+    const data = await this.getJson(qLink);
+    if (this.mCurrentAvailableTotal === 0 && data.response.total === 0) {
+      return [];
+    }
+    if (!this.mCurrentAvailableTotal) {
+      this.mCurrentAvailableTotal = data.response.total;
+    }
+    return (data.response.publishedfiledetails ?? []).filter(
+      (fileDetails: IWorkshopMod) => fileDetails && !this.isInCache(fileDetails.publishedfileid),
+    );
   }
 
   private generateLink(parameters: IQueryFilesParameters): string {
-    const { appid, key, page, publishedfileid } = parameters;
-    const apiKey = this.stringValOrDefault<string>(key, this.mApiKey);
-    const appId = this.stringValOrDefault<string>(appid, this.mAppId);
-    const currPage = this.stringValOrDefault<number>(page, '1');
-    let fileId = this.stringValOrDefault<string>(publishedfileid, '');
-    if (fileId) {
-      fileId = `&child_publishedfileid=${fileId}`;
-    }
-
-    let filter = this.mCurrentFilter;
-    if (filter) {
-      filter = `&search_text=${filter}`;
-    }
-    if (!appId) {
+    if (!this.mAppId) {
       return null;
     }
-    const link: string = QUERY_LINK_TEMPLATE.replace(/{{appId}}/g, appId)
-                                            .replace(/{{type}}/, parameters.sorting.toFixed())
-                                            .replace('{{key}}', apiKey)
-                                            .replace('{{page}}', currPage)
-                                            .replace('{{fileid}}', fileId)
-                                            .replace('{{title}}', filter);
-    return link;
+    const filter = this.mCurrentFilter ? `&search_text=${this.mCurrentFilter}` : "";
+    return QUERY_LINK_TEMPLATE.replace(/{{appId}}/g, this.mAppId)
+      .replace(/{{type}}/, parameters.sorting.toFixed())
+      .replace("{{key}}", this.mApiKey)
+      .replace("{{page}}", String(parameters.page ?? 1))
+      .replace("{{title}}", filter);
   }
 
-  private async startQuery(link: string): Promise<IWorkshopMod[]> {
-    return this.scrub(link);
+  /** The Steam name of a Workshop item's creator, by SteamID; undefined when Steam doesn't say. */
+  public async creatorName(creatorSteamId: string): Promise<string | undefined> {
+    const data = await this.getJson(
+      "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/" +
+        `?key=${this.mApiKey}&steamids=${creatorSteamId}`,
+    );
+    return data.response?.players?.[0]?.personaname;
   }
 
   public availableTotal(): number {
     return this.mCurrentAvailableTotal ?? 0;
   }
 
-  public async queryFileId(publishedfileid: string): Promise<IWorkshopMod> {
-    const pages = Object.keys(this.mDataArray);
-    for (const page of pages) {
-      if (this.findFileIdInPage(publishedfileid, page)) {
-        return this.findFileIdInPage(publishedfileid, page);
-      }
-    }
-    const queryLink = this.generateLink({ publishedfileid, appid: this.mAppId });
-    const data = await this.startQuery(queryLink);
-    return (data.length > 0) ? data[0] : undefined;
-  }
-
+  /** Forgets the pages and total fetched, for a new search or sort. */
   public resetDataArray() {
     this.mDataArray = {};
+    this.mCurrentAvailableTotal = 0;
   }
 
   public async scrubPage(query: IQueryFilesParameters): Promise<IWorkshopMod[]> {
@@ -172,16 +129,8 @@ export class ModScrubber {
     if (query?.filter !== this.mCurrentFilter) {
       this.mCurrentFilter = query.filter;
     }
-    const queryLink = this.generateLink(query);
-    try {
-      const res: IWorkshopMod[] = await this.startQuery(queryLink);
-      this.mDataArray[query.page] = res;
-      return res;
-    } catch (err) {
-      if (!(err instanceof NoSteamDataException)) {
-        this.mApi.showErrorNotification('Failed to query Steam Workshop', err);
-      }
-      return Promise.resolve([]);
-    }
+    const res: IWorkshopMod[] = await this.scrub(this.generateLink(query));
+    this.mDataArray[query.page] = res;
+    return res;
   }
 }

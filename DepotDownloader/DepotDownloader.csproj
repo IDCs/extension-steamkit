@@ -1,21 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Vendored from SteamRE/DepotDownloader 989f37b (2026-09-21). -->
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net9.0</TargetFramework>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <RollForward>LatestMajor</RollForward>
-    <Version>2.4.5</Version>
+    <Version>3.4.0</Version>
     <Description>Steam Downloading Utility</Description>
     <Authors>SteamRE Team</Authors>
-    <Copyright>Copyright © SteamRE Team 2021</Copyright>
+    <Copyright>Copyright © SteamRE Team 2025</Copyright>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="protobuf-net" Version="3.0.101" />
-    <PackageReference Include="SteamKit2" Version="2.4.1" />
+    <!-- Held at 0.3.183: later versions need a C# 14 compiler. -->
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.183">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="protobuf-net" Version="3.4.30" />
+    <PackageReference Include="QRCoder" Version="1.8.0" />
+    <PackageReference Include="SteamKit2" Version="3.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="DepotDownloaderNative" />
+    <InternalsVisibleTo Include="DepotDownloaderNative.Tests" />
   </ItemGroup>
 </Project>

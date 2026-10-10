@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "DepotDownloaderIPC": {
-      "commandName": "Project",
-      "commandLineArgs": "12346"
-    }
-  }
-}

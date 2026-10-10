@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DepotDownloaderIPC", "DepotDownloaderIPC\DepotDownloaderIPC.csproj", "{51487CAE-4E84-474D-871B-B70FEFAA49B2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D36278D9-EF02-4889-87E4-A1D830608CB8} = {D36278D9-EF02-4889-87E4-A1D830608CB8}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DepotDownloader", "DepotDownloader\DepotDownloader.csproj", "{9AA804B5-F465-458F-9E61-A093B2BB630D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D36278D9-EF02-4889-87E4-A1D830608CB8} = {D36278D9-EF02-4889-87E4-A1D830608CB8}
@@ -20,16 +15,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepotDownloaderNative", "DepotDownloaderNative\DepotDownloaderNative.csproj", "{EB76DA87-0D7B-456F-9668-2CF18D0A611A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepotDownloaderNative.Tests", "DepotDownloaderNative.Tests\DepotDownloaderNative.Tests.csproj", "{DAE5805F-CAA2-42ED-9AEE-1CBFA373D040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepotDownloaderNative.TestHost", "DepotDownloaderNative.TestHost\DepotDownloaderNative.TestHost.csproj", "{D18127B7-8796-496D-95AF-77BA7FB23957}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepotDownloaderNative.SteamTests", "DepotDownloaderNative.SteamTests\DepotDownloaderNative.SteamTests.csproj", "{3A05D2B1-4248-43E4-B6F4-AC60740986A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{51487CAE-4E84-474D-871B-B70FEFAA49B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51487CAE-4E84-474D-871B-B70FEFAA49B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51487CAE-4E84-474D-871B-B70FEFAA49B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51487CAE-4E84-474D-871B-B70FEFAA49B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9AA804B5-F465-458F-9E61-A093B2BB630D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9AA804B5-F465-458F-9E61-A093B2BB630D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AA804B5-F465-458F-9E61-A093B2BB630D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +37,22 @@ Global
 		{D36278D9-EF02-4889-87E4-A1D830608CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D36278D9-EF02-4889-87E4-A1D830608CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D36278D9-EF02-4889-87E4-A1D830608CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB76DA87-0D7B-456F-9668-2CF18D0A611A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB76DA87-0D7B-456F-9668-2CF18D0A611A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB76DA87-0D7B-456F-9668-2CF18D0A611A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB76DA87-0D7B-456F-9668-2CF18D0A611A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE5805F-CAA2-42ED-9AEE-1CBFA373D040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE5805F-CAA2-42ED-9AEE-1CBFA373D040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE5805F-CAA2-42ED-9AEE-1CBFA373D040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE5805F-CAA2-42ED-9AEE-1CBFA373D040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D18127B7-8796-496D-95AF-77BA7FB23957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18127B7-8796-496D-95AF-77BA7FB23957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18127B7-8796-496D-95AF-77BA7FB23957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18127B7-8796-496D-95AF-77BA7FB23957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A05D2B1-4248-43E4-B6F4-AC60740986A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A05D2B1-4248-43E4-B6F4-AC60740986A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A05D2B1-4248-43E4-B6F4-AC60740986A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A05D2B1-4248-43E4-B6F4-AC60740986A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,3021 @@
+{
+  "schemaVersion": 1,
+  "games": {
+    "skyrimse": {
+      "steamAppId": 489830,
+      "versions": [
+        {
+          "id": "1.7.104",
+          "label": "1.7.104",
+          "depots": [
+            { "depotId": 489831, "manifestId": "4940892828028256588" },
+            { "depotId": 489832, "manifestId": "5728778377666085157" },
+            { "depotId": 489833, "manifestId": "4886117324142477814" }
+          ]
+        },
+        {
+          "id": "1.5.97",
+          "label": "1.5.97",
+          "depots": [
+            { "depotId": 489831, "manifestId": "7848722008564294070" },
+            { "depotId": 489832, "manifestId": "8702665189575304780" },
+            { "depotId": 489833, "manifestId": "2289561010626853674" }
+          ]
+        },
+        {
+          "id": "1.6.317",
+          "label": "1.6.317",
+          "depots": [
+            { "depotId": 489831, "manifestId": "8893533186410323048" },
+            { "depotId": 489832, "manifestId": "7231497621745539234" },
+            { "depotId": 489833, "manifestId": "5887811902658527321" }
+          ]
+        },
+        {
+          "id": "1.6.318",
+          "label": "1.6.318",
+          "depots": [
+            { "depotId": 489831, "manifestId": "1985552842565684891" },
+            { "depotId": 489832, "manifestId": "5260954425794414274" },
+            { "depotId": 489833, "manifestId": "6964426252826681862" }
+          ]
+        },
+        {
+          "id": "1.6.323",
+          "label": "1.6.323",
+          "depots": [
+            { "depotId": 489831, "manifestId": "6913241376784585188" },
+            { "depotId": 489832, "manifestId": "6077137133470860357" },
+            { "depotId": 489833, "manifestId": "2414608533287116506" }
+          ]
+        },
+        {
+          "id": "1.6.342",
+          "label": "1.6.342",
+          "depots": [
+            { "depotId": 489831, "manifestId": "349141704917442044" },
+            { "depotId": 489832, "manifestId": "2337986449035143556" },
+            { "depotId": 489833, "manifestId": "5357951305619261097" }
+          ]
+        },
+        {
+          "id": "1.6.353",
+          "label": "1.6.353",
+          "depots": [
+            { "depotId": 489831, "manifestId": "7089166303853251347" },
+            { "depotId": 489832, "manifestId": "1476684358338706955" },
+            { "depotId": 489833, "manifestId": "4570833277049890269" }
+          ]
+        },
+        {
+          "id": "1.6.629",
+          "label": "1.6.629",
+          "depots": [
+            { "depotId": 489831, "manifestId": "3660787314279169352" },
+            { "depotId": 489832, "manifestId": "2756691988703496654" },
+            { "depotId": 489833, "manifestId": "8453224879269405640" }
+          ]
+        },
+        {
+          "id": "1.6.640",
+          "label": "1.6.640",
+          "depots": [
+            { "depotId": 489831, "manifestId": "3660787314279169352" },
+            { "depotId": 489832, "manifestId": "2756691988703496654" },
+            { "depotId": 489833, "manifestId": "5291801952219815735" }
+          ]
+        },
+        {
+          "id": "1.6.1130",
+          "label": "1.6.1130",
+          "depots": [
+            { "depotId": 489831, "manifestId": "3737743381894105176" },
+            { "depotId": 489832, "manifestId": "4341968404481569190" },
+            { "depotId": 489833, "manifestId": "2442187225363891157" }
+          ]
+        },
+        {
+          "id": "1.6.1170",
+          "label": "1.6.1170",
+          "depots": [
+            { "depotId": 489831, "manifestId": "8442952117333549665" },
+            { "depotId": 489832, "manifestId": "8042843504692938467" },
+            { "depotId": 489833, "manifestId": "1914580699073641964" }
+          ]
+        },
+        {
+          "id": "1.7.99",
+          "label": "1.7.99",
+          "depots": [
+            { "depotId": 489831, "manifestId": "3552311541133526669" },
+            { "depotId": 489832, "manifestId": "1885196179801530198" },
+            { "depotId": 489833, "manifestId": "8156748093655676596" }
+          ]
+        }
+      ]
+    },
+    "fallout4": {
+      "steamAppId": 377160,
+      "versions": [
+        {
+          "id": "1.11.240",
+          "label": "1.11.240",
+          "depots": [
+            { "depotId": 377161, "manifestId": "5983086794954940044" },
+            { "depotId": 377162, "manifestId": "4737695048810094469" },
+            { "depotId": 377163, "manifestId": "5944191827186292545" },
+            { "depotId": 377164, "manifestId": "8492427313392140315" }
+          ]
+        },
+        {
+          "id": "build-22848228",
+          "label": "Build 22848228",
+          "depots": [
+            { "depotId": 377161, "manifestId": "5983086794954940044" },
+            { "depotId": 377162, "manifestId": "387388833281246371" },
+            { "depotId": 377163, "manifestId": "8363807899725426636" },
+            { "depotId": 377164, "manifestId": "8492427313392140315" }
+          ]
+        },
+        {
+          "id": "1.10.984",
+          "label": "1.10.984",
+          "depots": [
+            { "depotId": 377161, "manifestId": "7332110922360867314" },
+            { "depotId": 377162, "manifestId": "5698952341602575696" },
+            { "depotId": 377163, "manifestId": "8681102885670959037" },
+            { "depotId": 435871, "manifestId": "7785009542965564688" },
+            { "depotId": 435880, "manifestId": "366079256218893805" },
+            { "depotId": 377164, "manifestId": "8492427313392140315" },
+            { "depotId": 435870, "manifestId": "1213339795579796878" },
+            { "depotId": 393885, "manifestId": "5000262035721758737" }
+          ]
+        }
+      ]
+    },
+    "skyrim": {
+      "steamAppId": 72850,
+      "versions": [
+        {
+          "id": "1.9.32",
+          "label": "1.9.32",
+          "depots": [
+            { "depotId": 72851, "manifestId": "430694959351693705" },
+            { "depotId": 72852, "manifestId": "5176728229505148062" },
+            { "depotId": 72853, "manifestId": "5477471785942614203" }
+          ]
+        }
+      ]
+    },
+    "falloutnv": {
+      "steamAppId": 22380,
+      "versions": [
+        {
+          "id": "1.4.0.525",
+          "label": "1.4.0.525",
+          "depots": [
+            { "depotId": 22381, "manifestId": "8327177303444281069" },
+            { "depotId": 22382, "manifestId": "1869121858616960493" },
+            { "depotId": 22393, "manifestId": "8227935753987096201" },
+            { "depotId": 72732, "manifestId": "4131381354636064588" },
+            { "depotId": 72742, "manifestId": "4517089570337326424" },
+            { "depotId": 72751, "manifestId": "1624841217294494503" },
+            { "depotId": 72761, "manifestId": "5717050455382180241" },
+            { "depotId": 72841, "manifestId": "7404324045800590955" }
+          ]
+        }
+      ]
+    },
+    "oblivion": {
+      "steamAppId": 22330,
+      "versions": [
+        {
+          "id": "1.2.0.416",
+          "label": "1.2.0.416",
+          "depots": [{ "depotId": 22331, "manifestId": "7977703601170745652" }]
+        }
+      ]
+    },
+    "stardewvalley": {
+      "steamAppId": 413150,
+      "versions": [
+        {
+          "id": "1.6.15.24356",
+          "label": "1.6.15.24356",
+          "depots": [{ "depotId": 413151, "manifestId": "4278718763097142923" }]
+        },
+        {
+          "id": "32-bit",
+          "label": "32-bit",
+          "branch": "compatibility",
+          "depots": [{ "depotId": 413151, "manifestId": "4848991934266309406" }]
+        },
+        {
+          "id": "1.6.14",
+          "label": "1.6.14",
+          "branch": "previous_version",
+          "depots": [{ "depotId": 413151, "manifestId": "1364246008775303529" }]
+        },
+        {
+          "id": "1.6.8-legacy",
+          "label": "1.6.8 (legacy)",
+          "branch": "legacy_1.6.8",
+          "depots": [{ "depotId": 413151, "manifestId": "1777024427851858279" }]
+        },
+        {
+          "id": "1.5.6-legacy",
+          "label": "1.5.6 (legacy)",
+          "branch": "legacy_1.5.6",
+          "depots": [{ "depotId": 413151, "manifestId": "5609262347030774375" }]
+        }
+      ]
+    },
+    "cyberpunk2077": {
+      "steamAppId": 1091500,
+      "versions": [
+        {
+          "id": "3.0.80.51928",
+          "label": "3.0.80.51928",
+          "depots": [{ "depotId": 1091501, "manifestId": "3389237510439361019" }]
+        },
+        {
+          "id": "2.3",
+          "label": "2.3",
+          "branch": "2_30_old",
+          "depots": [{ "depotId": 1091501, "manifestId": "6814019010317238099" }]
+        },
+        {
+          "id": "2.21",
+          "label": "2.21",
+          "branch": "2_21_old",
+          "depots": [{ "depotId": 1091501, "manifestId": "8420445566849588826" }]
+        },
+        {
+          "id": "2.13",
+          "label": "2.13",
+          "branch": "2_13_old",
+          "depots": [{ "depotId": 1091501, "manifestId": "4350623720177810551" }]
+        },
+        {
+          "id": "1.63-legacy",
+          "label": "1.63 (legacy)",
+          "branch": "1_63_legacy_patch",
+          "depots": [{ "depotId": 1091501, "manifestId": "6594873489665865240" }]
+        }
+      ]
+    },
+    "baldursgate3": {
+      "steamAppId": 1086940,
+      "versions": [
+        {
+          "id": "build-25605617",
+          "label": "Build 25605617",
+          "depots": [
+            { "depotId": 1086941, "manifestId": "8253106406752983615" },
+            { "depotId": 1086942, "manifestId": "17875152607970122" },
+            { "depotId": 1419652, "manifestId": "1625295449847783523" },
+            { "depotId": 1419653, "manifestId": "3221749745104422496" }
+          ]
+        },
+        {
+          "id": "build-24532579",
+          "label": "Build 24532579",
+          "depots": [
+            { "depotId": 1086941, "manifestId": "4288948197859959444" },
+            { "depotId": 1086942, "manifestId": "17875152607970122" },
+            { "depotId": 1419652, "manifestId": "7005275183208636774" },
+            { "depotId": 1419653, "manifestId": "2098612237190800348" }
+          ]
+        },
+        {
+          "id": "patch-7-hf3",
+          "label": "Patch 7 hf3",
+          "branch": "release_patch_7_hf3",
+          "depots": [
+            { "depotId": 1086941, "manifestId": "5026713417664092526" },
+            { "depotId": 1086942, "manifestId": "17875152607970122" },
+            { "depotId": 1419652, "manifestId": "4560720842929068408" },
+            { "depotId": 1419653, "manifestId": "813968981771126782" }
+          ]
+        },
+        {
+          "id": "patch-6-hf9",
+          "label": "Patch 6 hf9",
+          "branch": "release_patch6_hf9",
+          "depots": [
+            { "depotId": 1086941, "manifestId": "4016443084035836922" },
+            { "depotId": 1086942, "manifestId": "17875152607970122" },
+            { "depotId": 1419652, "manifestId": "6054390892227846984" },
+            { "depotId": 1419653, "manifestId": "5004287504333497038" }
+          ]
+        }
+      ]
+    },
+    "morrowind": {
+      "steamAppId": 22320,
+      "versions": [
+        {
+          "id": "1.6.0.1820",
+          "label": "1.6.0.1820",
+          "depots": [{ "depotId": 22321, "manifestId": "1293785437610275498" }]
+        }
+      ]
+    },
+    "starfield": {
+      "steamAppId": 1716740,
+      "versions": [
+        {
+          "id": "1.16.244",
+          "label": "1.16.244",
+          "depots": [
+            { "depotId": 1716741, "manifestId": "6026043903923231328" },
+            { "depotId": 1716742, "manifestId": "3130703038371677921" }
+          ]
+        }
+      ]
+    },
+    "7daystodie": {
+      "steamAppId": 251570,
+      "versions": [
+        {
+          "id": "3.3.0",
+          "label": "3.3.0",
+          "depots": [{ "depotId": 251576, "manifestId": "1372257690212457713" }]
+        },
+        {
+          "id": "3.2.0",
+          "label": "3.2.0",
+          "branch": "v3.2.0",
+          "depots": [{ "depotId": 251576, "manifestId": "369722652848853089" }]
+        },
+        {
+          "id": "3.1.0",
+          "label": "3.1.0",
+          "branch": "v3.1.0",
+          "depots": [{ "depotId": 251576, "manifestId": "2335528316889377843" }]
+        },
+        {
+          "id": "2.6",
+          "label": "2.6",
+          "branch": "v2.6",
+          "depots": [{ "depotId": 251576, "manifestId": "7009946112288959550" }]
+        },
+        {
+          "id": "1.4",
+          "label": "1.4",
+          "branch": "v1.4",
+          "depots": [{ "depotId": 251576, "manifestId": "6659681639584219039" }]
+        },
+        {
+          "id": "alpha-21.2",
+          "label": "Alpha 21.2",
+          "branch": "alpha21.2",
+          "depots": [{ "depotId": 251576, "manifestId": "2807835339043437499" }]
+        },
+        {
+          "id": "alpha-20.7",
+          "label": "Alpha 20.7",
+          "branch": "alpha20.7",
+          "depots": [{ "depotId": 251576, "manifestId": "7186207210366457474" }]
+        },
+        {
+          "id": "alpha-19.6",
+          "label": "Alpha 19.6",
+          "branch": "alpha19.6",
+          "depots": [{ "depotId": 251576, "manifestId": "7376710676679235726" }]
+        },
+        {
+          "id": "alpha-18.4",
+          "label": "Alpha 18.4",
+          "branch": "alpha18.4",
+          "depots": [{ "depotId": 251576, "manifestId": "1829459294485917329" }]
+        },
+        {
+          "id": "alpha-17.4",
+          "label": "Alpha 17.4",
+          "branch": "alpha17.4",
+          "depots": [{ "depotId": 251576, "manifestId": "3575830474138886113" }]
+        },
+        {
+          "id": "alpha-16.4",
+          "label": "Alpha 16.4",
+          "branch": "alpha16.4",
+          "depots": [{ "depotId": 251576, "manifestId": "7468628160220339213" }]
+        },
+        {
+          "id": "alpha-15.2",
+          "label": "Alpha 15.2",
+          "branch": "alpha15.2",
+          "depots": [{ "depotId": 251576, "manifestId": "1889406064716381912" }]
+        },
+        {
+          "id": "alpha-14.7",
+          "label": "Alpha 14.7",
+          "branch": "alpha14.7",
+          "depots": [{ "depotId": 251576, "manifestId": "1890869266944069978" }]
+        },
+        {
+          "id": "alpha-13.8",
+          "label": "Alpha 13.8",
+          "branch": "alpha13.8",
+          "depots": [{ "depotId": 251576, "manifestId": "4068792839952772166" }]
+        },
+        {
+          "id": "alpha-12.5",
+          "label": "Alpha 12.5",
+          "branch": "alpha12.5",
+          "depots": [{ "depotId": 251576, "manifestId": "4330205761186853781" }]
+        },
+        {
+          "id": "alpha-11.6",
+          "label": "Alpha 11.6",
+          "branch": "alpha11.6",
+          "depots": [{ "depotId": 251576, "manifestId": "3531752892536585587" }]
+        },
+        {
+          "id": "alpha-10.4",
+          "label": "Alpha 10.4",
+          "branch": "alpha10.4",
+          "depots": [{ "depotId": 251576, "manifestId": "5720370525519468123" }]
+        },
+        {
+          "id": "alpha-9.3",
+          "label": "Alpha 9.3",
+          "branch": "alpha9.3",
+          "depots": [{ "depotId": 251576, "manifestId": "2164521405273223044" }]
+        },
+        {
+          "id": "alpha-8.8",
+          "label": "Alpha 8.8",
+          "branch": "alpha8.8",
+          "depots": [{ "depotId": 251576, "manifestId": "2055364469586533071" }]
+        }
+      ]
+    },
+    "ahatintime": {
+      "steamAppId": 253230,
+      "versions": [
+        {
+          "id": "build-25577316",
+          "label": "Build 25577316",
+          "depots": [{ "depotId": 253232, "manifestId": "3049932171736837237" }]
+        }
+      ]
+    },
+    "battletech": {
+      "steamAppId": 637090,
+      "versions": [
+        {
+          "id": "build-20387569",
+          "label": "Build 20387569",
+          "depots": [{ "depotId": 637092, "manifestId": "3571434299329528407" }]
+        }
+      ]
+    },
+    "bladeandsorcery": {
+      "steamAppId": 629730,
+      "versions": [
+        {
+          "id": "build-24471221",
+          "label": "Build 24471221",
+          "depots": [{ "depotId": 629731, "manifestId": "3513455317288973999" }]
+        },
+        {
+          "id": "1.3.0",
+          "label": "1.3.0",
+          "branch": "previousversion_1.3.0",
+          "depots": [{ "depotId": 629731, "manifestId": "3111003840496035715" }]
+        },
+        {
+          "id": "1.2.1",
+          "label": "1.2.1",
+          "branch": "previousversion_1.2.1",
+          "depots": [{ "depotId": 629731, "manifestId": "7602532758400198373" }]
+        },
+        {
+          "id": "1.2.0",
+          "label": "1.2.0",
+          "branch": "previousversion_1.2.0",
+          "depots": [{ "depotId": 629731, "manifestId": "4650678897978224539" }]
+        },
+        {
+          "id": "1.1.2",
+          "label": "1.1.2",
+          "branch": "previousversion_1.1.2",
+          "depots": [{ "depotId": 629731, "manifestId": "142738448529930143" }]
+        },
+        {
+          "id": "1.1.1",
+          "label": "1.1.1",
+          "branch": "previousversion_1.1.1",
+          "depots": [{ "depotId": 629731, "manifestId": "4982978563643409113" }]
+        },
+        {
+          "id": "1.1.0",
+          "label": "1.1.0",
+          "branch": "previousversion_1.1.0",
+          "depots": [{ "depotId": 629731, "manifestId": "5670781749314393010" }]
+        },
+        {
+          "id": "1.0.7",
+          "label": "1.0.7",
+          "branch": "previousversion_1.0.7",
+          "depots": [{ "depotId": 629731, "manifestId": "173223821949560774" }]
+        },
+        {
+          "id": "update-12",
+          "label": "Update 12",
+          "branch": "previousversion_u12",
+          "depots": [{ "depotId": 629731, "manifestId": "6523986853884682652" }]
+        },
+        {
+          "id": "update-11.3",
+          "label": "Update 11.3",
+          "branch": "previousversion_u11",
+          "depots": [{ "depotId": 629731, "manifestId": "2919607818350853847" }]
+        },
+        {
+          "id": "update-10.2",
+          "label": "Update 10.2",
+          "branch": "previousversion_u10",
+          "depots": [{ "depotId": 629731, "manifestId": "3186407359680173248" }]
+        },
+        {
+          "id": "update-9.3",
+          "label": "Update 9.3",
+          "branch": "previousversion_u9.3",
+          "depots": [{ "depotId": 629731, "manifestId": "3428588699928380898" }]
+        },
+        {
+          "id": "update-9.0",
+          "label": "Update 9.0",
+          "branch": "previousversion_u9.0",
+          "depots": [{ "depotId": 629731, "manifestId": "1390591474667883816" }]
+        },
+        {
+          "id": "update-8.3",
+          "label": "Update 8.3",
+          "branch": "previousversion_u8",
+          "depots": [{ "depotId": 629731, "manifestId": "2297547079036515044" }]
+        },
+        {
+          "id": "update-7",
+          "label": "Update 7",
+          "branch": "previousversion_u7",
+          "depots": [{ "depotId": 629731, "manifestId": "7538751664354493754" }]
+        },
+        {
+          "id": "update-6",
+          "label": "Update 6",
+          "branch": "previousversion_u6",
+          "depots": [{ "depotId": 629731, "manifestId": "3400606199226081666" }]
+        }
+      ]
+    },
+    "bloodstainedritualofthenight": {
+      "steamAppId": 692850,
+      "versions": [
+        {
+          "id": "build-20844919",
+          "label": "Build 20844919",
+          "depots": [
+            { "depotId": 692851, "manifestId": "5832232959569309380" },
+            { "depotId": 692852, "manifestId": "175497718091106726" }
+          ]
+        }
+      ]
+    },
+    "breakingwheel": {
+      "steamAppId": 545890,
+      "versions": [
+        {
+          "id": "build-1731515",
+          "label": "Build 1731515",
+          "depots": [{ "depotId": 545891, "manifestId": "1090984410609291115" }]
+        }
+      ]
+    },
+    "conanexiles": {
+      "steamAppId": 440900,
+      "versions": [
+        {
+          "id": "build-25791535",
+          "label": "Build 25791535",
+          "depots": [
+            { "depotId": 440901, "manifestId": "2054081959462269381" },
+            { "depotId": 440902, "manifestId": "5273949083598308295" },
+            { "depotId": 440903, "manifestId": "4117553855113091513" }
+          ]
+        },
+        {
+          "id": "legacy-ue4",
+          "label": "Legacy (UE4)",
+          "branch": "conan-exiles-legacy",
+          "depots": [
+            { "depotId": 440901, "manifestId": "4116790600486792578" },
+            { "depotId": 440902, "manifestId": "3635075760854659884" },
+            { "depotId": 440903, "manifestId": "261321725502850169" }
+          ]
+        }
+      ]
+    },
+    "darkestdungeon": {
+      "steamAppId": 262060,
+      "versions": [
+        {
+          "id": "build-25810065",
+          "label": "Build 25810065",
+          "depots": [
+            { "depotId": 262061, "manifestId": "1244433749584235551" },
+            { "depotId": 262062, "manifestId": "1206048241558749867" }
+          ]
+        },
+        {
+          "id": "legacy-2022",
+          "label": "Legacy (2022)",
+          "branch": "legacy",
+          "depots": [
+            { "depotId": 262061, "manifestId": "5542773349944116172" },
+            { "depotId": 262062, "manifestId": "4622584022444491877" }
+          ]
+        }
+      ]
+    },
+    "darksouls": {
+      "steamAppId": 211420,
+      "versions": [
+        {
+          "id": "build-1480646",
+          "label": "Build 1480646",
+          "depots": [{ "depotId": 211421, "manifestId": "2485886415746818104" }]
+        },
+        {
+          "id": "steam-build-2.0",
+          "label": "Steam build 2.0",
+          "branch": "-dsptde-2.0-",
+          "depots": [{ "depotId": 211421, "manifestId": "4422435038260304287" }]
+        }
+      ]
+    },
+    "darksouls2": {
+      "steamAppId": 236430,
+      "versions": [
+        {
+          "id": "build-9849657",
+          "label": "Build 9849657",
+          "depots": [
+            { "depotId": 236432, "manifestId": "4547260915165328308" },
+            { "depotId": 236434, "manifestId": "683459295384639511" }
+          ]
+        }
+      ]
+    },
+    "dawnofman": {
+      "steamAppId": 858810,
+      "versions": [
+        {
+          "id": "build-20301737",
+          "label": "Build 20301737",
+          "depots": [{ "depotId": 858811, "manifestId": "6285443185208500270" }]
+        }
+      ]
+    },
+    "divinityoriginalsin2": {
+      "steamAppId": 435150,
+      "versions": [
+        {
+          "id": "build-9530355",
+          "label": "Build 9530355",
+          "depots": [
+            { "depotId": 435151, "manifestId": "5526106730905574720" },
+            { "depotId": 435152, "manifestId": "7844138143823902363" }
+          ]
+        }
+      ]
+    },
+    "divinityoriginalsin2definitiveedition": {
+      "steamAppId": 435150,
+      "versions": [
+        {
+          "id": "build-9530355",
+          "label": "Build 9530355",
+          "depots": [
+            { "depotId": 435151, "manifestId": "5526106730905574720" },
+            { "depotId": 435152, "manifestId": "7844138143823902363" }
+          ]
+        }
+      ]
+    },
+    "dragonage": {
+      "steamAppId": 17450,
+      "versions": [
+        {
+          "id": "build-47331",
+          "label": "Build 47331",
+          "depots": [
+            { "depotId": 17451, "manifestId": "5622515225044071038" },
+            { "depotId": 17452, "manifestId": "6034339279496214473" }
+          ]
+        }
+      ]
+    },
+    "dragonsdogma": {
+      "steamAppId": 367500,
+      "versions": [
+        {
+          "id": "build-2364871",
+          "label": "Build 2364871",
+          "depots": [
+            { "depotId": 367501, "manifestId": "735672774601731466" },
+            { "depotId": 367502, "manifestId": "7589884595560946912" },
+            { "depotId": 367503, "manifestId": "3311468442518842200" },
+            { "depotId": 367504, "manifestId": "6995011093083765600" },
+            { "depotId": 367505, "manifestId": "476511151159176101" }
+          ]
+        }
+      ]
+    },
+    "elex": {
+      "steamAppId": 411300,
+      "versions": [
+        {
+          "id": "build-2617898",
+          "label": "Build 2617898",
+          "depots": [
+            { "depotId": 411301, "manifestId": "2156199376835060556" },
+            { "depotId": 411302, "manifestId": "5544794952319600062" },
+            { "depotId": 411304, "manifestId": "7402692842390371462" }
+          ]
+        }
+      ]
+    },
+    "enderal": {
+      "steamAppId": 933480,
+      "versions": [
+        {
+          "id": "1.6.4.0",
+          "label": "1.6.4.0",
+          "depots": [
+            { "depotId": 933481, "manifestId": "4368429506411792406" },
+            { "depotId": 933483, "manifestId": "8323899641206846072" },
+            { "depotId": 933484, "manifestId": "7154283304654413420" },
+            { "depotId": 944242, "manifestId": "7584735128604642643" }
+          ]
+        },
+        {
+          "id": "1.6.3.0",
+          "label": "1.6.3.0",
+          "branch": "version_1.6.3.0",
+          "depots": [
+            { "depotId": 933481, "manifestId": "2328805965104461361" },
+            { "depotId": 933483, "manifestId": "4765268779331837601" },
+            { "depotId": 933484, "manifestId": "7154283304654413420" },
+            { "depotId": 944242, "manifestId": "7584735128604642643" }
+          ]
+        },
+        {
+          "id": "1.6.2.0",
+          "label": "1.6.2.0",
+          "branch": "version_1.6.2.0",
+          "depots": [
+            { "depotId": 933481, "manifestId": "292885457773814167" },
+            { "depotId": 933483, "manifestId": "8630842491716040346" },
+            { "depotId": 933484, "manifestId": "7154283304654413420" },
+            { "depotId": 944242, "manifestId": "7584735128604642643" }
+          ]
+        },
+        {
+          "id": "1.6.1.0",
+          "label": "1.6.1.0",
+          "branch": "version_1.6.1.0",
+          "depots": [
+            { "depotId": 933481, "manifestId": "633749732772391019" },
+            { "depotId": 933483, "manifestId": "1040464447181285862" },
+            { "depotId": 933484, "manifestId": "7154283304654413420" },
+            { "depotId": 944242, "manifestId": "7584735128604642643" }
+          ]
+        },
+        {
+          "id": "1.6.0.0",
+          "label": "1.6.0.0",
+          "branch": "version_1.6.0.0",
+          "depots": [
+            { "depotId": 933481, "manifestId": "4939164287210548824" },
+            { "depotId": 933483, "manifestId": "5672847980236979929" },
+            { "depotId": 933484, "manifestId": "7154283304654413420" },
+            { "depotId": 944242, "manifestId": "7584735128604642643" }
+          ]
+        }
+      ]
+    },
+    "factorio": {
+      "steamAppId": 427520,
+      "versions": [
+        {
+          "id": "2.0.77",
+          "label": "2.0.77",
+          "depots": [{ "depotId": 427521, "manifestId": "4175659602074733495" }]
+        },
+        {
+          "id": "2.1.21-experimental",
+          "label": "2.1.21 (experimental)",
+          "branch": "2.1.21",
+          "depots": [{ "depotId": 427521, "manifestId": "1810639531481523213" }]
+        },
+        {
+          "id": "2.1.20-experimental",
+          "label": "2.1.20 (experimental)",
+          "branch": "2.1.20",
+          "depots": [{ "depotId": 427521, "manifestId": "4626428277967971435" }]
+        },
+        {
+          "id": "2.1.19-experimental",
+          "label": "2.1.19 (experimental)",
+          "branch": "2.1.19",
+          "depots": [{ "depotId": 427521, "manifestId": "3683744160196384444" }]
+        },
+        {
+          "id": "2.1.17-experimental",
+          "label": "2.1.17 (experimental)",
+          "branch": "2.1.17",
+          "depots": [{ "depotId": 427521, "manifestId": "3496806414315685437" }]
+        },
+        {
+          "id": "2.1.14-experimental",
+          "label": "2.1.14 (experimental)",
+          "branch": "2.1.14",
+          "depots": [{ "depotId": 427521, "manifestId": "8499583699137103294" }]
+        },
+        {
+          "id": "2.1.7-experimental",
+          "label": "2.1.7 (experimental)",
+          "branch": "2.1.7",
+          "depots": [{ "depotId": 427521, "manifestId": "5918104345566217356" }]
+        },
+        {
+          "id": "2.0.76",
+          "label": "2.0.76",
+          "branch": "2.0.76",
+          "depots": [{ "depotId": 427521, "manifestId": "4584055913156309695" }]
+        },
+        {
+          "id": "2.0.72",
+          "label": "2.0.72",
+          "branch": "2.0.72",
+          "depots": [{ "depotId": 427521, "manifestId": "3717738577353096913" }]
+        },
+        {
+          "id": "1.1.110",
+          "label": "1.1.110",
+          "branch": "1.1.110",
+          "depots": [{ "depotId": 427521, "manifestId": "362171530019617350" }]
+        },
+        {
+          "id": "1.1.94",
+          "label": "1.1.94",
+          "branch": "1.1.94",
+          "depots": [{ "depotId": 427521, "manifestId": "4657870009257279704" }]
+        },
+        {
+          "id": "1.0.0",
+          "label": "1.0.0",
+          "branch": "1.0.0",
+          "depots": [{ "depotId": 427521, "manifestId": "5626465236371366430" }]
+        },
+        {
+          "id": "0.17.79",
+          "label": "0.17.79",
+          "branch": "0.17.79",
+          "depots": [{ "depotId": 427521, "manifestId": "5217633593669398073" }]
+        },
+        {
+          "id": "0.16.51",
+          "label": "0.16.51",
+          "branch": "0.16.51",
+          "depots": [{ "depotId": 427521, "manifestId": "7710943521562681979" }]
+        },
+        {
+          "id": "0.15.40",
+          "label": "0.15.40",
+          "branch": "0.15.40",
+          "depots": [{ "depotId": 427521, "manifestId": "5500062493293721113" }]
+        },
+        {
+          "id": "0.15.37",
+          "label": "0.15.37",
+          "branch": "0.15.37",
+          "depots": [{ "depotId": 427521, "manifestId": "2594072795645229932" }]
+        },
+        {
+          "id": "0.14.23",
+          "label": "0.14.23",
+          "branch": "0.14.23",
+          "depots": [{ "depotId": 427521, "manifestId": "828932359204301707" }]
+        },
+        {
+          "id": "0.13.20",
+          "label": "0.13.20",
+          "branch": "0.13.20",
+          "depots": [{ "depotId": 427521, "manifestId": "3458623580245405937" }]
+        },
+        {
+          "id": "0.12.35",
+          "label": "0.12.35",
+          "branch": "0.12.35",
+          "depots": [{ "depotId": 427521, "manifestId": "7111782590850240897" }]
+        }
+      ]
+    },
+    "fallout3": {
+      "steamAppId": 22300,
+      "versions": [
+        {
+          "id": "build-14365438",
+          "label": "Build 14365438",
+          "depots": [
+            { "depotId": 22301, "manifestId": "2329076020665736242" },
+            { "depotId": 461150, "manifestId": "6263313154763130481" }
+          ]
+        }
+      ]
+    },
+    "fallout4vr": {
+      "steamAppId": 611660,
+      "versions": [
+        {
+          "id": "update-1.2",
+          "label": "Update 1.2",
+          "depots": [
+            { "depotId": 611661, "manifestId": "8855914008840078851" },
+            { "depotId": 611662, "manifestId": "2607440145941621789" },
+            { "depotId": 748772, "manifestId": "6853555613453562821" }
+          ]
+        }
+      ]
+    },
+    "galacticcivilizations3": {
+      "steamAppId": 226860,
+      "versions": [
+        {
+          "id": "build-25785517",
+          "label": "Build 25785517",
+          "depots": [
+            { "depotId": 226861, "manifestId": "265233305476099026" },
+            { "depotId": 226875, "manifestId": "4348968366941513678" }
+          ]
+        },
+        {
+          "id": "2.80",
+          "label": "2.80",
+          "branch": "v2.80",
+          "depots": [
+            { "depotId": 226861, "manifestId": "3629994622042797790" },
+            { "depotId": 226875, "manifestId": "4348968366941513678" }
+          ]
+        },
+        {
+          "id": "2.33-classic",
+          "label": "2.33 (classic)",
+          "branch": "galciv3classic",
+          "depots": [
+            { "depotId": 226861, "manifestId": "3775941691967646028" },
+            { "depotId": 226875, "manifestId": "4348968366941513678" }
+          ]
+        }
+      ]
+    },
+    "gardenpaws": {
+      "steamAppId": 840010,
+      "versions": [
+        {
+          "id": "build-12473280",
+          "label": "Build 12473280",
+          "depots": [{ "depotId": 840011, "manifestId": "8213675977615145858" }]
+        }
+      ]
+    },
+    "greedfall": {
+      "steamAppId": 606880,
+      "versions": [
+        {
+          "id": "build-7035462",
+          "label": "Build 7035462",
+          "depots": [{ "depotId": 606881, "manifestId": "8874425372087683575" }]
+        }
+      ]
+    },
+    "grimdawn": {
+      "steamAppId": 219990,
+      "versions": [
+        {
+          "id": "build-25813250",
+          "label": "Build 25813250",
+          "depots": [{ "depotId": 219991, "manifestId": "382249031910927652" }]
+        },
+        {
+          "id": "1.1.9.8",
+          "label": "1.1.9.8",
+          "branch": "v1.1.9.8",
+          "depots": [{ "depotId": 219991, "manifestId": "1749162298806451998" }]
+        }
+      ]
+    },
+    "grimrock": {
+      "steamAppId": 207170,
+      "versions": [
+        {
+          "id": "build-687244",
+          "label": "Build 687244",
+          "depots": [{ "depotId": 207171, "manifestId": "5152770129304629740" }]
+        }
+      ]
+    },
+    "halothemasterchiefcollection": {
+      "steamAppId": 976730,
+      "versions": [
+        {
+          "id": "build-19905945",
+          "label": "Build 19905945",
+          "depots": [{ "depotId": 976731, "manifestId": "4956458579120161185" }]
+        }
+      ]
+    },
+    "kenshi": {
+      "steamAppId": 233860,
+      "versions": [
+        {
+          "id": "1.0.65",
+          "label": "1.0.65",
+          "depots": [{ "depotId": 233861, "manifestId": "5962268813919641662" }]
+        },
+        {
+          "id": "1.0.55",
+          "label": "1.0.55",
+          "branch": "1.0.55",
+          "depots": [{ "depotId": 233861, "manifestId": "5472331217060105720" }]
+        },
+        {
+          "id": "0.97.6",
+          "label": "0.97.6",
+          "branch": "old_version_966",
+          "depots": [{ "depotId": 233861, "manifestId": "5574548965337628027" }]
+        },
+        {
+          "id": "0.74-32-bit",
+          "label": "0.74 (32-bit)",
+          "branch": "oldland",
+          "depots": [{ "depotId": 233861, "manifestId": "6159432201035085314" }]
+        },
+        {
+          "id": "0.69",
+          "label": "0.69",
+          "branch": "older_version_69",
+          "depots": [{ "depotId": 233861, "manifestId": "4163032994186453846" }]
+        }
+      ]
+    },
+    "kerbalspaceprogram": {
+      "steamAppId": 220200,
+      "versions": [
+        {
+          "id": "build-10132464",
+          "label": "Build 10132464",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "895421221909357680" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.12.4",
+          "label": "1.12.4",
+          "branch": "1.12.4",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "2300264763117475944" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.12.3",
+          "label": "1.12.3",
+          "branch": "1.12.3",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "2679218743411895169" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.12.2",
+          "label": "1.12.2",
+          "branch": "1.12.2",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "5743064355328529087" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.12.1",
+          "label": "1.12.1",
+          "branch": "1.12.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "4103616524441416287" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.11.2",
+          "label": "1.11.2",
+          "branch": "1.11.2",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "1309711775567892654" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.11.1",
+          "label": "1.11.1",
+          "branch": "1.11.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "7184475543592810984" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.10.1",
+          "label": "1.10.1",
+          "branch": "1.10.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "6930622538072350794" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.9.1",
+          "label": "1.9.1",
+          "branch": "1.9.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "750032727509408556" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.9.0",
+          "label": "1.9.0",
+          "branch": "1.9.0",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "5841173915608386022" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.8.1",
+          "label": "1.8.1",
+          "branch": "1.8.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "2849961497658188170" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.8.0",
+          "label": "1.8.0",
+          "branch": "1.8.0",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "5722734838775428594" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.7.3",
+          "label": "1.7.3",
+          "branch": "1.7.3",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "2712988001005185641" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.7.2",
+          "label": "1.7.2",
+          "branch": "1.7.2",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "4008622871584392016" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.6.1",
+          "label": "1.6.1",
+          "branch": "1.6.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "2240020754323236144" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.5.1",
+          "label": "1.5.1",
+          "branch": "1.5.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6331816835925954858" },
+            { "depotId": 220204, "manifestId": "7910228755676126898" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.4.5",
+          "label": "1.4.5",
+          "branch": "previous_1.4.5",
+          "depots": [
+            { "depotId": 220201, "manifestId": "8237064801876894706" },
+            { "depotId": 220204, "manifestId": "7961531249656965480" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.3.1",
+          "label": "1.3.1",
+          "branch": "previous_1.3.1",
+          "depots": [
+            { "depotId": 220201, "manifestId": "6129985237511607976" },
+            { "depotId": 220204, "manifestId": "4879731577466528628" },
+            { "depotId": 220211, "manifestId": "3901531883767526193" },
+            { "depotId": 220212, "manifestId": "78739687081486078" },
+            { "depotId": 220213, "manifestId": "1660641291841592914" },
+            { "depotId": 220214, "manifestId": "8229629602796981387" },
+            { "depotId": 220216, "manifestId": "9167099533421805932" }
+          ]
+        },
+        {
+          "id": "1.2.2",
+          "label": "1.2.2",
+          "branch": "previous_1.2.2",
+          "depots": [
+            { "depotId": 220201, "manifestId": "1370264542937149306" },
+            { "depotId": 220204, "manifestId": "924882057968743710" },
+            { "depotId": 220211, "manifestId": "6751619336412812483" },
+            { "depotId": 220212, "manifestId": "7678080907780895421" },
+            { "depotId": 220213, "manifestId": "2612418389232955075" },
+            { "depotId": 220214, "manifestId": "1199050053482722421" },
+            { "depotId": 220216, "manifestId": "1312015117838531277" }
+          ]
+        },
+        {
+          "id": "1.1.3",
+          "label": "1.1.3",
+          "branch": "previous_1.1.3",
+          "depots": [
+            { "depotId": 220201, "manifestId": "8861194897798749346" },
+            { "depotId": 220204, "manifestId": "4146752957728470874" },
+            { "depotId": 220211, "manifestId": "6874525175117281514" },
+            { "depotId": 220212, "manifestId": "2827704494019666285" },
+            { "depotId": 220213, "manifestId": "4452903758749559338" },
+            { "depotId": 220214, "manifestId": "788039670152933643" },
+            { "depotId": 220216, "manifestId": "1808825188947128249" }
+          ]
+        }
+      ]
+    },
+    "kingdomcomedeliverance": {
+      "steamAppId": 379430,
+      "versions": [
+        {
+          "id": "build-22623230",
+          "label": "Build 22623230",
+          "depots": [
+            { "depotId": 379432, "manifestId": "5694983311934705492" },
+            { "depotId": 379433, "manifestId": "717100730472011277" },
+            { "depotId": 379434, "manifestId": "8451909559598054310" },
+            { "depotId": 379435, "manifestId": "2097264242316941887" },
+            { "depotId": 379436, "manifestId": "6811928840428249954" },
+            { "depotId": 379437, "manifestId": "4604036471320335843" }
+          ]
+        }
+      ]
+    },
+    "kotor": {
+      "steamAppId": 32370,
+      "versions": [
+        {
+          "id": "build-4143502",
+          "label": "Build 4143502",
+          "depots": [{ "depotId": 32371, "manifestId": "4122010938027300909" }]
+        }
+      ]
+    },
+    "kotor2": {
+      "steamAppId": 208580,
+      "versions": [
+        {
+          "id": "build-817494",
+          "label": "Build 817494",
+          "depots": [
+            { "depotId": 208581, "manifestId": "4377184069201602877" },
+            { "depotId": 208582, "manifestId": "6204537822791674280" }
+          ]
+        },
+        {
+          "id": "legacy-pc",
+          "label": "Legacy PC",
+          "branch": "legacypc",
+          "depots": [
+            { "depotId": 208581, "manifestId": "2341675484287465272" },
+            { "depotId": 208582, "manifestId": "4707943215413405349" }
+          ]
+        }
+      ]
+    },
+    "mbwarband": {
+      "steamAppId": 48700,
+      "versions": [
+        {
+          "id": "build-23983102",
+          "label": "Build 23983102",
+          "depots": [
+            { "depotId": 48701, "manifestId": "6798402207518250693" },
+            { "depotId": 48704, "manifestId": "6672793413405812033" },
+            { "depotId": 48706, "manifestId": "1552991085830895904" }
+          ]
+        }
+      ]
+    },
+    "mbwithfireandsword": {
+      "steamAppId": 48720,
+      "versions": [
+        {
+          "id": "build-4027522",
+          "label": "Build 4027522",
+          "depots": [
+            { "depotId": 48721, "manifestId": "3141280427055525072" },
+            { "depotId": 48722, "manifestId": "9181176257886004286" }
+          ]
+        }
+      ]
+    },
+    "microsoftflightsimulator": {
+      "steamAppId": 1250410,
+      "versions": [
+        {
+          "id": "sim-update-16",
+          "label": "Sim Update 16",
+          "depots": [{ "depotId": 1250411, "manifestId": "4980418302200182124" }]
+        }
+      ]
+    },
+    "monsterhunterworld": {
+      "steamAppId": 582010,
+      "versions": [
+        {
+          "id": "build-15539686",
+          "label": "Build 15539686",
+          "depots": [{ "depotId": 582011, "manifestId": "2525674006025364114" }]
+        }
+      ]
+    },
+    "mountandblade": {
+      "steamAppId": 22100,
+      "versions": [
+        {
+          "id": "build-1326955",
+          "label": "Build 1326955",
+          "depots": [{ "depotId": 22101, "manifestId": "3862390339797844474" }]
+        }
+      ]
+    },
+    "nehrim": {
+      "steamAppId": 1014940,
+      "versions": [
+        {
+          "id": "build-10249594",
+          "label": "Build 10249594",
+          "depots": [
+            { "depotId": 1014941, "manifestId": "5503118278127581098" },
+            { "depotId": 1014943, "manifestId": "419439267051649869" },
+            { "depotId": 1014946, "manifestId": "1159404255126144438" },
+            { "depotId": 1014949, "manifestId": "5199718084534706598" }
+          ]
+        }
+      ]
+    },
+    "nomanssky": {
+      "steamAppId": 275850,
+      "versions": [
+        {
+          "id": "build-25732212",
+          "label": "Build 25732212",
+          "depots": [{ "depotId": 275851, "manifestId": "9023685413768918978" }]
+        }
+      ]
+    },
+    "nwnee": {
+      "steamAppId": 704450,
+      "versions": [
+        {
+          "id": "build-20277208",
+          "label": "Build 20277208",
+          "depots": [
+            { "depotId": 704451, "manifestId": "5662616691190369758" },
+            { "depotId": 704452, "manifestId": "1163809314576969976" }
+          ]
+        },
+        {
+          "id": "build-8193.36",
+          "label": "Build 8193.36",
+          "branch": "build8193.36",
+          "depots": [
+            { "depotId": 704451, "manifestId": "2679359819303310565" },
+            { "depotId": 704452, "manifestId": "7681780722742457911" }
+          ]
+        },
+        {
+          "id": "build-8193.35",
+          "label": "Build 8193.35",
+          "branch": "build8193.35",
+          "depots": [
+            { "depotId": 704451, "manifestId": "7602611914538474758" },
+            { "depotId": 704452, "manifestId": "420576893927246124" }
+          ]
+        },
+        {
+          "id": "build-8193.34",
+          "label": "Build 8193.34",
+          "branch": "build8193.34",
+          "depots": [
+            { "depotId": 704451, "manifestId": "2248058606254654358" },
+            { "depotId": 704452, "manifestId": "2721957522604330397" }
+          ]
+        },
+        {
+          "id": "build-8193.33",
+          "label": "Build 8193.33",
+          "branch": "build8193.33",
+          "depots": [
+            { "depotId": 704451, "manifestId": "3598776878881218493" },
+            { "depotId": 704452, "manifestId": "5971041387830025140" }
+          ]
+        },
+        {
+          "id": "build-8193.32",
+          "label": "Build 8193.32",
+          "branch": "build8193.32",
+          "depots": [
+            { "depotId": 704451, "manifestId": "8585925405399086825" },
+            { "depotId": 704452, "manifestId": "3626922023577400290" }
+          ]
+        },
+        {
+          "id": "build-8193.31",
+          "label": "Build 8193.31",
+          "branch": "build8193.31",
+          "depots": [
+            { "depotId": 704451, "manifestId": "5074310154252719160" },
+            { "depotId": 704452, "manifestId": "8205286936681267331" }
+          ]
+        },
+        {
+          "id": "build-8193.30",
+          "label": "Build 8193.30",
+          "branch": "build8193.30",
+          "depots": [
+            { "depotId": 704451, "manifestId": "3634709975511866606" },
+            { "depotId": 704452, "manifestId": "2693048774058968500" }
+          ]
+        },
+        {
+          "id": "build-8193.29",
+          "label": "Build 8193.29",
+          "branch": "build8193.29",
+          "depots": [
+            { "depotId": 704451, "manifestId": "6873755356292939225" },
+            { "depotId": 704452, "manifestId": "4622178981690618476" }
+          ]
+        },
+        {
+          "id": "build-8193.28",
+          "label": "Build 8193.28",
+          "branch": "build8193.28",
+          "depots": [
+            { "depotId": 704451, "manifestId": "5638762575475308296" },
+            { "depotId": 704452, "manifestId": "6569060650757314742" }
+          ]
+        },
+        {
+          "id": "build-8193.27",
+          "label": "Build 8193.27",
+          "branch": "build8193.27",
+          "depots": [
+            { "depotId": 704451, "manifestId": "709661375050373741" },
+            { "depotId": 704452, "manifestId": "7684224769561665433" }
+          ]
+        },
+        {
+          "id": "build-8193.26",
+          "label": "Build 8193.26",
+          "branch": "build8193.26",
+          "depots": [
+            { "depotId": 704451, "manifestId": "8877210474883949006" },
+            { "depotId": 704452, "manifestId": "3449010867708411885" }
+          ]
+        },
+        {
+          "id": "build-8193.25",
+          "label": "Build 8193.25",
+          "branch": "build8193.25",
+          "depots": [
+            { "depotId": 704451, "manifestId": "516059062105788683" },
+            { "depotId": 704452, "manifestId": "8926956577086585473" }
+          ]
+        },
+        {
+          "id": "build-8193.24",
+          "label": "Build 8193.24",
+          "branch": "build8193.24",
+          "depots": [
+            { "depotId": 704451, "manifestId": "3704985756173916864" },
+            { "depotId": 704452, "manifestId": "2013311071976851329" }
+          ]
+        },
+        {
+          "id": "build-8193.23",
+          "label": "Build 8193.23",
+          "branch": "build8193.23",
+          "depots": [
+            { "depotId": 704451, "manifestId": "9064674033011198331" },
+            { "depotId": 704452, "manifestId": "6176400293706289925" }
+          ]
+        },
+        {
+          "id": "build-8193.22",
+          "label": "Build 8193.22",
+          "branch": "build8193.22",
+          "depots": [
+            { "depotId": 704451, "manifestId": "3784329735492983185" },
+            { "depotId": 704452, "manifestId": "1170299278524992495" }
+          ]
+        },
+        {
+          "id": "build-8193.21",
+          "label": "Build 8193.21",
+          "branch": "build8193.21",
+          "depots": [
+            { "depotId": 704451, "manifestId": "5819906610320367156" },
+            { "depotId": 704452, "manifestId": "2708431247855282817" }
+          ]
+        },
+        {
+          "id": "build-8193.20",
+          "label": "Build 8193.20",
+          "branch": "build8193.20",
+          "depots": [
+            { "depotId": 704451, "manifestId": "493104376037734075" },
+            { "depotId": 704452, "manifestId": "6048598367676384753" }
+          ]
+        },
+        {
+          "id": "build-8193.19",
+          "label": "Build 8193.19",
+          "branch": "build8193.19",
+          "depots": [
+            { "depotId": 704451, "manifestId": "4786282852157978442" },
+            { "depotId": 704452, "manifestId": "1579426019501321427" }
+          ]
+        },
+        {
+          "id": "build-8186-32-bit",
+          "label": "Build 8186 (32-bit)",
+          "branch": "build8186",
+          "depots": [
+            { "depotId": 704451, "manifestId": "5530306117568362467" },
+            { "depotId": 704452, "manifestId": "4370088424930538920" }
+          ]
+        }
+      ]
+    },
+    "oxygennotincluded": {
+      "steamAppId": 457140,
+      "versions": [
+        {
+          "id": "build-24423041",
+          "label": "Build 24423041",
+          "depots": [{ "depotId": 457141, "manifestId": "4837644823067158760" }]
+        },
+        {
+          "id": "u57-707956-older-os",
+          "label": "U57-707956 (older OS)",
+          "branch": "legacy_compatibility_version",
+          "depots": [{ "depotId": 457141, "manifestId": "5023512730209373114" }]
+        }
+      ]
+    },
+    "pathfinderkingmaker": {
+      "steamAppId": 640820,
+      "versions": [
+        {
+          "id": "build-6757524",
+          "label": "Build 6757524",
+          "depots": [
+            { "depotId": 640821, "manifestId": "4002653326100613789" },
+            { "depotId": 640822, "manifestId": "6104123763976478393" }
+          ]
+        },
+        {
+          "id": "2.1.5d",
+          "label": "2.1.5d",
+          "branch": "2.1.5d",
+          "depots": [
+            { "depotId": 640821, "manifestId": "6172639546650717324" },
+            { "depotId": 640822, "manifestId": "6104123763976478393" }
+          ]
+        }
+      ]
+    },
+    "pathfinderwrathoftherighteous": {
+      "steamAppId": 1184370,
+      "versions": [
+        {
+          "id": "build-20212986",
+          "label": "Build 20212986",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "6624263451234269485" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "2.4.1i",
+          "label": "2.4.1i",
+          "branch": "2.4.1i",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "6231895698948566224" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "2.3.3k",
+          "label": "2.3.3k",
+          "branch": "2.3.3k",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "6479743225303232289" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "2.2.4p",
+          "label": "2.2.4p",
+          "branch": "2.2.4p",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "3616555767055230058" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "2.1.5r",
+          "label": "2.1.5r",
+          "branch": "2.1.5r",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "557038035598604008" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "2.0.7o",
+          "label": "2.0.7o",
+          "branch": "2.0.7o",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "6137582048720657958" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "1.4.4g",
+          "label": "1.4.4g",
+          "branch": "1.4.4g",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "5963272864892377235" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        },
+        {
+          "id": "1.3.7d",
+          "label": "1.3.7d",
+          "branch": "1.3.7d",
+          "depots": [
+            { "depotId": 1184371, "manifestId": "3717212101766653364" },
+            { "depotId": 1184372, "manifestId": "7527851383142730328" },
+            { "depotId": 1184374, "manifestId": "9059805660516767946" },
+            { "depotId": 1184379, "manifestId": "7030613816386541594" }
+          ]
+        }
+      ]
+    },
+    "pillarsofeternity2": {
+      "steamAppId": 560130,
+      "versions": [
+        {
+          "id": "build-12181035",
+          "label": "Build 12181035",
+          "depots": [
+            { "depotId": 560131, "manifestId": "7303141664931652087" },
+            { "depotId": 812211, "manifestId": "7793235349351306936" },
+            { "depotId": 812237, "manifestId": "1216853061996828151" },
+            { "depotId": 812238, "manifestId": "5433399161169684718" },
+            { "depotId": 812239, "manifestId": "1868576862701102676" },
+            { "depotId": 812241, "manifestId": "61627058436756915" },
+            { "depotId": 812242, "manifestId": "8128757184136440836" },
+            { "depotId": 812243, "manifestId": "2991966289149468536" },
+            { "depotId": 812251, "manifestId": "1624777655558257931" },
+            { "depotId": 812254, "manifestId": "272507515472291188" },
+            { "depotId": 812257, "manifestId": "846217069547439411" },
+            { "depotId": 812261, "manifestId": "5066153019694411133" },
+            { "depotId": 812262, "manifestId": "2684730521298609783" },
+            { "depotId": 812263, "manifestId": "135054638718580364" },
+            { "depotId": 812264, "manifestId": "9140973938774917736" },
+            { "depotId": 812265, "manifestId": "7728266835374401313" },
+            { "depotId": 812271, "manifestId": "6229984004157226069" }
+          ]
+        }
+      ]
+    },
+    "prisonarchitect": {
+      "steamAppId": 233450,
+      "versions": [
+        {
+          "id": "build-10630057",
+          "label": "Build 10630057",
+          "depots": [{ "depotId": 233451, "manifestId": "214199605922079846" }]
+        },
+        {
+          "id": "2018-anniversary",
+          "label": "2018 (Anniversary)",
+          "branch": "prisonarchitect_anniversary_2018_version",
+          "depots": [{ "depotId": 233451, "manifestId": "8665413028647381948" }]
+        },
+        {
+          "id": "2015-anniversary",
+          "label": "2015 (Anniversary)",
+          "branch": "prisonarchitect_anniversary_2015_version",
+          "depots": [{ "depotId": 233451, "manifestId": "5776768502849728890" }]
+        }
+      ]
+    },
+    "rimworld": {
+      "steamAppId": 294100,
+      "versions": [
+        {
+          "id": "build-23969874",
+          "label": "Build 23969874",
+          "depots": [{ "depotId": 294104, "manifestId": "3464668865934009251" }]
+        },
+        {
+          "id": "1.6.4633",
+          "label": "1.6.4633",
+          "branch": "version-1.6.4633",
+          "depots": [{ "depotId": 294104, "manifestId": "2772688105937893244" }]
+        },
+        {
+          "id": "1.5",
+          "label": "1.5",
+          "branch": "version-1.5",
+          "depots": [{ "depotId": 294104, "manifestId": "4758502247733710441" }]
+        },
+        {
+          "id": "1.4.3901",
+          "label": "1.4.3901",
+          "branch": "version-1.4.3901",
+          "depots": [{ "depotId": 294104, "manifestId": "6204801302266436121" }]
+        },
+        {
+          "id": "1.4.3563",
+          "label": "1.4.3563",
+          "branch": "version-1.4.3563",
+          "depots": [{ "depotId": 294104, "manifestId": "4476713874247917059" }]
+        },
+        {
+          "id": "1.4.3542",
+          "label": "1.4.3542",
+          "branch": "version-1.4.3542",
+          "depots": [{ "depotId": 294104, "manifestId": "2084092365431020583" }]
+        },
+        {
+          "id": "1.3",
+          "label": "1.3",
+          "branch": "version-1.3-latest",
+          "depots": [{ "depotId": 294104, "manifestId": "8138304505561771987" }]
+        },
+        {
+          "id": "1.3.3287",
+          "label": "1.3.3287",
+          "branch": "version-1.3.3287",
+          "depots": [{ "depotId": 294104, "manifestId": "8411409874337528175" }]
+        },
+        {
+          "id": "1.2",
+          "label": "1.2",
+          "branch": "version-1.2",
+          "depots": [{ "depotId": 294104, "manifestId": "8107588516744056546" }]
+        },
+        {
+          "id": "1.2.3005",
+          "label": "1.2.3005",
+          "branch": "version-1.2.3005",
+          "depots": [{ "depotId": 294104, "manifestId": "7766783325762567603" }]
+        },
+        {
+          "id": "1.1",
+          "label": "1.1",
+          "branch": "version-1.1",
+          "depots": [{ "depotId": 294104, "manifestId": "8211141225019274925" }]
+        },
+        {
+          "id": "1.0",
+          "label": "1.0",
+          "branch": "version-1.0",
+          "depots": [{ "depotId": 294104, "manifestId": "1202485057052572423" }]
+        },
+        {
+          "id": "beta-19",
+          "label": "Beta 19",
+          "branch": "beta19",
+          "depots": [{ "depotId": 294104, "manifestId": "1945990380722241342" }]
+        },
+        {
+          "id": "beta-18",
+          "label": "Beta 18",
+          "branch": "beta18",
+          "depots": [{ "depotId": 294104, "manifestId": "860275689195968022" }]
+        },
+        {
+          "id": "alpha-17",
+          "label": "Alpha 17",
+          "branch": "alpha17",
+          "depots": [{ "depotId": 294104, "manifestId": "1061042397890035266" }]
+        },
+        {
+          "id": "alpha-16",
+          "label": "Alpha 16",
+          "branch": "alpha16",
+          "depots": [{ "depotId": 294104, "manifestId": "6784446709639518487" }]
+        },
+        {
+          "id": "alpha-15",
+          "label": "Alpha 15",
+          "branch": "alpha15",
+          "depots": [{ "depotId": 294104, "manifestId": "1536912220904761886" }]
+        },
+        {
+          "id": "alpha-14",
+          "label": "Alpha 14",
+          "branch": "alpha14",
+          "depots": [{ "depotId": 294104, "manifestId": "5906751867226726828" }]
+        },
+        {
+          "id": "alpha-13",
+          "label": "Alpha 13",
+          "branch": "alpha13",
+          "depots": [{ "depotId": 294104, "manifestId": "7362731565702425949" }]
+        },
+        {
+          "id": "alpha-4",
+          "label": "Alpha 4",
+          "branch": "alpha4",
+          "depots": [{ "depotId": 294104, "manifestId": "7095894165249022471" }]
+        }
+      ]
+    },
+    "sekiro": {
+      "steamAppId": 814380,
+      "versions": [
+        {
+          "id": "build-5794815",
+          "label": "Build 5794815",
+          "depots": [
+            { "depotId": 814381, "manifestId": "7598923580425802222" },
+            { "depotId": 814382, "manifestId": "8495754623934990551" },
+            { "depotId": 814383, "manifestId": "1996592192490629382" },
+            { "depotId": 814384, "manifestId": "147690030473406272" },
+            { "depotId": 814385, "manifestId": "1613271962634429538" }
+          ]
+        }
+      ]
+    },
+    "shadowrunreturns": {
+      "steamAppId": 234650,
+      "versions": [
+        {
+          "id": "build-340555",
+          "label": "Build 340555",
+          "depots": [{ "depotId": 234651, "manifestId": "7013467749258038040" }]
+        }
+      ]
+    },
+    "skyrimvr": {
+      "steamAppId": 611670,
+      "versions": [
+        {
+          "id": "update-1.4",
+          "label": "Update 1.4",
+          "depots": [
+            { "depotId": 611671, "manifestId": "3877383290467193767" },
+            { "depotId": 611672, "manifestId": "1928013110065929089" },
+            { "depotId": 611673, "manifestId": "4815482462544068657" }
+          ]
+        }
+      ]
+    },
+    "spyroreignitedtrilogy": {
+      "steamAppId": 996580,
+      "versions": [
+        {
+          "id": "build-3849171",
+          "label": "Build 3849171",
+          "depots": [
+            { "depotId": 996581, "manifestId": "8223464263088965733" },
+            { "depotId": 996582, "manifestId": "6673579705803232637" }
+          ]
+        }
+      ]
+    },
+    "starbound": {
+      "steamAppId": 211820,
+      "versions": [
+        {
+          "id": "build-16302742",
+          "label": "Build 16302742",
+          "depots": [
+            { "depotId": 211821, "manifestId": "612190494005252909" },
+            { "depotId": 211822, "manifestId": "3176698905874508149" },
+            { "depotId": 211823, "manifestId": "2204433742415235791" }
+          ]
+        }
+      ]
+    },
+    "stateofdecay": {
+      "steamAppId": 241540,
+      "versions": [
+        {
+          "id": "build-305948",
+          "label": "Build 305948",
+          "depots": [{ "depotId": 241541, "manifestId": "2191603663082571190" }]
+        }
+      ]
+    },
+    "survivingmars": {
+      "steamAppId": 464920,
+      "versions": [
+        {
+          "id": "build-8705308",
+          "label": "Build 8705308",
+          "depots": [
+            { "depotId": 464921, "manifestId": "447948026586350606" },
+            { "depotId": 464922, "manifestId": "2257851184703518869" },
+            { "depotId": 464926, "manifestId": "6281924960710939694" }
+          ]
+        }
+      ]
+    },
+    "teamfortress2": {
+      "steamAppId": 440,
+      "versions": [
+        {
+          "id": "build-25738890",
+          "label": "Build 25738890",
+          "depots": [
+            { "depotId": 440, "manifestId": "1118032470228587934" },
+            { "depotId": 441, "manifestId": "3766524819740088105" },
+            { "depotId": 232251, "manifestId": "3238139619978080772" }
+          ]
+        }
+      ]
+    },
+    "teso": {
+      "steamAppId": 306130,
+      "versions": [
+        {
+          "id": "build-23588301",
+          "label": "Build 23588301",
+          "depots": [{ "depotId": 306131, "manifestId": "4114184198158436191" }]
+        }
+      ]
+    },
+    "thesims3": {
+      "steamAppId": 47890,
+      "versions": [
+        {
+          "id": "build-172264",
+          "label": "Build 172264",
+          "depots": [{ "depotId": 47891, "manifestId": "6449742215339092050" }]
+        }
+      ]
+    },
+    "torchlight2": {
+      "steamAppId": 200710,
+      "versions": [
+        {
+          "id": "build-24292952",
+          "label": "Build 24292952",
+          "depots": [
+            { "depotId": 200711, "manifestId": "5916473160849500132" },
+            { "depotId": 200713, "manifestId": "1937744461698132231" }
+          ]
+        }
+      ]
+    },
+    "totalwarthreekingdoms": {
+      "steamAppId": 779340,
+      "versions": [
+        {
+          "id": "build-25370317",
+          "label": "Build 25370317",
+          "depots": [
+            { "depotId": 779341, "manifestId": "8716874195928468173" },
+            { "depotId": 779342, "manifestId": "7248085912293370823" },
+            { "depotId": 779343, "manifestId": "6811352873591035718" }
+          ]
+        }
+      ]
+    },
+    "vampirebloodlines": {
+      "steamAppId": 2600,
+      "versions": [
+        {
+          "id": "build-242386",
+          "label": "Build 242386",
+          "depots": [
+            { "depotId": 2601, "manifestId": "7559191905314037026" },
+            { "depotId": 2602, "manifestId": "5942701187426550593" },
+            { "depotId": 2603, "manifestId": "1507670812436564491" }
+          ]
+        }
+      ]
+    },
+    "warthunder": {
+      "steamAppId": 236390,
+      "versions": [
+        {
+          "id": "build-25802948",
+          "label": "Build 25802948",
+          "depots": [
+            { "depotId": 236391, "manifestId": "5248353283174841118" },
+            { "depotId": 236394, "manifestId": "1503600245087379077" }
+          ]
+        }
+      ]
+    },
+    "witcher": {
+      "steamAppId": 20900,
+      "versions": [
+        {
+          "id": "build-13143960",
+          "label": "Build 13143960",
+          "depots": [
+            { "depotId": 20901, "manifestId": "8428448618762971564" },
+            { "depotId": 20905, "manifestId": "1239865348526158074" },
+            { "depotId": 20910, "manifestId": "8647435729719117490" }
+          ]
+        }
+      ]
+    },
+    "witcher2": {
+      "steamAppId": 20920,
+      "versions": [
+        {
+          "id": "build-13542023",
+          "label": "Build 13542023",
+          "depots": [
+            { "depotId": 20921, "manifestId": "8223514100734217719" },
+            { "depotId": 20922, "manifestId": "3780814960985639249" },
+            { "depotId": 20926, "manifestId": "315769246484065383" }
+          ]
+        }
+      ]
+    },
+    "witcher3": {
+      "steamAppId": 292030,
+      "versions": [
+        {
+          "id": "build-25773555",
+          "label": "Build 25773555",
+          "depots": [
+            { "depotId": 292031, "manifestId": "2054812161488822410" },
+            { "depotId": 292032, "manifestId": "575892319347867876" },
+            { "depotId": 292033, "manifestId": "5639169236463762487" },
+            { "depotId": 292034, "manifestId": "8424330412888561905" },
+            { "depotId": 292036, "manifestId": "1350518231851738693" },
+            { "depotId": 292042, "manifestId": "6269665821460720205" },
+            { "depotId": 370009, "manifestId": "3734479324830949470" }
+          ]
+        },
+        {
+          "id": "4.04",
+          "label": "4.04",
+          "branch": "next-gen",
+          "depots": [
+            { "depotId": 292031, "manifestId": "1714062795524118335" },
+            { "depotId": 292032, "manifestId": "3490723872095446153" },
+            { "depotId": 292033, "manifestId": "5639169236463762487" },
+            { "depotId": 292034, "manifestId": "8082988454426507412" },
+            { "depotId": 292036, "manifestId": "3491360665020245284" },
+            { "depotId": 292042, "manifestId": "99458089550221039" },
+            { "depotId": 370009, "manifestId": "3498696915194240584" }
+          ]
+        },
+        {
+          "id": "1.32",
+          "label": "1.32",
+          "branch": "classic",
+          "depots": [
+            { "depotId": 292031, "manifestId": "1383808000755504545" },
+            { "depotId": 292032, "manifestId": "4005678493423036387" },
+            { "depotId": 292033, "manifestId": "5639169236463762487" },
+            { "depotId": 292034, "manifestId": "8408545504167686271" },
+            { "depotId": 292036, "manifestId": "3165406379888910705" },
+            { "depotId": 292042, "manifestId": "5386546338585218525" }
+          ]
+        }
+      ]
+    },
+    "wolcenlordsofmayhem": {
+      "steamAppId": 424370,
+      "versions": [
+        {
+          "id": "build-15727055",
+          "label": "Build 15727055",
+          "depots": [
+            { "depotId": 424371, "manifestId": "2645580744796891281" },
+            { "depotId": 424372, "manifestId": "6055080594274902095" },
+            { "depotId": 424373, "manifestId": "5578179157934817718" }
+          ]
+        }
+      ]
+    },
+    "x4foundations": {
+      "steamAppId": 392160,
+      "versions": [
+        {
+          "id": "9.00",
+          "label": "9.00",
+          "depots": [
+            { "depotId": 392161, "manifestId": "4225550057772253293" },
+            { "depotId": 392162, "manifestId": "2857524089846017050" },
+            { "depotId": 392163, "manifestId": "7091123868222547143" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "8.00-hotfix-4",
+          "label": "8.00 Hotfix 4",
+          "branch": "8.00",
+          "depots": [
+            { "depotId": 392161, "manifestId": "309787400901166300" },
+            { "depotId": 392162, "manifestId": "6380334188148948474" },
+            { "depotId": 392163, "manifestId": "3699341697583321303" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "7.60",
+          "label": "7.60",
+          "branch": "7.60",
+          "depots": [
+            { "depotId": 392161, "manifestId": "1432027569199100494" },
+            { "depotId": 392162, "manifestId": "5574010442986741515" },
+            { "depotId": 392163, "manifestId": "2211101753762255202" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "7.50",
+          "label": "7.50",
+          "branch": "7.50",
+          "depots": [
+            { "depotId": 392161, "manifestId": "6325737970630880240" },
+            { "depotId": 392162, "manifestId": "8910938635091176349" },
+            { "depotId": 392163, "manifestId": "519142402841788407" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "7.10-hotfix-3",
+          "label": "7.10 Hotfix 3",
+          "branch": "7.10",
+          "depots": [
+            { "depotId": 392161, "manifestId": "777884129389209191" },
+            { "depotId": 392162, "manifestId": "8821460777942334509" },
+            { "depotId": 392163, "manifestId": "1936172258047261585" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "7.00-hotfix-1",
+          "label": "7.00 Hotfix 1",
+          "branch": "7.00",
+          "depots": [
+            { "depotId": 392161, "manifestId": "1144850726984844505" },
+            { "depotId": 392162, "manifestId": "5843962732516495859" },
+            { "depotId": 392163, "manifestId": "7863327140261751654" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "6.20",
+          "label": "6.20",
+          "branch": "6.20",
+          "depots": [
+            { "depotId": 392161, "manifestId": "782589745216201058" },
+            { "depotId": 392162, "manifestId": "1495501401436945727" },
+            { "depotId": 392163, "manifestId": "852157824919486279" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "6.10-hotfix-1",
+          "label": "6.10 Hotfix 1",
+          "branch": "6.10",
+          "depots": [
+            { "depotId": 392161, "manifestId": "782589745216201058" },
+            { "depotId": 392162, "manifestId": "6306160191863694185" },
+            { "depotId": 392163, "manifestId": "4678941283331703497" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "6.00-hotfix-5",
+          "label": "6.00 Hotfix 5",
+          "branch": "6.00",
+          "depots": [
+            { "depotId": 392161, "manifestId": "782589745216201058" },
+            { "depotId": 392162, "manifestId": "5576034909347403004" },
+            { "depotId": 392163, "manifestId": "2480118633777097048" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "5.10-hotfix-3",
+          "label": "5.10 Hotfix 3",
+          "branch": "5.10",
+          "depots": [
+            { "depotId": 392161, "manifestId": "4548104928650908005" },
+            { "depotId": 392162, "manifestId": "8407823400278880088" },
+            { "depotId": 392163, "manifestId": "4212241281893264961" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "5.00-hotfix-4",
+          "label": "5.00 Hotfix 4",
+          "branch": "5.00",
+          "depots": [
+            { "depotId": 392161, "manifestId": "4548104928650908005" },
+            { "depotId": 392162, "manifestId": "4303831949711110603" },
+            { "depotId": 392163, "manifestId": "2337331935661761526" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "4.20",
+          "label": "4.20",
+          "branch": "4.20",
+          "depots": [
+            { "depotId": 392161, "manifestId": "7749781016097074244" },
+            { "depotId": 392162, "manifestId": "9005421327147843260" },
+            { "depotId": 392163, "manifestId": "1490407767745404000" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "4.10",
+          "label": "4.10",
+          "branch": "4.10",
+          "depots": [
+            { "depotId": 392161, "manifestId": "7749781016097074244" },
+            { "depotId": 392162, "manifestId": "3214540072332563773" },
+            { "depotId": 392163, "manifestId": "5639959482569403363" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "4.00-hotfix-3",
+          "label": "4.00 Hotfix 3",
+          "branch": "4.00",
+          "depots": [
+            { "depotId": 392161, "manifestId": "7749781016097074244" },
+            { "depotId": 392162, "manifestId": "8954930995869930133" },
+            { "depotId": 392163, "manifestId": "3137387331173592085" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "3.30-hotfix-2",
+          "label": "3.30 Hotfix 2",
+          "branch": "3.30",
+          "depots": [
+            { "depotId": 392161, "manifestId": "732504018695845011" },
+            { "depotId": 392162, "manifestId": "8808259699697271773" },
+            { "depotId": 392163, "manifestId": "3696069945477276001" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        },
+        {
+          "id": "3.20",
+          "label": "3.20",
+          "branch": "3.20",
+          "depots": [
+            { "depotId": 392161, "manifestId": "732504018695845011" },
+            { "depotId": 392162, "manifestId": "7409557247251569467" },
+            { "depotId": 392163, "manifestId": "7427314969949163515" },
+            { "depotId": 392166, "manifestId": "1428443897261327369" },
+            { "depotId": 942198, "manifestId": "5742520538671173936" }
+          ]
+        }
+      ]
+    },
+    "xcom2": {
+      "steamAppId": 268500,
+      "versions": [
+        {
+          "id": "build-8270065",
+          "label": "Build 8270065",
+          "depots": [
+            { "depotId": 268501, "manifestId": "8736125264145479330" },
+            { "depotId": 268502, "manifestId": "3964459376964430563" },
+            { "depotId": 268503, "manifestId": "6038888666676454089" },
+            { "depotId": 268514, "manifestId": "2781230624575294884" },
+            { "depotId": 424945, "manifestId": "345374647346915517" }
+          ]
+        },
+        {
+          "id": "pre-21.10-support",
+          "label": "Pre-21.10 (support)",
+          "branch": "pre-21.10-support",
+          "depots": [
+            { "depotId": 268501, "manifestId": "8630509321264840781" },
+            { "depotId": 268502, "manifestId": "753675129382979619" },
+            { "depotId": 268503, "manifestId": "1836542980379314317" },
+            { "depotId": 268514, "manifestId": "1602955702507523785" },
+            { "depotId": 424945, "manifestId": "345374647346915517" }
+          ]
+        }
+      ]
+    },
+    "xcom2-wotc": {
+      "steamAppId": 268500,
+      "versions": [
+        {
+          "id": "build-8270065",
+          "label": "Build 8270065",
+          "depots": [
+            { "depotId": 268501, "manifestId": "8736125264145479330" },
+            { "depotId": 268502, "manifestId": "3964459376964430563" },
+            { "depotId": 268503, "manifestId": "6038888666676454089" },
+            { "depotId": 268514, "manifestId": "2781230624575294884" },
+            { "depotId": 424945, "manifestId": "345374647346915517" }
+          ]
+        },
+        {
+          "id": "pre-21.10-support",
+          "label": "Pre-21.10 (support)",
+          "branch": "pre-21.10-support",
+          "depots": [
+            { "depotId": 268501, "manifestId": "8630509321264840781" },
+            { "depotId": 268502, "manifestId": "753675129382979619" },
+            { "depotId": 268503, "manifestId": "1836542980379314317" },
+            { "depotId": 268514, "manifestId": "1602955702507523785" },
+            { "depotId": 424945, "manifestId": "345374647346915517" }
+          ]
+        }
+      ]
+    },
+    "xrebirth": {
+      "steamAppId": 2870,
+      "versions": [
+        {
+          "id": "build-18516231",
+          "label": "Build 18516231",
+          "depots": [
+            { "depotId": 2871, "manifestId": "8886857700802283586" },
+            { "depotId": 2872, "manifestId": "7432802884925751746" },
+            { "depotId": 2873, "manifestId": "697012814670579241" },
+            { "depotId": 2880, "manifestId": "1537487932073095545" },
+            { "depotId": 2881, "manifestId": "841422303861230533" },
+            { "depotId": 2882, "manifestId": "8783885823638824740" }
+          ]
+        },
+        {
+          "id": "2.51-32-bit",
+          "label": "2.51 (32-bit)",
+          "branch": "legacy",
+          "depots": [
+            { "depotId": 2871, "manifestId": "7613027218610260374" },
+            { "depotId": 2872, "manifestId": "9204260528771605390" },
+            { "depotId": 2873, "manifestId": "3553170905531767088" },
+            { "depotId": 2880, "manifestId": "1537487932073095545" },
+            { "depotId": 2881, "manifestId": "841422303861230533" },
+            { "depotId": 2882, "manifestId": "8783885823638824740" }
+          ]
+        }
+      ]
+    },
+    "codevein": {
+      "steamAppId": 678960,
+      "versions": [
+        {
+          "id": "build-5008417",
+          "label": "Build 5008417",
+          "depots": [{ "depotId": 678961, "manifestId": "5047212604937406931" }]
+        }
+      ]
+    },
+    "dragonage2": {
+      "steamAppId": 1238040,
+      "versions": [
+        {
+          "id": "build-10351532",
+          "label": "Build 10351532",
+          "depots": [
+            { "depotId": 1238041, "manifestId": "6701893115208317717" },
+            { "depotId": 1238042, "manifestId": "6562337805101275464" }
+          ]
+        }
+      ]
+    },
+    "mountandblade2bannerlord": {
+      "steamAppId": 261550,
+      "versions": [
+        {
+          "id": "1.4.8",
+          "label": "1.4.8",
+          "depots": [
+            { "depotId": 261551, "manifestId": "2130492496439118726" },
+            { "depotId": 261552, "manifestId": "652956066029874796" }
+          ]
+        },
+        {
+          "id": "1.4.7",
+          "label": "1.4.7",
+          "branch": "v1.4.7",
+          "depots": [
+            { "depotId": 261551, "manifestId": "7407794063550825204" },
+            { "depotId": 261552, "manifestId": "7993276738486126297" }
+          ]
+        },
+        {
+          "id": "1.4.6",
+          "label": "1.4.6",
+          "branch": "v1.4.6",
+          "depots": [
+            { "depotId": 261551, "manifestId": "813532240231811649" },
+            { "depotId": 261552, "manifestId": "7719431349712662189" }
+          ]
+        },
+        {
+          "id": "1.4.5",
+          "label": "1.4.5",
+          "branch": "v1.4.5",
+          "depots": [
+            { "depotId": 261551, "manifestId": "1685543684836167396" },
+            { "depotId": 261552, "manifestId": "8925134026694346596" }
+          ]
+        },
+        {
+          "id": "1.3.15",
+          "label": "1.3.15",
+          "branch": "v1.3.15",
+          "depots": [
+            { "depotId": 261551, "manifestId": "8316190348239003775" },
+            { "depotId": 261552, "manifestId": "5190102127508538142" }
+          ]
+        },
+        {
+          "id": "1.3.14",
+          "label": "1.3.14",
+          "branch": "v1.3.14",
+          "depots": [
+            { "depotId": 261551, "manifestId": "4630084632630573232" },
+            { "depotId": 261552, "manifestId": "6526719714136202922" }
+          ]
+        },
+        {
+          "id": "1.3.13",
+          "label": "1.3.13",
+          "branch": "v1.3.13",
+          "depots": [
+            { "depotId": 261551, "manifestId": "2145787897439111197" },
+            { "depotId": 261552, "manifestId": "5339652988623708128" }
+          ]
+        },
+        {
+          "id": "1.3.12",
+          "label": "1.3.12",
+          "branch": "v1.3.12",
+          "depots": [
+            { "depotId": 261551, "manifestId": "5101894972532897077" },
+            { "depotId": 261552, "manifestId": "342534808107611657" }
+          ]
+        },
+        {
+          "id": "1.3.11",
+          "label": "1.3.11",
+          "branch": "v1.3.11",
+          "depots": [
+            { "depotId": 261551, "manifestId": "8201207055186273567" },
+            { "depotId": 261552, "manifestId": "620818465310130860" }
+          ]
+        },
+        {
+          "id": "1.3.10",
+          "label": "1.3.10",
+          "branch": "v1.3.10",
+          "depots": [
+            { "depotId": 261551, "manifestId": "8211251051201469236" },
+            { "depotId": 261552, "manifestId": "5041831809617278725" }
+          ]
+        },
+        {
+          "id": "1.3.9",
+          "label": "1.3.9",
+          "branch": "v1.3.9",
+          "depots": [
+            { "depotId": 261551, "manifestId": "6171124926858171184" },
+            { "depotId": 261552, "manifestId": "5424148264945289759" }
+          ]
+        },
+        {
+          "id": "1.3.8",
+          "label": "1.3.8",
+          "branch": "v1.3.8",
+          "depots": [
+            { "depotId": 261551, "manifestId": "7576755804382596567" },
+            { "depotId": 261552, "manifestId": "713649195325159107" }
+          ]
+        },
+        {
+          "id": "1.3.7-watchdog-launcher",
+          "label": "1.3.7 (watchdog launcher)",
+          "branch": "v1.3.7_launcher_watchdog",
+          "depots": [
+            { "depotId": 261551, "manifestId": "3060650522355875143" },
+            { "depotId": 261552, "manifestId": "1271784143208618577" }
+          ]
+        },
+        {
+          "id": "1.3.7",
+          "label": "1.3.7",
+          "branch": "v1.3.7",
+          "depots": [
+            { "depotId": 261551, "manifestId": "9122089984960997812" },
+            { "depotId": 261552, "manifestId": "2208448863323996203" }
+          ]
+        },
+        {
+          "id": "1.3.6",
+          "label": "1.3.6",
+          "branch": "v1.3.6",
+          "depots": [
+            { "depotId": 261551, "manifestId": "3756391701135636872" },
+            { "depotId": 261552, "manifestId": "2111702450165285864" }
+          ]
+        },
+        {
+          "id": "1.3.5",
+          "label": "1.3.5",
+          "branch": "v1.3.5",
+          "depots": [
+            { "depotId": 261551, "manifestId": "1030727577639072553" },
+            { "depotId": 261552, "manifestId": "1683632194058957942" }
+          ]
+        },
+        {
+          "id": "1.3.4",
+          "label": "1.3.4",
+          "branch": "v1.3.4",
+          "depots": [
+            { "depotId": 261551, "manifestId": "1778298196938116004" },
+            { "depotId": 261552, "manifestId": "7658582228879138046" }
+          ]
+        },
+        {
+          "id": "1.2.12",
+          "label": "1.2.12",
+          "branch": "v1.2.12",
+          "depots": [
+            { "depotId": 261551, "manifestId": "6992419040320091598" },
+            { "depotId": 261552, "manifestId": "9186208735541562301" }
+          ]
+        },
+        {
+          "id": "1.2.11",
+          "label": "1.2.11",
+          "branch": "v1.2.11",
+          "depots": [
+            { "depotId": 261551, "manifestId": "4167353200358167700" },
+            { "depotId": 261552, "manifestId": "3866228193305563713" }
+          ]
+        },
+        {
+          "id": "1.2.10",
+          "label": "1.2.10",
+          "branch": "v1.2.10",
+          "depots": [
+            { "depotId": 261551, "manifestId": "718779902395765855" },
+            { "depotId": 261552, "manifestId": "6899651629696580446" }
+          ]
+        },
+        {
+          "id": "1.2.9",
+          "label": "1.2.9",
+          "branch": "v1.2.9",
+          "depots": [
+            { "depotId": 261551, "manifestId": "7600736037801138753" },
+            { "depotId": 261552, "manifestId": "8658691993005164312" }
+          ]
+        },
+        {
+          "id": "1.2.8",
+          "label": "1.2.8",
+          "branch": "v1.2.8",
+          "depots": [
+            { "depotId": 261551, "manifestId": "92565971655502058" },
+            { "depotId": 261552, "manifestId": "4450953435514120557" }
+          ]
+        },
+        {
+          "id": "1.2.7",
+          "label": "1.2.7",
+          "branch": "v1.2.7",
+          "depots": [
+            { "depotId": 261551, "manifestId": "7868621547752273750" },
+            { "depotId": 261552, "manifestId": "3225417090295018154" }
+          ]
+        },
+        {
+          "id": "1.2.0",
+          "label": "1.2.0",
+          "branch": "v1.2.0",
+          "depots": [
+            { "depotId": 261551, "manifestId": "6015074900936461685" },
+            { "depotId": 261552, "manifestId": "3856199456868520662" }
+          ]
+        },
+        {
+          "id": "1.1.6",
+          "label": "1.1.6",
+          "branch": "v1.1.6",
+          "depots": [
+            { "depotId": 261551, "manifestId": "7330141611880206733" },
+            { "depotId": 261552, "manifestId": "130201671325024126" }
+          ]
+        },
+        {
+          "id": "1.1.5",
+          "label": "1.1.5",
+          "branch": "v1.1.5",
+          "depots": [
+            { "depotId": 261551, "manifestId": "4496822290475949599" },
+            { "depotId": 261552, "manifestId": "4421992661433109349" }
+          ]
+        },
+        {
+          "id": "1.1.4",
+          "label": "1.1.4",
+          "branch": "v1.1.4",
+          "depots": [
+            { "depotId": 261551, "manifestId": "5767012970610151466" },
+            { "depotId": 261552, "manifestId": "5502406132218847736" }
+          ]
+        },
+        {
+          "id": "1.1.3",
+          "label": "1.1.3",
+          "branch": "v1.1.3",
+          "depots": [
+            { "depotId": 261551, "manifestId": "6550292397653393003" },
+            { "depotId": 261552, "manifestId": "2362259405320703979" }
+          ]
+        },
+        {
+          "id": "1.1.2",
+          "label": "1.1.2",
+          "branch": "v1.1.2",
+          "depots": [
+            { "depotId": 261551, "manifestId": "6223895923184730452" },
+            { "depotId": 261552, "manifestId": "5786871768987957088" }
+          ]
+        },
+        {
+          "id": "1.1.1",
+          "label": "1.1.1",
+          "branch": "v1.1.1",
+          "depots": [
+            { "depotId": 261551, "manifestId": "6701195382417147601" },
+            { "depotId": 261552, "manifestId": "3077157367786169746" }
+          ]
+        },
+        {
+          "id": "1.1.0",
+          "label": "1.1.0",
+          "branch": "v1.1.0",
+          "depots": [
+            { "depotId": 261551, "manifestId": "992588358951023668" },
+            { "depotId": 261552, "manifestId": "3747185004141727505" }
+          ]
+        },
+        {
+          "id": "1.0.3",
+          "label": "1.0.3",
+          "branch": "v1.0.3",
+          "depots": [
+            { "depotId": 261551, "manifestId": "4516228824400773663" },
+            { "depotId": 261552, "manifestId": "6168342392494709536" }
+          ]
+        },
+        {
+          "id": "1.0.2",
+          "label": "1.0.2",
+          "branch": "v1.0.2",
+          "depots": [
+            { "depotId": 261551, "manifestId": "8619691498312834258" },
+            { "depotId": 261552, "manifestId": "8475947536751003021" }
+          ]
+        },
+        {
+          "id": "1.0.1",
+          "label": "1.0.1",
+          "branch": "v1.0.1",
+          "depots": [
+            { "depotId": 261551, "manifestId": "3232904809827808730" },
+            { "depotId": 261552, "manifestId": "7847532366110406640" }
+          ]
+        },
+        {
+          "id": "1.0.0",
+          "label": "1.0.0",
+          "branch": "v1.0.0",
+          "depots": [
+            { "depotId": 261551, "manifestId": "8567443353992076424" },
+            { "depotId": 261552, "manifestId": "7068962424434400123" }
+          ]
+        },
+        {
+          "id": "e1.9.0",
+          "label": "e1.9.0",
+          "branch": "e1.9.0",
+          "depots": [
+            { "depotId": 261551, "manifestId": "8940354230908804283" },
+            { "depotId": 261552, "manifestId": "5577511017924537973" }
+          ]
+        },
+        {
+          "id": "e1.8.1",
+          "label": "e1.8.1",
+          "branch": "e1.8.1",
+          "depots": [
+            { "depotId": 261551, "manifestId": "3472834488969645961" },
+            { "depotId": 261552, "manifestId": "3908493955344289360" }
+          ]
+        },
+        {
+          "id": "e1.7.2",
+          "label": "e1.7.2",
+          "branch": "e1.7.2",
+          "depots": [
+            { "depotId": 261551, "manifestId": "3140178721644615003" },
+            { "depotId": 261552, "manifestId": "8934200487301581430" }
+          ]
+        },
+        {
+          "id": "e1.7.1",
+          "label": "e1.7.1",
+          "branch": "e1.7.1",
+          "depots": [
+            { "depotId": 261551, "manifestId": "3626675318971139822" },
+            { "depotId": 261552, "manifestId": "8934200487301581430" }
+          ]
+        },
+        {
+          "id": "e1.7.0",
+          "label": "e1.7.0",
+          "branch": "e1.7.0",
+          "depots": [
+            { "depotId": 261551, "manifestId": "5323680629176368300" },
+            { "depotId": 261552, "manifestId": "820150832826118419" }
+          ]
+        }
+      ]
+    },
+    "palworld": {
+      "steamAppId": 1623730,
+      "versions": [
+        {
+          "id": "build-25246127",
+          "label": "Build 25246127",
+          "depots": [{ "depotId": 1623731, "manifestId": "3164835476547629219" }]
+        }
+      ]
+    },
+    "subnautica": {
+      "steamAppId": 264710,
+      "versions": [
+        {
+          "id": "build-20241558",
+          "label": "Build 20241558",
+          "depots": [{ "depotId": 264712, "manifestId": "4495119477327785570" }]
+        }
+      ]
+    },
+    "subnauticabelowzero": {
+      "steamAppId": 848450,
+      "versions": [
+        {
+          "id": "build-20245197",
+          "label": "Build 20245197",
+          "depots": [{ "depotId": 848452, "manifestId": "3284616936916893028" }]
+        }
+      ]
+    },
+    "devilmaycry5": {
+      "steamAppId": 601150,
+      "versions": [
+        {
+          "id": "build-24901913",
+          "label": "Build 24901913",
+          "depots": [
+            { "depotId": 601151, "manifestId": "7720053908610938491" },
+            { "depotId": 601152, "manifestId": "8627312034706131555" }
+          ]
+        }
+      ]
+    },
+    "residentevil22019": {
+      "steamAppId": 883710,
+      "versions": [
+        {
+          "id": "build-11636119",
+          "label": "Build 11636119",
+          "depots": [
+            { "depotId": 883711, "manifestId": "1276883776777242280" },
+            { "depotId": 883712, "manifestId": "4308061999662339354" },
+            { "depotId": 883713, "manifestId": "5793354868189524285" },
+            { "depotId": 883714, "manifestId": "5577253524310892660" },
+            { "depotId": 883715, "manifestId": "1048038669598412361" },
+            { "depotId": 883716, "manifestId": "6893789202571151145" },
+            { "depotId": 883717, "manifestId": "594447121131702131" },
+            { "depotId": 883718, "manifestId": "5949125275142682173" },
+            { "depotId": 883719, "manifestId": "2758490342177349494" },
+            { "depotId": 920572, "manifestId": "4813678597596508063" },
+            { "depotId": 920573, "manifestId": "419112001528634823" }
+          ]
+        },
+        {
+          "id": "dx11-non-rt",
+          "label": "DX11 (non-RT)",
+          "branch": "dx11_non-rt",
+          "depots": [
+            { "depotId": 883711, "manifestId": "1320402877134802356" },
+            { "depotId": 883712, "manifestId": "1789873155220005271" },
+            { "depotId": 883713, "manifestId": "7881911296249913725" },
+            { "depotId": 883714, "manifestId": "5516536679007499617" },
+            { "depotId": 883715, "manifestId": "7983123118006450774" },
+            { "depotId": 883716, "manifestId": "1919852394931102622" },
+            { "depotId": 883717, "manifestId": "328331778652019305" },
+            { "depotId": 883718, "manifestId": "6762561700557762870" },
+            { "depotId": 883719, "manifestId": "2758490342177349494" },
+            { "depotId": 920572, "manifestId": "4813678597596508063" },
+            { "depotId": 920573, "manifestId": "419112001528634823" }
+          ]
+        }
+      ]
+    },
+    "residentevil32020": {
+      "steamAppId": 952060,
+      "versions": [
+        {
+          "id": "build-24468913",
+          "label": "Build 24468913",
+          "depots": [
+            { "depotId": 952061, "manifestId": "3564315731812381316" },
+            { "depotId": 952062, "manifestId": "3791699160523467767" }
+          ]
+        },
+        {
+          "id": "dx11-non-rt",
+          "label": "DX11 (non-RT)",
+          "branch": "dx11_non-rt",
+          "depots": [
+            { "depotId": 952061, "manifestId": "8227126564196732721" },
+            { "depotId": 952062, "manifestId": "4250078460962883141" }
+          ]
+        }
+      ]
+    }
+  }
+}

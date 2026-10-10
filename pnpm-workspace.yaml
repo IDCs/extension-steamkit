@@ -2,4 +2,4 @@ allowBuilds:
   # postinstall only prints a funding banner
   core-js: false
 minimumReleaseAgeExclude:
-  - '@nexusmods/vortex-api@2.7.2'
+  - "@nexusmods/vortex-api@2.7.2"
