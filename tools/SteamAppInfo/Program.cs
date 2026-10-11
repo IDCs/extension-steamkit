@@ -18,11 +18,42 @@ var client = new SteamClient();
 var manager = new CallbackManager(client);
 var user = client.GetHandler<SteamUser>()!;
 var steamApps = client.GetHandler<SteamApps>()!;
-var loggedOn = new TaskCompletionSource<EResult>();
+var signedIn = new TaskCompletionSource();
+const int MaxConnectionAttempts = 10;
+var connectionAttempts = 1;
 
 manager.Subscribe<SteamClient.ConnectedCallback>(_ => user.LogOnAnonymous());
-manager.Subscribe<SteamClient.DisconnectedCallback>(_ => loggedOn.TrySetException(new Exception("Steam disconnected")));
-manager.Subscribe<SteamUser.LoggedOnCallback>(callback => loggedOn.TrySetResult(callback.Result));
+manager.Subscribe<SteamUser.LoggedOnCallback>(callback =>
+{
+    if (callback.Result == EResult.OK)
+    {
+        signedIn.TrySetResult();
+    }
+    else if (callback.Result == EResult.TryAnotherCM)
+    {
+        // SteamKit marks the busy server, so reconnecting picks another.
+        client.Disconnect();
+    }
+    else
+    {
+        signedIn.TrySetException(new Exception($"Anonymous sign-in failed: {callback.Result}"));
+    }
+});
+// Reconnects with a growing pause until signed in, as DepotDownloader's Steam3Session does.
+manager.Subscribe<SteamClient.DisconnectedCallback>(_ =>
+{
+    if (signedIn.Task.IsCompleted)
+    {
+        return;
+    }
+    if (connectionAttempts >= MaxConnectionAttempts)
+    {
+        signedIn.TrySetException(new Exception($"Could not sign in to Steam after {connectionAttempts} tries"));
+        return;
+    }
+    Thread.Sleep(TimeSpan.FromSeconds(connectionAttempts++));
+    client.Connect();
+});
 
 using var stop = new CancellationTokenSource();
 var pump = Task.Run(() =>
@@ -34,11 +65,7 @@ var pump = Task.Run(() =>
 });
 
 client.Connect();
-var logOn = await loggedOn.Task.WaitAsync(TimeSpan.FromSeconds(30));
-if (logOn != EResult.OK)
-{
-    throw new Exception($"Anonymous sign-in failed: {logOn}");
-}
+await signedIn.Task.WaitAsync(TimeSpan.FromMinutes(2));
 
 var appIds = apps.Select(app => app.appId).Distinct().ToList();
 var tokens = await steamApps.PICSGetAccessTokens(appIds, []).ToTask();
