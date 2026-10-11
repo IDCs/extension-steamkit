@@ -1,4 +1,4 @@
-import type { ModScrubber } from "../util/Scrubber";
+import type { WorkshopPages } from "../util/workshopPages";
 
 export interface ISteamKitParameters {
   Username?: string;
@@ -16,16 +16,14 @@ export interface ISteamKitParameters {
 
   // Steam app id
   AppId?: number;
+  /** The Workshop item to download instead of the app. A string, since published file ids are 64-bit. */
+  PubFile?: string;
 
   Branch?: string;
   BetaBranchPassword?: string;
   DepotIdList?: number[];
   /** The manifest of each depot in DepotIdList. Strings, since manifest ids are 64-bit. */
   ManifestIdList?: string[];
-}
-
-export interface IModsCache {
-  [page: string]: IWorkshopMod[];
 }
 
 export interface IWorkshopMod {
@@ -88,7 +86,7 @@ export const WorkshopAccessState = {
 export type WorkshopAccessState = (typeof WorkshopAccessState)[keyof typeof WorkshopAccessState];
 
 export type WorkshopAccess =
-  | { state: typeof WorkshopAccessState.Ready; scrubber: ModScrubber }
+  | { state: typeof WorkshopAccessState.Ready; pages: WorkshopPages }
   | { state: typeof WorkshopAccessState.NeedsApiKey }
   | { state: typeof WorkshopAccessState.NotSteam };
 
@@ -96,20 +94,16 @@ export type WorkshopAccess =
 export const SignInMethod = { Password: "password", QrCode: "qrCode" } as const;
 export type SignInMethod = (typeof SignInMethod)[keyof typeof SignInMethod];
 
+/** Why a Steam job asks the user to sign in, shown on the sign-in prompt. */
+export interface ISignInPurpose {
+  title: string;
+  text: string;
+}
+
 /** How the user signs in; remember keeps the sign-in so later runs don't ask. */
 export type SignInAnswer =
   | { method: typeof SignInMethod.Password; username: string; password: string; remember: boolean }
   | { method: typeof SignInMethod.QrCode; remember: boolean };
 
-export interface IMismatch {
-  id: string;
-  filePath: string;
-  enabled: boolean;
-}
-
 /** Called with a download's progress in percent. */
 export type ProgressCallback = (percent: number) => void;
-
-export interface IMismatchState {
-  mismatches: IMismatch[];
-}

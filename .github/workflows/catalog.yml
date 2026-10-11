@@ -1,0 +1,55 @@
+name: Update catalog
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: catalog-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', 'global.json') }}
+
+      # pnpm from packageManager, Node from devEngines.runtime.
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v2.0.2
+        with:
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Update the catalog
+        run: pnpm run catalog:update --summary "$RUNNER_TEMP/catalog-summary.md"
+
+      # One pull request, updated each night until merged; nothing opens when the catalog is unchanged.
+      - name: Open or update the pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: catalog/nightly
+          add-paths: catalog.json
+          commit-message: update the game version catalog
+          title: Update the game version catalog
+          body-path: ${{ runner.temp }}/catalog-summary.md
+          delete-branch: true

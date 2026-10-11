@@ -4,6 +4,20 @@ import type { IWorkshopMod } from "../types/interface";
 /** The download's modInfo key holding the Workshop item creator's Steam name. */
 export const AUTHOR_MODINFO_KEY = "steamkitAuthor";
 
+// Characters Windows forbids in file names, and the trailing dots and spaces it drops.
+const FORBIDDEN_IN_FILE_NAMES = /[<>:"/\\|?*\u0000-\u001f]/g;
+const TRAILING_DOTS_AND_SPACES = /[. ]+$/;
+
+/** The file name of a Workshop item's archive: its title, else its id when the title leaves no name. */
+export function workshopArchiveName(item: Pick<IWorkshopMod, "title" | "publishedfileid">): string {
+  const name = item.title
+    .replace(FORBIDDEN_IN_FILE_NAMES, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(TRAILING_DOTS_AND_SPACES, "");
+  return name !== "" ? name : item.publishedfileid;
+}
+
 /**
  * Workshop items have no version; the UTC date of the last update stands in for one, written as semver
  * (year.month.day, no leading zeros) so Vortex accepts it and versions sort in update order.

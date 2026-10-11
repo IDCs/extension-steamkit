@@ -1,3 +1,4 @@
+using Common;
 using DepotDownloader;
 
 namespace DepotDownloaderNative.Tests
@@ -14,6 +15,8 @@ namespace DepotDownloaderNative.Tests
 
     public void Dispose() => Directory.Delete(mInstallDirectory, recursive: true);
 
+    private static Task<string[]?> SelectFilesToRestore() => Exec.SelectFilesToRestoreAsync();
+
     /// <summary>Checks a depot of one file whose installed copy is modified.</summary>
     private void CheckModifiedDepot(string name)
     {
@@ -27,7 +30,7 @@ namespace DepotDownloaderNative.Tests
       CheckModifiedDepot("a.bsa");
       CheckModifiedDepot("b.bsa");
 
-      await Exec.SelectFilesToRestoreAsync();
+      await SelectFilesToRestore();
 
       Assert.Equal([["a.bsa", "b.bsa"]], mHost.ReportedMismatches);
     }
@@ -39,7 +42,7 @@ namespace DepotDownloaderNative.Tests
       CheckModifiedDepot("b.bsa");
       mHost.MismatchSelection = ["b.bsa"];
 
-      Assert.True(await Exec.SelectFilesToRestoreAsync());
+      Assert.Equal(new[] { "b.bsa" }, await SelectFilesToRestore());
 
       Assert.Null(Exec.Verification);
       Assert.True(ContentDownloader.TestIsFileIncluded("b.bsa"));
@@ -51,13 +54,13 @@ namespace DepotDownloaderNative.Tests
     {
       CheckModifiedDepot("a.bsa");
 
-      Assert.False(await Exec.SelectFilesToRestoreAsync());
+      Assert.Equal(new string[0], await SelectFilesToRestore());
     }
 
     [Fact]
     public async Task AsksNothingWhenEveryFileMatches()
     {
-      Assert.False(await Exec.SelectFilesToRestoreAsync());
+      Assert.Null(await SelectFilesToRestore());
 
       Assert.Empty(mHost.ReportedMismatches);
     }

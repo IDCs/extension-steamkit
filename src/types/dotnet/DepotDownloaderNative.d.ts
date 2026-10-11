@@ -32,13 +32,6 @@ declare module 'node-api-dotnet' {
 				cancellation?: AbortSignal,
 			): Promise<DepotDownloader.RunResult>;
 
-			export function DownloadWorkshopItem(
-				parameters: DepotDownloader.RunParameters,
-				publishedFileId: string,
-				host: Common.HostCallbacks,
-				cancellation?: AbortSignal,
-			): Promise<DepotDownloader.RunResult>;
-
 			export function InstalledManifests(
 				installDirectory: string,
 				appId: number,

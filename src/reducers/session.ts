@@ -1,12 +1,19 @@
 import type { types } from "@nexusmods/vortex-api";
 
-import { builtInCatalogLoaded, endMismatchDialog, setMismatchState } from "../actions/session";
+import { builtInCatalogLoaded, sessionWebApiKeySaved } from "../actions/session";
+import { ICatalog } from "../catalog/types";
+
+export interface ISessionState {
+  builtInCatalog?: ICatalog;
+  /** The Steam Web API key, in plain text, when it can't be kept protected. */
+  webApiKey?: string;
+}
 
 export const sessionReducer: types.IReducerSpec = {
   reducers: {
-    [endMismatchDialog as any]: (state) => ({ ...state, mismatches: [] }),
-    [setMismatchState as any]: (state, payload) => ({ ...state, mismatches: payload.mismatches }),
-    [builtInCatalogLoaded.getType()]: (state, catalog) => ({ ...state, builtInCatalog: catalog }),
+    [builtInCatalogLoaded.getType()]: (state: ISessionState, catalog) => ({ ...state, builtInCatalog: catalog }),
+    [sessionWebApiKeySaved.getType()]: ({ webApiKey: _previous, ...state }: ISessionState, webApiKey) =>
+      webApiKey !== undefined ? { ...state, webApiKey } : state,
   },
-  defaults: { mismatches: [] },
+  defaults: {} satisfies ISessionState,
 };

@@ -1,9 +1,9 @@
 import { mdiAccountMultiple, mdiCheck, mdiDownload, mdiImageBroken, mdiOpenInNew, mdiThumbUp } from "@mdi/js";
 import { util } from "@nexusmods/vortex-api";
-import { TFunction } from "i18next";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
-import { workshopItemUrl } from "../constants";
+import { NS, workshopItemUrl } from "../constants";
 import { IWorkshopMod } from "../types/interface";
 import { logError } from "../util/errors";
 import { totalVotes } from "../util/votes";
@@ -22,7 +22,6 @@ const ImageState = { Loading: "loading", Loaded: "loaded", Failed: "failed" } as
 type ImageState = (typeof ImageState)[keyof typeof ImageState];
 
 interface IWorkshopTileProps {
-  t: TFunction;
   mod: IWorkshopMod;
   fallbackImg: string;
   /** Whether one of the game's mods was installed from this item. */
@@ -40,7 +39,8 @@ function Stat({ iconPath, text }: { iconPath: string; text: string }) {
 }
 
 /** A Steam Workshop item, laid out as Vortex's collection tiles are. */
-export default function WorkshopTile({ t, mod, fallbackImg, installed, onInstall }: IWorkshopTileProps) {
+function WorkshopTile({ mod, fallbackImg, installed, onInstall }: IWorkshopTileProps) {
+  const { t } = useTranslation(NS);
   const [imageState, setImageState] = React.useState<ImageState>(ImageState.Loading);
   const votes = totalVotes(mod.vote_data);
 
@@ -104,6 +104,8 @@ export default function WorkshopTile({ t, mod, fallbackImg, installed, onInstall
     </div>
   );
 }
+
+export default React.memo(WorkshopTile);
 
 /** Stands in for a tile while the page loads. */
 export function WorkshopTileSkeleton() {

@@ -23,13 +23,14 @@ namespace DepotDownloader
         public const string Failed = "failed";
 
         /// <summary>The outcome an expected failure ends a run with; null for an unexpected one.</summary>
-        public static string Of(Exception exception) => exception switch
+        public static string? Of(Exception exception) => exception switch
         {
             SignInCancelledException => Cancelled,
             ContentDownloaderAccountException => AccessDenied,
             SignInFailedException => SignInFailed,
             SteamUnreachableException or HttpRequestException => SteamUnreachable,
-            ContentDownloaderException => Failed,
+            // A request Steam didn't answer in time; a user's cancel is caught before this.
+            ContentDownloaderException or OperationCanceledException => Failed,
             _ => null,
         };
     }
@@ -39,5 +40,13 @@ namespace DepotDownloader
     {
         public string Outcome { get; } = outcome;
         public string Message { get; } = message;
+        /// <summary>Whether a verification found files that differ from Steam's.</summary>
+        public bool FilesDiffered { get; private init; }
+        /// <summary>The files a verification restored; never null, as JavaScript can't read a null array.</summary>
+        public string[] RestoredFiles { get; private init; } = [];
+
+        /// <summary>A completed run, given the files it restored: null when none differed, empty when the user restored none.</summary>
+        public static RunResult Completed(string[]? restoredFiles) =>
+            new(RunOutcome.Completed) { FilesDiffered = restoredFiles != null, RestoredFiles = restoredFiles ?? [] };
     }
 }

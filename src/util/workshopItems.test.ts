@@ -22,6 +22,6 @@ describe("installedWorkshopItemIds", () => {
   });
 
   it("lists none for a game without mods", () => {
-    expect(installedWorkshopItemIds(undefined)).toEqual(new Set());
+    expect(installedWorkshopItemIds({})).toEqual(new Set());
   });
 });

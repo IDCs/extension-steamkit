@@ -2,14 +2,14 @@ import { Modal, selectors } from "@nexusmods/vortex-api";
 import * as React from "react";
 import { Button, ControlLabel, FormControl, FormGroup, Label, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 import { userVersionAdded, userVersionChanged, userVersionRemoved } from "../actions/persistent";
 import { isInstalledVersion, listGameVersions, validateUserVersion } from "../catalog/catalog";
+import { readGameManifests } from "../catalog/gameVersions";
 import { parseDepotLines } from "../catalog/parse";
 import { IGameVersion, IListedVersion, VersionSource } from "../catalog/types";
 import { NS } from "../constants";
-import { readInstalledManifests } from "../native";
 import { builtInCatalog, steamAppIdFor, userVersions } from "../selectors";
 import { logError } from "../util/errors";
 
@@ -28,13 +28,11 @@ interface IEditing {
 export default function GameVersionsDialog({ visible, onHide, onInstall }: IGameVersionsDialogProps) {
   const { t } = useTranslation([NS, "common"]);
   const dispatch = useDispatch();
+  const store = useStore();
   const gameId: string = useSelector(selectors.activeGameId);
   const builtIn = useSelector(builtInCatalog);
   const users = useSelector(userVersions);
   const steamAppId = useSelector((state) => steamAppIdFor(state, gameId));
-  const installPath: string | undefined = useSelector(
-    (state) => selectors.discoveryByGame(state, gameId)?.path,
-  );
   const [editing, setEditing] = React.useState<IEditing | undefined>(undefined);
   // keyed by depot id; read each time the dialog opens
   const [installedManifests, setInstalledManifests] = React.useState<
@@ -42,11 +40,11 @@ export default function GameVersionsDialog({ visible, onHide, onInstall }: IGame
   >(undefined);
 
   React.useEffect(() => {
-    if (!visible || steamAppId === undefined || installPath === undefined) {
+    if (!visible) {
       return undefined;
     }
     let current = true;
-    readInstalledManifests(steamAppId, installPath).then(
+    readGameManifests(store.getState(), gameId).then(
       (manifests) => {
         if (current) {
           setInstalledManifests(manifests);
@@ -58,7 +56,7 @@ export default function GameVersionsDialog({ visible, onHide, onInstall }: IGame
       current = false;
       setInstalledManifests(undefined);
     };
-  }, [visible, steamAppId, installPath]);
+  }, [visible, gameId]);
 
   const versions = React.useMemo(
     () => listGameVersions(builtIn, users, gameId),

@@ -25,19 +25,14 @@ const hostProvided = [
   "react-i18next",
   "react-redux",
   "redux-act",
-  "shortid",
 ];
-
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
 
 // Matches the package and any subpath, e.g. `react/jsx-runtime`.
 const external = [
   ...builtinModules.filter((m) => !m.startsWith("_")),
   ...hostProvided,
   ...shipped,
-].map((id) => new RegExp(`^${escapeRegExp(id)}(?:$|/)`));
+].map((id) => new RegExp(`^${RegExp.escape(id)}(?:$|/)`));
 
 const config = defineConfig({
   input: entryPoint,

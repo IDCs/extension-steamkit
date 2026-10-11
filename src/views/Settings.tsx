@@ -1,45 +1,29 @@
 import { More, tooltip } from "@nexusmods/vortex-api";
-import I18next from "i18next";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-interface IProps {
-  t: typeof I18next.t;
-  getSteamWebApiKey: () => Promise<string | undefined>;
-  /** Asks for a Steam Web API key and saves it; resolves to whether one was saved. */
+import { NS } from "../constants";
+import { hasWebApiKey, protectedAccount } from "../util/steamAccount";
+
+interface ISettingsProps {
+  /** Asks for a Steam Web API key and saves it. */
   onRequestApiKey: () => Promise<boolean>;
-  /** Forgets the Steam Web API key; resolves to whether that worked. */
+  /** Forgets the Steam Web API key. */
   onResetApiKey: () => Promise<boolean>;
   /** The Steam account Vortex remembers, if any. */
   getRememberedAccount: () => Promise<string | undefined>;
   onForgetAccount: () => void;
 }
 
-function ApiKeyButton({ t, getSteamWebApiKey, onRequestApiKey, onResetApiKey }: IProps) {
-  const [hasKey, setHasKey] = React.useState(false);
-  React.useEffect(() => {
-    let current = true;
-    void getSteamWebApiKey().then((key) => {
-      if (current) {
-        setHasKey(key !== undefined);
-      }
-    });
-    return () => {
-      current = false;
-    };
-  }, []);
-
-  const onClick = async () => {
-    if (hasKey) {
-      setHasKey(!(await onResetApiKey()));
-    } else {
-      setHasKey(await onRequestApiKey());
-    }
-  };
+function ApiKeyButton({ onRequestApiKey, onResetApiKey }: ISettingsProps) {
+  const { t } = useTranslation(NS);
+  const hasKey = useSelector(hasWebApiKey);
   return (
     <div>
       <tooltip.Button
         tooltip={hasKey ? t("Resets the Steam Web API Key") : t("Sets the Steam Web API Key")}
-        onClick={() => void onClick()}
+        onClick={() => void (hasKey ? onResetApiKey() : onRequestApiKey())}
       >
         {hasKey ? t("Reset Steam Web API Key") : t("Set Steam Web API Key")}
       </tooltip.Button>
@@ -54,12 +38,25 @@ function ApiKeyButton({ t, getSteamWebApiKey, onRequestApiKey, onResetApiKey }: 
   );
 }
 
-function RememberedAccount({ t, getRememberedAccount, onForgetAccount }: IProps) {
+function RememberedAccount({ getRememberedAccount, onForgetAccount }: ISettingsProps) {
+  const { t } = useTranslation(NS);
+  const keptAccount = useSelector(protectedAccount);
   const [account, setAccount] = React.useState<string | undefined>(undefined);
   React.useEffect(() => {
-    void getRememberedAccount().then(setAccount);
-  }, [getRememberedAccount]);
-  if (account === undefined) {
+    if (keptAccount === undefined) {
+      return undefined;
+    }
+    let current = true;
+    void getRememberedAccount().then((readAccount) => {
+      if (current) {
+        setAccount(readAccount);
+      }
+    });
+    return () => {
+      current = false;
+    };
+  }, [keptAccount]);
+  if (keptAccount === undefined || account === undefined) {
     return null;
   }
   return (
@@ -67,10 +64,7 @@ function RememberedAccount({ t, getRememberedAccount, onForgetAccount }: IProps)
       <p>{t("Vortex remembers your Steam account {{account}}.", { replace: { account } })}</p>
       <tooltip.Button
         tooltip={t("Forgets the Steam account and its sign-in, so Vortex asks you to sign in again")}
-        onClick={() => {
-          onForgetAccount();
-          setAccount(undefined);
-        }}
+        onClick={onForgetAccount}
       >
         {t("Forget Steam account")}
       </tooltip.Button>
@@ -78,7 +72,7 @@ function RememberedAccount({ t, getRememberedAccount, onForgetAccount }: IProps)
   );
 }
 
-export default function Settings(props: IProps) {
+export default function Settings(props: ISettingsProps) {
   return (
     <div>
       <ApiKeyButton {...props} />

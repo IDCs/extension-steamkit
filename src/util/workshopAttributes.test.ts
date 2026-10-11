@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { IWorkshopMod } from "../types/interface";
-import { AUTHOR_MODINFO_KEY, workshopAttributeExtractor } from "./workshopAttributes";
+import { AUTHOR_MODINFO_KEY, workshopArchiveName, workshopAttributeExtractor } from "./workshopAttributes";
 
 const ITEM = {
   publishedfileid: "2413210890",
@@ -55,5 +55,21 @@ describe("workshopAttributeExtractor", () => {
   it("leaves mods from other sources alone", async () => {
     expect(await workshopAttributeExtractor(downloadOf({ source: "nexus" }))).toEqual({});
     expect(await workshopAttributeExtractor({})).toEqual({});
+  });
+});
+
+describe("workshopArchiveName", () => {
+  const item = (title: string) => ({ ...ITEM, title });
+
+  it("names the archive after the item's title, in any script", () => {
+    expect(workshopArchiveName(item("Броня кочевника"))).toBe("Броня кочевника");
+  });
+
+  it("leaves out the characters Windows forbids in file names", () => {
+    expect(workshopArchiveName(item('Armour: "Nomad" <v2>?'))).toBe("Armour Nomad v2");
+  });
+
+  it("names the archive after the item's id when the title leaves no name", () => {
+    expect(workshopArchiveName(item("???"))).toBe(ITEM.publishedfileid);
   });
 });

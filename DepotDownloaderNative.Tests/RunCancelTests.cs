@@ -15,6 +15,7 @@ namespace DepotDownloaderNative.Tests
       {
         running.SetResult();
         await Task.Delay(Timeout.Infinite, cancellation.Token);
+        return null;
       }, cancellation.Token);
       await running.Task;
       cancellation.Cancel();
@@ -39,11 +40,39 @@ namespace DepotDownloaderNative.Tests
     [Fact]
     public async Task ReportsADownloadTheDownloaderGaveUpOnAsFailed()
     {
-      // The downloader cancels its own work when Steam cannot provide a manifest or chunk.
-      var result = await NativeApi.RunOffJsThread(() => throw new TaskCanceledException());
+      var result = await NativeApi.RunOffJsThread(() => throw new ContentDownloaderException(Exec.DownloaderGaveUp));
 
       Assert.Equal(RunOutcome.Failed, result.Outcome);
-      Assert.Equal(NativeApi.DownloaderGaveUp, result.Message);
+      Assert.Equal(Exec.DownloaderGaveUp, result.Message);
+    }
+
+    [Fact]
+    public async Task ReportsARequestSteamTimedOutAsFailed()
+    {
+      var result = await NativeApi.RunOffJsThread(() => throw new TaskCanceledException("Steam did not answer in time"));
+
+      Assert.Equal(RunOutcome.Failed, result.Outcome);
+      Assert.Equal("Steam did not answer in time", result.Message);
+    }
+
+    [Fact]
+    public async Task HandsBackTheFilesAVerificationRestored()
+    {
+      var result = await NativeApi.RunOffJsThread(() => Task.FromResult<string[]?>(["a.bsa"]));
+
+      Assert.Equal(RunOutcome.Completed, result.Outcome);
+      Assert.True(result.FilesDiffered);
+      Assert.Equal(new[] { "a.bsa" }, result.RestoredFiles);
+    }
+
+    [Fact]
+    public async Task HandsBackNoFilesForARunWithNothingToRestore()
+    {
+      var result = await NativeApi.RunOffJsThread(() => Task.FromResult<string[]?>(null));
+
+      Assert.Equal(RunOutcome.Completed, result.Outcome);
+      Assert.False(result.FilesDiffered);
+      Assert.Empty(result.RestoredFiles);
     }
 
     [Fact]
@@ -54,7 +83,7 @@ namespace DepotDownloaderNative.Tests
       var result = await NativeApi.RunOffJsThread(() =>
       {
         started = true;
-        return Task.CompletedTask;
+        return Task.FromResult<string[]?>(null);
       }, new CancellationToken(canceled: true));
 
       Assert.False(started);

@@ -41,7 +41,7 @@ namespace DepotDownloader
             return RequireCode(await host.RequestSteamGuard(cancellation));
         }
 
-        string RequireCode(string code)
+        string RequireCode(string? code)
         {
             if (string.IsNullOrEmpty(code))
             {
@@ -84,7 +84,7 @@ namespace DepotDownloader
             return new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         }
 
-        void ShowPrompt(string qrCode)
+        void ShowPrompt(string? qrCode)
         {
             promptShown = true;
             var cancelled = signInCancelled;
@@ -138,19 +138,19 @@ namespace DepotDownloader
         }
 
         /// <summary>Asks the host for a two-factor code on the legacy logon path. Null when the user cancels.</summary>
-        public string ReadTwoFactorCode()
+        public string? ReadTwoFactorCode()
         {
             return ReadCode(GetDeviceCodeAsync(false));
         }
 
         /// <summary>Asks the host for an emailed Steam Guard code on the legacy logon path. Null if cancelled.</summary>
-        public string ReadEmailCode()
+        public string? ReadEmailCode()
         {
-            return ReadCode(GetEmailCodeAsync(null, false));
+            return ReadCode(GetEmailCodeAsync(string.Empty, false));
         }
 
         // The legacy prompts run inside a synchronous SteamKit callback, off the host's thread.
-        static string ReadCode(Task<string> prompt)
+        static string? ReadCode(Task<string> prompt)
         {
             try
             {

@@ -2,7 +2,8 @@ import type { types } from "@nexusmods/vortex-api";
 
 import { ErrorKind, SteamkitError } from "../types/errors";
 
-export type ErrorLogLevel = "debug" | "warn" | "error";
+export const ErrorLogLevel = { Debug: "debug", Warn: "warn", Error: "error" } as const;
+export type ErrorLogLevel = (typeof ErrorLogLevel)[keyof typeof ErrorLogLevel];
 export type ErrorLog = (level: ErrorLogLevel, message: string, metadata?: unknown) => void;
 
 let errorLog: ErrorLog = () => undefined;
@@ -54,14 +55,14 @@ export function errorMessage(err: unknown): string {
 }
 
 const LOG_LEVEL: Record<ErrorKind, ErrorLogLevel> = {
-  [ErrorKind.Cancelled]: "debug",
-  [ErrorKind.AccessDenied]: "warn",
-  [ErrorKind.SignInFailed]: "warn",
-  [ErrorKind.SteamUnreachable]: "warn",
-  [ErrorKind.Failed]: "warn",
-  [ErrorKind.NotSteamGame]: "warn",
-  [ErrorKind.InvalidInput]: "warn",
-  [ErrorKind.Unexpected]: "error",
+  [ErrorKind.Cancelled]: ErrorLogLevel.Debug,
+  [ErrorKind.AccessDenied]: ErrorLogLevel.Warn,
+  [ErrorKind.SignInFailed]: ErrorLogLevel.Warn,
+  [ErrorKind.SteamUnreachable]: ErrorLogLevel.Warn,
+  [ErrorKind.Failed]: ErrorLogLevel.Warn,
+  [ErrorKind.NotSteamGame]: ErrorLogLevel.Warn,
+  [ErrorKind.InvalidInput]: ErrorLogLevel.Warn,
+  [ErrorKind.Unexpected]: ErrorLogLevel.Error,
 };
 
 /** Logs a failure the user is not told about. */

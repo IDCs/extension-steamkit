@@ -18,7 +18,7 @@ export const RunOutcome = {
 export type RunOutcome = (typeof RunOutcome)[keyof typeof RunOutcome];
 
 export type IRunParameters = DepotDownloader.RunParameters;
-export type IRunResult = Pick<DepotDownloader.RunResult, "Outcome" | "Message">;
+export type IRunResult = Pick<DepotDownloader.RunResult, "Outcome" | "Message" | "FilesDiffered" | "RestoredFiles">;
 export type IHostCallbacks = Common.HostCallbacks;
 
 /** The types the extension uses. */

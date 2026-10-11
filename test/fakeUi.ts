@@ -1,6 +1,7 @@
 import type UI from "../src/delegates/UI";
 import { type SignInAnswer, SignInMethod } from "../src/types/interface";
 import type { IRememberedAccount } from "../src/util/steamAccount";
+import { fakeAccounts } from "./fakeAccounts";
 
 export interface IFakeUiOptions {
   /** The files the user selects to restore when shown mismatches. */
@@ -27,9 +28,9 @@ export function fakeUi({
   const signInPrompt: string[] = [];
   const qrCodes: Array<string | undefined> = [];
   const progress: number[] = [];
-  const signIns: Array<[string, string | undefined, string | undefined]> = [];
-  const forgottenTokens: string[] = [];
+  const { accounts, signIns, forgottenTokens } = fakeAccounts({ remembered });
   const ui = {
+    accounts,
     requestCredentials: answer(credentials),
     requestSteamGuard: answer("GUARD"),
     request2FA: answer("2FA"),
@@ -49,13 +50,14 @@ export function fakeUi({
     reportProgress: async (percent: number) => {
       progress.push(percent);
     },
-    rememberedAccount: async () => remembered,
-    recordSignIn: async (account: string, loginToken?: string, guardData?: string) => {
-      signIns.push([account, loginToken, guardData]);
-    },
-    forgetLoginToken: async (account: string) => {
-      forgottenTokens.push(account);
-    },
   } as unknown as UI;
-  return { ui, mismatches, signInPrompt, qrCodes, progress, signIns, forgottenTokens };
+  return {
+    ui,
+    mismatches,
+    signInPrompt,
+    qrCodes,
+    progress,
+    signIns,
+    forgottenTokens,
+  };
 }

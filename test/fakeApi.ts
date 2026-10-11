@@ -7,6 +7,7 @@ import { vi } from "vitest";
 export function fakeApi() {
   const api = {
     sendNotification: vi.fn<(notification: types.INotification) => string>(() => "notification"),
+    dismissNotification: vi.fn<(id: string) => void>(),
     showErrorNotification:
       vi.fn<(message: string, detail: unknown, options?: types.IErrorOptions) => void>(),
     showDialog: vi.fn(),

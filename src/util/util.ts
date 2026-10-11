@@ -1,5 +1,5 @@
-import { readFile, rm } from "node:fs/promises";
-import path from "path";
+import { readdir, readFile, rm } from "node:fs/promises";
+import path from "node:path";
 
 import { actions, types, util } from "@nexusmods/vortex-api";
 
@@ -13,17 +13,17 @@ import { AUTHOR_MODINFO_KEY } from "./workshopAttributes";
 export function addDownloadMetaData(
   api: types.IExtensionApi,
   mod: IWorkshopMod,
-  dlId: string,
+  downloadId: string,
   gameId: string,
   author: string | undefined,
 ) {
   const batchedActions = [
-    actions.setDownloadModInfo(dlId, "name", mod.title),
-    actions.setDownloadModInfo(dlId, "source", "website"),
-    actions.setDownloadModInfo(dlId, "url", workshopItemUrl(mod.publishedfileid)),
-    actions.setDownloadModInfo(dlId, "game", gameId),
-    actions.setDownloadModInfo(dlId, "steamkit", JSON.stringify(mod)),
-    ...(author !== undefined ? [actions.setDownloadModInfo(dlId, AUTHOR_MODINFO_KEY, author)] : []),
+    actions.setDownloadModInfo(downloadId, "name", mod.title),
+    actions.setDownloadModInfo(downloadId, "source", "website"),
+    actions.setDownloadModInfo(downloadId, "url", workshopItemUrl(mod.publishedfileid)),
+    actions.setDownloadModInfo(downloadId, "game", gameId),
+    actions.setDownloadModInfo(downloadId, "steamkit", JSON.stringify(mod)),
+    ...(author !== undefined ? [actions.setDownloadModInfo(downloadId, AUTHOR_MODINFO_KEY, author)] : []),
   ];
   util.batchDispatch(api.store, batchedActions);
 }
@@ -37,42 +37,15 @@ export function importDownload(api: types.IExtensionApi, archivePath: string): P
   );
 }
 
-export async function packFiles(modPath: string, files: string[], destination: string) {
-  const baseSegments = modPath.split(path.sep);
-  const baseSeg = baseSegments.slice(baseSegments.length - 1)[0];
-  const arcMap: { [arcName: string]: { basePath: string; relPath: string }[] } = files.reduce(
-    (accum, iter) => {
-      const segments = iter.split(path.sep);
-      const idx = segments.findIndex((seg) => seg === baseSeg);
-      if (idx === -1) {
-        return accum;
-      }
-      const modKey = segments.slice(idx - 1, idx + 1).join("_");
-      if (accum[modKey] === undefined) {
-        accum[modKey] = [];
-      }
-      const basePath = segments.slice(0, idx + 1).join(path.sep);
-      const relPath = path.relative(basePath, iter);
-      const pathExists =
-        accum[modKey].find(
-          (file) => file.relPath.split(path.sep)[0] === relPath.split(path.sep)[0],
-        ) !== undefined;
-      if (!pathExists) {
-        accum[modKey].push({ relPath, basePath });
-      }
-      return accum;
-    },
-    {},
-  );
+// Where the downloader keeps its config and manifests, inside the directory it downloads to.
+const DOWNLOADER_DIR = ".DepotDownloader";
 
-  const szip = new util.SevenZip();
-  for (const modKey of Object.keys(arcMap)) {
-    await szip.add(
-      destination,
-      arcMap[modKey].map((file) => path.join(file.basePath, file.relPath.split(path.sep)[0])),
-      { raw: ["-r"] },
-    );
-  }
+/** Packs what a download left in a directory, without the downloader's own files, into an archive. */
+export async function packWorkshopItem(downloadDirectory: string, archivePath: string): Promise<void> {
+  const entries = (await readdir(downloadDirectory))
+    .filter((entryName) => entryName !== DOWNLOADER_DIR)
+    .map((entryName) => path.join(downloadDirectory, entryName));
+  await new util.SevenZip().add(archivePath, entries, { raw: ["-r"] });
 }
 
 /**

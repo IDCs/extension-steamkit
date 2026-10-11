@@ -1,7 +1,7 @@
 import * as path from "node:path";
 
 import { ASSEMBLIES } from "../src/native";
-import type { IHostCallbacks } from "../src/types/bridge";
+import type { IHostCallbacks, IRunResult } from "../src/types/bridge";
 
 /** Where test setup publishes the bridge and its test host. */
 export const DOTNET_TEST_DIR = path.resolve(import.meta.dirname, "..", ".test-dotnet");
@@ -17,6 +17,7 @@ export interface IProbes {
   WriteConsoleFromWorkerThread(output: string): Promise<void>;
   WriteConsoleFromBothThreads(lines: number): Promise<void>;
   RunOutcomes(): string[];
+  CompletedRun(restoredFiles: string[] | null): IRunResult;
   WaitUntilCancelled(cancellation: AbortSignal): Promise<boolean>;
 }
 

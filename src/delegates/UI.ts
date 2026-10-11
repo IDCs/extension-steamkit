@@ -1,47 +1,55 @@
 import type { types } from "@nexusmods/vortex-api";
-import { generate } from "shortid";
 
-import { endMismatchDialog, setMismatchState } from "../actions/session";
-import { ErrorKind, SteamkitError } from "../types/errors";
-import { IMismatch, ProgressCallback, SignInAnswer, SignInMethod } from "../types/interface";
-import { reportError } from "../util/errors";
-import { IAccountKeeper, IRememberedAccount, sharedAccountKeeper } from "../util/steamAccount";
+import { ISignInPurpose, ProgressCallback, SignInAnswer, SignInMethod } from "../types/interface";
+import type { RestorePrompt } from "../util/restorePrompt";
+import type { IAccountKeeper } from "../util/steamAccount";
+
+/** What a job's prompts use beyond the extension API. */
+export interface IPromptServices {
+  accounts: IAccountKeeper;
+  restorePrompt: RestorePrompt;
+}
 
 const SIGN_IN_DIALOG = "steam-sign-in-dialog";
 const CREDENTIALS_DIALOG = "steamkit-login-screen";
 const STEAM_GUARD_DIALOG = "steam-guard-dialog";
 const TWO_FACTOR_DIALOG = "steam-2fa-dialog";
-const USE_QR_CODE = "Use QR Code";
+const USERNAME = "Username";
+const PASSWORD = "Password";
 // Not "remember": Vortex applies a checkbox with that id to every pending dialog with the same title.
 const REMEMBER_SIGN_IN = "rememberSignIn";
 
+/** The buttons of the job's prompts, as Vortex reports the one the user clicked. */
+const DialogAction = {
+  Cancel: "Cancel",
+  Close: "Close",
+  Continue: "Continue",
+  UseQrCode: "Use QR Code",
+} as const;
+
 /** Answers the downloader's prompts with Vortex dialogs. A prompt the user cancels resolves to undefined. */
 class UI {
+  /** Keeps the job's Steam sign-in. */
+  public readonly accounts: IAccountKeeper;
   private mApi: types.IExtensionApi;
+  private mRestorePrompt: RestorePrompt;
+  private mAskingRestore = false;
+  private mSignIn: ISignInPurpose;
   private mOnProgress: ProgressCallback;
-  private mResolveMismatch: ((selected: string[]) => void) | undefined;
   // keyed by dialog id; a QR code prompt reopens under the same id before the old one settles
   private mOpenDialogCounts = new Map<string, number>();
 
-  private mAccountKeeper: () => IAccountKeeper;
-
   constructor(
     api: types.IExtensionApi,
+    signIn: ISignInPurpose,
+    services: IPromptServices,
     onProgress: ProgressCallback,
-    accountKeeper: () => IAccountKeeper = sharedAccountKeeper,
   ) {
     this.mApi = api;
+    this.mSignIn = signIn;
+    this.accounts = services.accounts;
+    this.mRestorePrompt = services.restorePrompt;
     this.mOnProgress = onProgress;
-    this.mAccountKeeper = accountKeeper;
-    api.events
-      .on("steamkit-mismatch-select", this.onMismatchSelect)
-      .on("steamkit-mismatch-cancel", this.onMismatchCancel);
-  }
-
-  public detach() {
-    this.mApi.events
-      .removeListener("steamkit-mismatch-select", this.onMismatchSelect)
-      .removeListener("steamkit-mismatch-cancel", this.onMismatchCancel);
   }
 
   // Shows one of this job's prompts, tracked so cancelling the job closes it.
@@ -62,27 +70,23 @@ class UI {
 
   public requestCredentials = async (): Promise<SignInAnswer | undefined> => {
     const t = this.mApi.translate;
-    const canRemember = await this.mAccountKeeper().canRemember();
-    const res = await this.showPrompt(
+    const canRemember = await this.accounts.canRemember();
+    const result = await this.showPrompt(
       CREDENTIALS_DIALOG,
       "question",
-      "Verify Integrity of Steam Game Files",
+      t(this.mSignIn.title),
       {
-        bbcode: t(
-          "If you are missing textures or other content in game, or experiencing " +
-            "crashing while playing a game, you can have Steam verify that the game's " +
-            "files are installed correctly on your computer. Steam will restore any " +
-            "original files that have been altered or are missing{{bl}}" +
-            "Note: this check is only available with Steam games and can not fix " +
-            "issues with mod conflicts.{{bl}}" +
-            "To continue, please enter your Steam credentials, or sign in with a QR code from the " +
-            "Steam Mobile app. If you are using Steam guard, you will have 30 seconds to enter your " +
-            "code on the next screen. Vortex never stores your password.",
-          { replace: { bl: "[br][/br][br][/br]" } },
-        ),
+        bbcode:
+          t(this.mSignIn.text) +
+          "[br][/br][br][/br]" +
+          t(
+            "Enter your Steam username and password, or sign in with a QR code from the Steam Mobile app. " +
+              "If you use Steam Guard, you have 30 seconds to enter its code on the next screen. " +
+              "Vortex never stores your password.",
+          ),
         input: [
-          { id: "Username", type: "text", label: "Username" },
-          { id: "Password", type: "password", label: "Password" },
+          { id: USERNAME, type: "text", label: "Username" },
+          { id: PASSWORD, type: "password", label: "Password" },
         ],
         checkboxes: canRemember
           ? [
@@ -97,79 +101,68 @@ class UI {
               },
             ]
           : undefined,
+        condition: (content) => {
+          const isFilled = (fieldId: string) =>
+            (content.input?.find((field) => field.id === fieldId)?.value ?? "") !== "";
+          return isFilled(USERNAME) && isFilled(PASSWORD)
+            ? []
+            : [{ id: PASSWORD, actions: [DialogAction.Continue], errorText: t("Enter your username and password") }];
+        },
       },
-      [{ label: "Cancel" }, { label: USE_QR_CODE }, { label: "Continue", default: true }],
+      [
+        { label: DialogAction.Cancel },
+        { label: DialogAction.UseQrCode },
+        { label: DialogAction.Continue, default: true },
+      ],
     );
-    if (res.action === "Cancel") {
-      return undefined;
+    const remember = canRemember && result.input[REMEMBER_SIGN_IN] === true;
+    switch (result.action) {
+      case DialogAction.UseQrCode:
+        return { method: SignInMethod.QrCode, remember };
+      case DialogAction.Continue:
+        return {
+          method: SignInMethod.Password,
+          username: result.input[USERNAME],
+          password: result.input[PASSWORD],
+          remember,
+        };
+      default:
+        return undefined;
     }
-    const remember = canRemember && res.input[REMEMBER_SIGN_IN] === true;
-    if (res.action === USE_QR_CODE) {
-      return { method: SignInMethod.QrCode, remember };
-    }
-    const username: string = res.input["Username"];
-    const password: string = res.input["Password"];
-    if (username === undefined || username === "" || password === undefined || password === "") {
-      reportError(
-        this.mApi,
-        "Unable to complete Steam operation",
-        new SteamkitError(ErrorKind.InvalidInput, "Please provide valid credentials"),
-      );
-      return undefined;
-    }
-    return { method: SignInMethod.Password, username, password, remember };
   };
-
-  /** The Steam account the extension remembers signing in as, for the downloader. */
-  public rememberedAccount = async (): Promise<IRememberedAccount | undefined> =>
-    this.mAccountKeeper().remembered();
-
-  // The bridge hands over a missing token or Steam Guard record as undefined.
-  public recordSignIn = async (account: string, loginToken?: string, guardData?: string) =>
-    this.mAccountKeeper().recordSignIn(account, loginToken, guardData);
-
-  public forgetLoginToken = async (_account: string) => this.mAccountKeeper().forgetLoginToken();
 
   public requestSteamGuard = async (): Promise<string | undefined> => {
-    const res = await this.showPrompt(
+    const code = await this.requestCode(
       STEAM_GUARD_DIALOG,
-      "question",
       "Steam Guard Code Required",
-      {
-        text:
-          "Steam has sent you a Steam Guard Code, this will be to either your email address or your Steam mobile app.\n" +
-          "Please enter the code below:\n\n" +
-          "Note: if you have not received your code, please check your spam folder or contact Steam support.",
-        input: [
-          {
-            id: "SteamGuard",
-            type: "text",
-            label: "Steam guard code",
-            placeholder: "Not case sensitive",
-          },
-        ],
-      },
-      [{ label: "Cancel" }, { label: "Continue", default: true }],
+      "Steam has sent you a Steam Guard Code, this will be to either your email address or your Steam mobile app.\n" +
+        "Please enter the code below:\n\n" +
+        "Note: if you have not received your code, please check your spam folder or contact Steam support.",
+      { id: "SteamGuard", type: "text", label: "Steam guard code", placeholder: "Not case sensitive" },
     );
-    const code: string = res.input["SteamGuard"];
-    return res.action !== "Cancel" && code !== undefined && code !== ""
-      ? code.toUpperCase()
-      : undefined;
+    return code?.toUpperCase();
   };
 
-  public request2FA = async (): Promise<string | undefined> => {
-    const res = await this.showPrompt(
+  public request2FA = async (): Promise<string | undefined> =>
+    this.requestCode(
       TWO_FACTOR_DIALOG,
-      "question",
       "Two Factor Authentication Required",
-      {
-        text: "Please authenticate using your 2FA application",
-        input: [{ id: "2FA", type: "text", label: "Two Factor Auth Key" }],
-      },
-      [{ label: "Cancel" }, { label: "Continue", default: true }],
+      "Please authenticate using your 2FA application",
+      { id: "2FA", type: "text", label: "Two Factor Auth Key" },
     );
-    return res.action !== "Cancel" ? res.input["2FA"] : undefined;
-  };
+
+  private async requestCode(
+    dialogId: string,
+    title: string,
+    text: string,
+    input: types.IInput,
+  ): Promise<string | undefined> {
+    const result = await this.showPrompt(dialogId, "question", title, { text, input: [input] }, [
+      { label: DialogAction.Cancel },
+      { label: DialogAction.Continue, default: true },
+    ]);
+    return result.action === DialogAction.Continue ? result.input[input.id] : undefined;
+  }
 
   public confirmSignIn = async (qrCode?: string): Promise<boolean> => {
     // Steam replaces its QR code as it expires; the new prompt settles the old one.
@@ -186,10 +179,10 @@ class UI {
               `<img src="${qrCode}" alt="Steam sign-in QR code" style="width: 240px; height: 240px; ` +
               `image-rendering: pixelated; display: block; margin: 0 auto;" />`,
           };
-    const res = await this.showPrompt(SIGN_IN_DIALOG, "info", "Approve the Sign-in", content, [
-      { label: "Cancel" },
+    const result = await this.showPrompt(SIGN_IN_DIALOG, "info", "Approve the Sign-in", content, [
+      { label: DialogAction.Cancel },
     ]);
-    return res.action === "Cancel";
+    return result.action === DialogAction.Cancel;
   };
 
   public endSignInConfirmation = async (): Promise<void> => {
@@ -198,64 +191,35 @@ class UI {
 
   // Closing with an action settles the dialog, so its pending confirmSignIn call returns.
   private closeSignInDialog = () => {
-    this.mApi.closeDialog(SIGN_IN_DIALOG, "Close");
+    this.mApi.closeDialog(SIGN_IN_DIALOG, DialogAction.Close);
   };
 
   public reportProgress = async (percent: number): Promise<void> => {
     this.mOnProgress(percent);
   };
 
-  /** Closes every prompt this job has open, as the user cancelling it; the restore prompt restores nothing. */
-  public closePrompts() {
-    for (const [dialogId, openCount] of this.mOpenDialogCounts) {
-      if (openCount > 0) {
-        this.mApi.closeDialog(dialogId, "Cancel");
-      }
-    }
-    if (this.awaitsMismatch()) {
-      this.mApi.store.dispatch(endMismatchDialog());
-      this.settleMismatch([]);
-    }
-  }
-
-  /** The files the user chose to restore, empty when they left them unchanged; undefined until asked. */
-  public restoreSelection: string[] | undefined;
-
-  /** Resolves to the files the user selects to restore; cancelling restores none. */
-  public reportMismatch = (files: string[]): Promise<string[]> => {
-    const mismatches: IMismatch[] = files.map((filePath) => ({
-      id: generate(),
-      enabled: true,
-      filePath,
-    }));
-    return new Promise((resolve) => {
-      this.mResolveMismatch = resolve;
-      this.mApi.store.dispatch(setMismatchState({ mismatches }));
-    });
-  };
-
-  // The restore prompt is shared; only the job that showed it answers.
-  private awaitsMismatch = () => this.mResolveMismatch !== undefined;
-
-  private settleMismatch = (selected: string[]) => {
-    if (!this.awaitsMismatch()) {
-      return;
-    }
-    this.restoreSelection = selected;
-    this.mResolveMismatch!(selected);
-    this.mResolveMismatch = undefined;
-  };
-
-  private onMismatchSelect = (mismatches: IMismatch[]) => {
-    const selected = mismatches.filter((m) => m.enabled).map((m) => m.filePath);
-    if (this.awaitsMismatch() && selected.length > 0) {
+  /** Asks which of the files that differ to restore, all selected at first; cancelling restores none. */
+  public reportMismatch = async (files: string[]): Promise<string[]> => {
+    this.mAskingRestore = true;
+    const selected = await this.mRestorePrompt.ask(files).finally(() => (this.mAskingRestore = false));
+    if (selected.length > 0) {
       // Restoring starts now; its progress follows.
       this.mOnProgress(0);
     }
-    this.settleMismatch(selected);
+    return selected;
   };
 
-  private onMismatchCancel = () => this.settleMismatch([]);
+  /** Closes every prompt this job has open, as the user cancelling it. */
+  public closePrompts() {
+    for (const [dialogId, openCount] of this.mOpenDialogCounts) {
+      if (openCount > 0) {
+        this.mApi.closeDialog(dialogId, DialogAction.Cancel);
+      }
+    }
+    if (this.mAskingRestore) {
+      this.mRestorePrompt.cancel();
+    }
+  }
 }
 
 export default UI;

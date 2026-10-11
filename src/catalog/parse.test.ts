@@ -72,6 +72,15 @@ describe("parseCatalog", () => {
     expect(problems).toEqual([expect.stringContaining("1.6.640")]);
   });
 
+  it("drops a version whose manifest id isn't a number, and says why", () => {
+    const broken = { id: "1.6.640", depots: [{ depotId: 489831, manifestId: "not a manifest" }] };
+
+    const { catalog, problems } = parseCatalog(catalogOf([SKYRIM_SE_1_5_97, broken]));
+
+    expect(catalog?.["skyrimse"].versions.map((v) => v.id)).toEqual(["1.5.97"]);
+    expect(problems).toEqual([expect.stringContaining("1.6.640")]);
+  });
+
   it("drops a version that repeats another's id", () => {
     const { catalog, problems } = parseCatalog(
       catalogOf([SKYRIM_SE_1_5_97, { ...SKYRIM_SE_1_5_97, label: "copy" }]),

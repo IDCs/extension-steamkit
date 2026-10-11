@@ -13,7 +13,7 @@ const SteamId = z.int().positive();
 /** Manifest ids are 64-bit, beyond what a JS number holds exactly, so only decimal strings count. */
 const ManifestId = z
   .string()
-  .regex(/^\d{1,20}$/, "a manifest id is a decimal string")
+  .regex(/^\d{1,20}$/, { error: "a manifest id is a decimal string", abort: true })
   .refine((manifestId) => BigInt(manifestId) <= MAX_UINT64, "a manifest id fits 64 bits");
 
 /** One depot of a version, pinned to a manifest. */
