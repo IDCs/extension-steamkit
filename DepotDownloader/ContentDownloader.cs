@@ -1,6 +1,8 @@
 // This file is subject to the terms and conditions defined
 // in file 'LICENSE', which is part of this source code package.
 
+#nullable disable
+
 using System;
 using System.Buffers;
 using System.Collections.Concurrent;
@@ -599,7 +601,9 @@ namespace DepotDownloader
             catch (OperationCanceledException)
             {
                 Console.WriteLine("App {0} was not completely downloaded.", appId);
-                throw;
+                if (Exec.Cancellation.IsCancellationRequested)
+                    throw;
+                throw new ContentDownloaderException(Exec.DownloaderGaveUp);
             }
         }
 

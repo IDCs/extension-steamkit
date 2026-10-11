@@ -8,3 +8,4 @@ export const NS = "STEAMKIT";
 export const CATALOG_URL =
   "https://raw.githubusercontent.com/Nexus-Mods/extension-steamkit/main/catalog.json";
 export const GAME_VERSIONS_DIALOG = "steamkit-game-versions";
+export const RESTORE_FILES_DIALOG = "steamkit-restore-files";

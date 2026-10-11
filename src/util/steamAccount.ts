@@ -1,7 +1,14 @@
 import type { types } from "@nexusmods/vortex-api";
 
-import { steamLoginTokenForgotten, steamSignInRecorded, steamWebApiKeySaved } from "../actions/confidential";
+import {
+  steamAccountForgotten,
+  steamLoginTokenForgotten,
+  steamSignInRecorded,
+  steamWebApiKeySaved,
+} from "../actions/confidential";
+import { sessionWebApiKeySaved } from "../actions/session";
 import { IConfidentialState } from "../reducers/confidential";
+import { ISessionState } from "../reducers/session";
 
 /** Encryption for the current Windows user (DPAPI), through the bridge. */
 export interface ISecrets {
@@ -28,6 +35,8 @@ export interface IAccountKeeper {
   /** A missing token or Steam Guard record clears the kept one. */
   recordSignIn: (account: string, loginToken?: string, guardData?: string) => Promise<void>;
   forgetLoginToken: () => Promise<void>;
+  /** Forgets the account and its sign-in; the Web API key stays. */
+  forgetAccount: () => void;
   webApiKey: () => Promise<string | undefined>;
   saveWebApiKey: (webApiKey: string | undefined) => Promise<void>;
 }
@@ -35,8 +44,17 @@ export interface IAccountKeeper {
 const confidentialSteam = (state: unknown): IConfidentialState =>
   (state as { confidential?: { account?: { steam?: IConfidentialState } } }).confidential?.account?.steam ?? {};
 
+const sessionWebApiKey = (state: unknown): string | undefined =>
+  (state as { session?: { steamkit?: ISessionState } }).session?.steamkit?.webApiKey;
+
+/** The remembered Steam account, protected; undefined when none is remembered. */
+export const protectedAccount = (state: unknown): string | undefined => confidentialSteam(state).account;
+
+/** Whether a Steam Web API key is kept, protected or for this session. */
+export const hasWebApiKey = (state: unknown): boolean =>
+  confidentialSteam(state).webApiKey !== undefined || sessionWebApiKey(state) !== undefined;
+
 export function accountKeeper(api: types.IExtensionApi, loadSecrets: () => Promise<ISecrets>): IAccountKeeper {
-  let sessionWebApiKey: string | undefined;
   const readBack = (secrets: ISecrets, protectedSecret: string | undefined) =>
     protectedSecret !== undefined ? secrets.unprotect(protectedSecret) : undefined;
 
@@ -81,36 +99,27 @@ export function accountKeeper(api: types.IExtensionApi, loadSecrets: () => Promi
       api.store.dispatch(steamLoginTokenForgotten());
     },
 
+    forgetAccount: () => {
+      api.store.dispatch(steamAccountForgotten());
+    },
+
     webApiKey: async () => {
-      const kept = confidentialSteam(api.getState()).webApiKey;
+      const state = api.getState();
+      const kept = confidentialSteam(state).webApiKey;
       if (kept === undefined) {
-        return sessionWebApiKey;
+        return sessionWebApiKey(state);
       }
       const secrets = await loadSecrets();
-      return secrets.canProtect ? secrets.unprotect(kept) : sessionWebApiKey;
+      return secrets.canProtect ? secrets.unprotect(kept) : sessionWebApiKey(state);
     },
 
     saveWebApiKey: async (webApiKey) => {
       const secrets = await loadSecrets();
-      if (!secrets.canProtect) {
-        sessionWebApiKey = webApiKey;
-        return;
-      }
-      api.store.dispatch(steamWebApiKeySaved(webApiKey !== undefined ? secrets.protect(webApiKey) : undefined));
+      api.store.dispatch(
+        secrets.canProtect
+          ? steamWebApiKeySaved(webApiKey !== undefined ? secrets.protect(webApiKey) : undefined)
+          : sessionWebApiKeySaved(webApiKey),
+      );
     },
   };
-}
-
-let shared: IAccountKeeper | undefined;
-
-/** Sets the keeper the extension's jobs and pages use. */
-export function shareAccountKeeper(keeper: IAccountKeeper): void {
-  shared = keeper;
-}
-
-export function sharedAccountKeeper(): IAccountKeeper {
-  if (shared === undefined) {
-    throw new Error("The Steam account keeper is used before the extension set it up");
-  }
-  return shared;
 }

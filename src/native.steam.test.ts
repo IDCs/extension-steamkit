@@ -6,10 +6,13 @@ import { setTimeout } from "node:timers/promises";
 
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
-import { SKYRIM_SE_APP_ID } from "../test/catalogFixtures";
+import { gameVersion, SKYRIM_SE_APP_ID } from "../test/catalogFixtures";
+import { BANNERLORD_APP_ID, BANNERLORD_DEPOT_IDS } from "../test/catalogUpdateFixtures";
 import { DOTNET_TEST_DIR } from "../test/dotnet";
 import { fakeUi } from "../test/fakeUi";
-import { downloadWorkshopItem, setLogger, runDownloader, useAssemblyDirectory } from "./native";
+import { versionRunParameters } from "./catalog/install";
+import type UI from "./delegates/UI";
+import { setLogger, runDownloader, useAssemblyDirectory } from "./native";
 import { ErrorKind } from "./types/errors";
 import { SignInMethod } from "./types/interface";
 
@@ -168,10 +171,59 @@ describe.skipIf(STEAM_USER === undefined || STEAM_PASSWORD === undefined)(
   },
 );
 
-describe("downloadWorkshopItem", () => {
+// Opt-in: scan QR_CODE_FILE with the Steam Mobile app of an account owning Bannerlord.
+const QR_CODE_FILE = path.join(os.tmpdir(), "steamkit-sign-in.png");
+
+describe.skipIf(process.env.STEAM_QR_SIGN_IN !== "1")("signed in by QR code", () => {
+  // Bannerlord e1.8.0 (build 9332085), which no Steam branch serves.
+  const E1_8_0 = gameVersion("e1.8.0", {
+    depots: [
+      { depotId: BANNERLORD_DEPOT_IDS[0], manifestId: "329407662762906075" },
+      { depotId: BANNERLORD_DEPOT_IDS[1], manifestId: "5143176435180904897" },
+    ],
+  });
+
+  /** A UI that signs in by QR code, saving each code Steam sends until the phone approves. */
+  function qrSignInUi() {
+    const host = fakeUi({ mismatchSelection: [], credentials: { method: SignInMethod.QrCode, remember: false } });
+    let settleShown: ((cancelled: boolean) => void) | undefined;
+    host.ui.confirmSignIn = (qrCode?: string) => {
+      settleShown?.(false);
+      if (qrCode !== undefined) {
+        fs.writeFileSync(QR_CODE_FILE, Buffer.from(qrCode.replace(/^data:image\/png;base64,/, ""), "base64"));
+        console.log(`Scan ${QR_CODE_FILE} with the Steam Mobile app`);
+      }
+      return new Promise<boolean>((resolve) => (settleShown = resolve));
+    };
+    host.ui.endSignInConfirmation = async () => settleShown?.(false);
+    return host;
+  }
+
+  it("verifies against the manifest of a build no branch serves", async () => {
+    const host = qrSignInUi();
+    // Verification skips a depot with nothing installed, so one file stands in for an install.
+    const executable = path.join(installDirectory, "bin", "Win64_Shipping_Client", "Bannerlord.exe");
+    fs.mkdirSync(path.dirname(executable), { recursive: true });
+    fs.writeFileSync(executable, "not the game");
+
+    await runDownloader(
+      { ...versionRunParameters(BANNERLORD_APP_ID, installDirectory, E1_8_0), ManifestOnly: true },
+      host.ui,
+    );
+
+    // Only the manifest lists the missing files.
+    expect(host.mismatches).toHaveLength(1);
+    expect(host.mismatches[0]).toContain(path.join("bin", "Win64_Shipping_Client", "Bannerlord.exe"));
+  }, 300_000);
+});
+
+describe("runDownloader with a Workshop item", () => {
   // Wiremod for Garry's Mod, whose workshop content downloads with an anonymous login.
   const GARRYS_MOD = 4000;
   const WIREMOD = "160250458";
+
+  const downloadWorkshopItem = (ui: UI, signal?: AbortSignal) =>
+    runDownloader({ AppId: GARRYS_MOD, PubFile: WIREMOD, InstallDirectory: installDirectory }, ui, signal);
 
   /** The item's current size as Steam publishes it; the author can update it at any time. */
   async function publishedSize(publishedFileId: string): Promise<number> {
@@ -189,7 +241,7 @@ describe("downloadWorkshopItem", () => {
   }
 
   it("downloads the item into the directory", async () => {
-    await downloadWorkshopItem(GARRYS_MOD, WIREMOD, installDirectory, fakeUi().ui);
+    await downloadWorkshopItem(fakeUi().ui);
 
     expect(fs.statSync(path.join(installDirectory, `${WIREMOD}.gma`)).size).toBe(
       await publishedSize(WIREMOD),
@@ -199,7 +251,7 @@ describe("downloadWorkshopItem", () => {
   it("reports its progress as it downloads", async () => {
     const { ui, progress } = fakeUi();
 
-    await downloadWorkshopItem(GARRYS_MOD, WIREMOD, installDirectory, ui);
+    await downloadWorkshopItem(ui);
 
     expect(progress.length).toBeGreaterThan(1);
     expect(progress).toEqual([...progress].sort((a, b) => a - b));
@@ -211,13 +263,7 @@ describe("downloadWorkshopItem", () => {
     const { ui } = fakeUi();
     ui.reportProgress = async () => controller.abort();
 
-    const download = downloadWorkshopItem(
-      GARRYS_MOD,
-      WIREMOD,
-      installDirectory,
-      ui,
-      controller.signal,
-    );
+    const download = downloadWorkshopItem(ui, controller.signal);
 
     await expect(download).rejects.toEqual(CANCELLED);
   });

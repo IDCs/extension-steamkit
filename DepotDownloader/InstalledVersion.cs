@@ -62,7 +62,7 @@ namespace DepotDownloader
 
             var manifests = appState["InstalledDepots"].Children
                 .Where(depot => uint.TryParse(depot.Name, out _))
-                .ToDictionary(depot => uint.Parse(depot.Name), depot => depot["manifest"].AsUnsignedLong());
+                .ToDictionary(depot => uint.Parse(depot.Name!), depot => depot["manifest"].AsUnsignedLong());
             return (DateTimeOffset.FromUnixTimeSeconds(appState["LastUpdated"].AsLong()).UtcDateTime, manifests);
         }
     }

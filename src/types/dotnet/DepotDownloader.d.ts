@@ -12,7 +12,7 @@ declare module 'node-api-dotnet' {
 				parameters: DepotDownloader.RunParameters,
 				host: Common.HostCallbacks,
 				cancellation?: AbortSignal,
-			): Promise<void>;
+			): Promise<string[] | undefined>;
 		}
 	}
 
@@ -36,7 +36,7 @@ declare module 'node-api-dotnet' {
 
 	export namespace DepotDownloader {
 		export namespace RunOutcome {
-			export function Of(exception: unknown): string;
+			export function Of(exception: unknown): string | undefined;
 		}
 	}
 
@@ -50,6 +50,12 @@ declare module 'node-api-dotnet' {
 			readonly Outcome: string;
 
 			readonly Message: string;
+
+			FilesDiffered: boolean;
+
+			RestoredFiles: string[];
+
+			static Completed(restoredFiles: string[] | undefined): DepotDownloader.RunResult;
 		}
 	}
 
@@ -57,25 +63,25 @@ declare module 'node-api-dotnet' {
 		export class RunParameters {
 			constructor();
 
-			Username: string;
+			Username?: string;
 
-			Password: string;
+			Password?: string;
 
 			RememberPassword: boolean;
 
-			Account: string;
+			Account?: string;
 
-			LoginToken: string;
+			LoginToken?: string;
 
-			GuardData: string;
+			GuardData?: string;
 
 			ManifestOnly: boolean;
 
 			CellId: number;
 
-			FileList: string;
+			FileList?: string;
 
-			InstallDirectory: string;
+			InstallDirectory?: string;
 
 			VerifyAll: boolean;
 
@@ -83,17 +89,17 @@ declare module 'node-api-dotnet' {
 
 			LoginId: number;
 
-			AppId: string;
+			AppId: number;
 
-			PubFile: number;
+			PubFile?: string;
 
-			Branch: string;
+			Branch?: string;
 
-			BetaBranchPassword: string;
+			BetaBranchPassword?: string;
 
-			DepotIdList: number[];
+			DepotIdList?: number[];
 
-			ManifestIdList: string[];
+			ManifestIdList?: string[];
 		}
 	}
 }

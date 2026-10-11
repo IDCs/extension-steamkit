@@ -53,6 +53,10 @@ namespace DepotDownloaderNative.TestHost
         .Select(field => (string)field.GetRawConstantValue()!)
         .ToArray();
 
+    /// <summary>A completed run, as a verification that restored the files, or a run with nothing to restore.</summary>
+    public static DepotDownloader.RunResult CompletedRun(string[]? restoredFiles) =>
+      DepotDownloader.RunResult.Completed(restoredFiles);
+
     /// <summary>Calls a host callback from a thread pool thread, as SteamKit2's callback loop does.</summary>
     public static Task<string> CallFromWorkerThread(Func<Task<string>> callback)
     {

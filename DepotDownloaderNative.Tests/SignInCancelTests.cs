@@ -14,7 +14,7 @@ namespace DepotDownloaderNative.Tests
     [Fact]
     public async Task CancelsTheSignInWhenTheUserCancelsTheTwoFactorPrompt()
     {
-      await Assert.ThrowsAsync<SignInCancelledException>(() => Exec.Authenticator.GetDeviceCodeAsync(false));
+      await Assert.ThrowsAsync<SignInCancelledException>(() => Exec.Authenticator!.GetDeviceCodeAsync(false));
 
       Assert.IsType<SignInCancelledException>(Exec.SignInFailure());
     }
@@ -23,7 +23,7 @@ namespace DepotDownloaderNative.Tests
     public async Task CancelsTheSignInWhenTheUserCancelsTheEmailCodePrompt()
     {
       await Assert.ThrowsAsync<SignInCancelledException>(
-        () => Exec.Authenticator.GetEmailCodeAsync("user@example.com", false));
+        () => Exec.Authenticator!.GetEmailCodeAsync("user@example.com", false));
 
       Assert.IsType<SignInCancelledException>(Exec.SignInFailure());
     }
@@ -31,7 +31,7 @@ namespace DepotDownloaderNative.Tests
     [Fact]
     public void CancelsTheSignInWhenTheUserCancelsALegacyCodePrompt()
     {
-      Assert.Null(Exec.Authenticator.ReadTwoFactorCode());
+      Assert.Null(Exec.Authenticator!.ReadTwoFactorCode());
 
       Assert.IsType<SignInCancelledException>(Exec.SignInFailure());
     }
@@ -39,7 +39,7 @@ namespace DepotDownloaderNative.Tests
     [Fact]
     public void CancelsTheSignInWhenTheUserCancelsALegacyEmailCodePrompt()
     {
-      Assert.Null(Exec.Authenticator.ReadEmailCode());
+      Assert.Null(Exec.Authenticator!.ReadEmailCode());
 
       Assert.IsType<SignInCancelledException>(Exec.SignInFailure());
     }
@@ -67,7 +67,7 @@ namespace DepotDownloaderNative.Tests
     [Fact]
     public async Task ReportsACompletedRun()
     {
-      var result = await NativeApi.RunOffJsThread(() => Task.CompletedTask);
+      var result = await NativeApi.RunOffJsThread(() => Task.FromResult<string[]?>(null));
 
       Assert.Equal(RunOutcome.Completed, result.Outcome);
     }

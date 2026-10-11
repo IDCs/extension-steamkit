@@ -29,6 +29,8 @@ const PASS_THROUGH = [
   "VerifyAll",
   "MaxDownloads",
   "LoginId",
+  "AppId",
+  "PubFile",
   "Branch",
   "BetaBranchPassword",
   "DepotIdList",
@@ -91,9 +93,6 @@ export function toRunParameters(ns: IBridge, parameters: ISteamKitParameters): I
   for (const field of PASS_THROUGH) {
     passThrough(native, parameters, field);
   }
-  if (parameters.AppId !== undefined) {
-    native.AppId = String(parameters.AppId);
-  }
   return native;
 }
 
@@ -137,14 +136,17 @@ export function toHostCallbacks(ns: IBridge, ui: UI): IHostCallbacks {
   host.confirmSignIn = forDotnet(ui.confirmSignIn);
   host.endSignInConfirmation = forDotnet(ui.endSignInConfirmation);
   host.reportProgress = forDotnet(ui.reportProgress);
-  host.recordSignIn = forDotnet(ui.recordSignIn);
-  host.forgetLoginToken = forDotnet(ui.forgetLoginToken);
+  // The bridge hands over a missing token or Steam Guard record as undefined.
+  host.recordSignIn = forDotnet(async (account: string, loginToken?: string, guardData?: string) =>
+    ui.accounts.recordSignIn(account, loginToken, guardData),
+  );
+  host.forgetLoginToken = forDotnet(async (_account: string) => ui.accounts.forgetLoginToken());
   return host;
 }
 
 /** Signs the run in as the account the extension remembers, if any. */
 async function withRememberedAccount(native: IRunParameters, ui: UI): Promise<IRunParameters> {
-  const remembered = await ui.rememberedAccount();
+  const remembered = await ui.accounts.remembered();
   if (remembered !== undefined) {
     native.Account = remembered.account;
     native.LoginToken = remembered.loginToken;
@@ -175,7 +177,7 @@ export async function readInstalledManifests(
 }
 
 /** Raises a run that did not complete as a steamkit error of its outcome. */
-export function requireCompleted(result: IRunResult): void {
+export function requireCompleted(result: Pick<IRunResult, "Outcome" | "Message">): void {
   if (result.Outcome === RunOutcome.Completed) {
     return;
   }
@@ -183,31 +185,24 @@ export function requireCompleted(result: IRunResult): void {
   throw new SteamkitError(kind, result.Message);
 }
 
-/** Verifies a Steam app's installed files when ManifestOnly is set, else downloads its depots; aborting cancels. */
+/** The files a verification restored: undefined when none differed, empty when the user restored none. */
+export function restoredFiles(result: IRunResult): string[] | undefined {
+  return result.FilesDiffered ? result.RestoredFiles : undefined;
+}
+
+/**
+ * Verifies a Steam app's installed files when ManifestOnly is set, downloads a Workshop item when PubFile is
+ * set, else downloads the app's depots; aborting cancels.
+ * @returns The files a verification restored: undefined when none differed, empty when the user restored none.
+ */
 export async function runDownloader(
   parameters: ISteamKitParameters,
   ui: UI,
   signal?: AbortSignal,
-): Promise<void> {
+): Promise<string[] | undefined> {
   const ns = await loadBridge();
   const native = await withRememberedAccount(toRunParameters(ns, parameters), ui);
-  requireCompleted(await ns.NativeApi.Run(native, toHostCallbacks(ns, ui), signal));
-}
-
-/** Downloads a Steam Workshop item into a directory. Aborting the signal ends the run as cancelled. */
-export async function downloadWorkshopItem(
-  appId: number,
-  publishedFileId: string,
-  installDirectory: string,
-  ui: UI,
-  signal?: AbortSignal,
-): Promise<void> {
-  const ns = await loadBridge();
-  const native = await withRememberedAccount(
-    toRunParameters(ns, { AppId: appId, InstallDirectory: installDirectory }),
-    ui,
-  );
-  requireCompleted(
-    await ns.NativeApi.DownloadWorkshopItem(native, publishedFileId, toHostCallbacks(ns, ui), signal),
-  );
+  const result = await ns.NativeApi.Run(native, toHostCallbacks(ns, ui), signal);
+  requireCompleted(result);
+  return restoredFiles(result);
 }

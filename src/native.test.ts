@@ -8,6 +8,7 @@ import { fakeUi } from "../test/fakeUi";
 import {
   loadBridge,
   requireCompleted,
+  restoredFiles,
   runDownloader,
   toHostCallbacks,
   toRunParameters,
@@ -77,7 +78,7 @@ describe("toHostCallbacks", () => {
     await probes.DriveCallbacks(toHostCallbacks(ns, ui));
 
     expect(signIns).toEqual([["player", "token", undefined]]);
-    expect(forgottenTokens).toEqual(["player"]);
+    expect(forgottenTokens()).toBe(1);
   });
 
   it("passes download progress to the extension", async () => {
@@ -102,10 +103,11 @@ describe("toHostCallbacks", () => {
 });
 
 describe("toRunParameters", () => {
-  it("passes the app id as a string", () => {
-    const parameters = toRunParameters(ns, { AppId: 489830 });
+  it("passes the app id and the Workshop item", () => {
+    const parameters = toRunParameters(ns, { AppId: 4000, PubFile: "18446744073709551615" });
 
-    expect(parameters.AppId).toBe("489830");
+    expect(parameters.AppId).toBe(4000);
+    expect(parameters.PubFile).toBe("18446744073709551615");
   });
 
   it("carries the fields the extension sets", () => {
@@ -221,6 +223,16 @@ describe("cancelling a run", () => {
 describe("RunOutcome", () => {
   it("lists every code the bridge ends a run with", () => {
     expect(probes.RunOutcomes().sort()).toEqual(Object.values(RunOutcome).sort());
+  });
+});
+
+describe("restoredFiles", () => {
+  it("hands back the files a verification restored", () => {
+    expect(restoredFiles(probes.CompletedRun(["a.bsa"]))).toEqual(["a.bsa"]);
+  });
+
+  it("hands back none for a run that had nothing to restore", () => {
+    expect(restoredFiles(probes.CompletedRun(null))).toBeUndefined();
   });
 });
 

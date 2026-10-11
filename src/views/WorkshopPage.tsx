@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 
 import {
   mdiAlertCircleOutline,
@@ -10,17 +10,17 @@ import {
   mdiSteam,
 } from "@mdi/js";
 import { MainContext, MainPage, selectors } from "@nexusmods/vortex-api";
-import { TFunction } from "i18next";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-import { MODS_PER_PAGE } from "../constants";
-import { IWorkshopMod, WorkshopAccess, WorkshopAccessState } from "../types/interface";
+import { MODS_PER_PAGE, NS } from "../constants";
 import { gameMods } from "../selectors";
+import { IWorkshopMod, WorkshopAccess, WorkshopAccessState } from "../types/interface";
 import { reportError } from "../util/errors";
-import { QueryType } from "../util/Scrubber";
+import { IWorkshopQuery, WorkshopSorting } from "../util/steamWebApi";
 import { installedWorkshopItemIds } from "../util/workshopItems";
+import { WorkshopPages } from "../util/workshopPages";
 import WorkshopTile, { WorkshopTileSkeleton } from "./WorkshopTile";
 import { Button, ButtonStyle, IPickerOption, NoResults, Pagination, Picker, SearchField } from "./vortexUi";
 
@@ -33,10 +33,10 @@ interface IWorkshopPageProps {
   onShowGameVersions: () => void;
 }
 
-const SORT_OPTIONS: Array<IPickerOption<QueryType>> = [
-  { label: "Newest", value: QueryType.ByDate },
-  { label: "Highest Rated", value: QueryType.ByVote },
-  { label: "Trending", value: QueryType.ByTrend },
+const SORT_OPTIONS: Array<IPickerOption<WorkshopSorting>> = [
+  { label: "Newest", value: WorkshopSorting.ByDate },
+  { label: "Highest Rated", value: WorkshopSorting.ByVote },
+  { label: "Trending", value: WorkshopSorting.ByTrend },
 ];
 
 const ListingState = { Loading: "loading", Ready: "ready", Failed: "failed" } as const;
@@ -45,14 +45,29 @@ type Listing =
   | { state: typeof ListingState.Ready; mods: IWorkshopMod[]; total: number }
   | { state: typeof ListingState.Failed };
 
+const LOADING: Listing = { state: ListingState.Loading };
+
+/** A listing, with the pages and query it answers. */
+interface IFetched {
+  pages: WorkshopPages;
+  query: IWorkshopQuery;
+  reloads: number;
+  listing: Listing;
+}
+
 // Vortex's grid of tiles at least 16rem wide.
 const TILE_GRID = "grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4";
 
 export default function WorkshopPage(props: IWorkshopPageProps) {
-  const { onGameModeActivated, onRequestApiKey, onModClick, onVerifyFiles, onShowGameVersions } = props;
-  const [t] = useTranslation();
-  const context = React.useContext(MainContext);
   const gameId: string | undefined = useSelector(selectors.activeGameId);
+  // Mounted per game, so nothing of the previous game's Workshop carries over.
+  return gameId !== undefined ? <GameWorkshopPage {...props} gameId={gameId} key={gameId} /> : null;
+}
+
+function GameWorkshopPage(props: IWorkshopPageProps & { gameId: string }) {
+  const { gameId, onGameModeActivated, onRequestApiKey, onModClick, onVerifyFiles, onShowGameVersions } = props;
+  const { t } = useTranslation(NS);
+  const context = React.useContext(MainContext);
   const fallbackImg = useSelector((state) => gameImage(state, gameId));
   const mods = useSelector((state) => gameMods(state, gameId));
   const installedItemIds = React.useMemo(() => installedWorkshopItemIds(mods), [mods]);
@@ -60,20 +75,17 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
 
   const [access, setAccess] = React.useState<WorkshopAccess | undefined>(undefined);
   const [page, setPage] = React.useState(1);
-  const [sorting, setSorting] = React.useState<QueryType>(QueryType.ByDate);
+  const [sorting, setSorting] = React.useState<WorkshopSorting>(WorkshopSorting.ByDate);
   const [searchText, setSearchText] = React.useState("");
   const [search, setSearch] = React.useState("");
   const [reloads, setReloads] = React.useState(0);
-  const [listing, setListing] = React.useState<Listing>({ state: ListingState.Loading });
-  const scrubber = access?.state === WorkshopAccessState.Ready ? access.scrubber : undefined;
+  const [fetched, setFetched] = React.useState<IFetched | undefined>(undefined);
+  const pages = access?.state === WorkshopAccessState.Ready ? access.pages : undefined;
+  const query = React.useMemo(() => ({ page, search, sorting }), [page, search, sorting]);
 
   const activate = React.useCallback(async () => {
-    if (gameId === undefined) {
-      return;
-    }
     try {
       setAccess(await onGameModeActivated(gameId));
-      setPage(1);
     } catch (err) {
       reportError(context.api, "Failed to open the Steam Workshop", err);
     }
@@ -84,20 +96,20 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
   }, [activate]);
 
   React.useEffect(() => {
-    if (scrubber === undefined) {
+    if (pages === undefined) {
       return undefined;
     }
     let current = true;
-    setListing({ state: ListingState.Loading });
-    scrubber.scrubPage({ page, filter: search, sorting }).then(
-      (mods) => {
-        if (current) {
-          setListing({ state: ListingState.Ready, mods, total: scrubber.availableTotal() });
-        }
-      },
+    const settle = (listing: Listing) => {
+      if (current) {
+        setFetched({ pages, query, reloads, listing });
+      }
+    };
+    pages.page(query).then(
+      ({ items, total }) => settle({ state: ListingState.Ready, mods: items, total }),
       (err) => {
+        settle({ state: ListingState.Failed });
         if (current) {
-          setListing({ state: ListingState.Failed });
           reportError(context.api, "Failed to query Steam Workshop", err);
         }
       },
@@ -105,13 +117,16 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
     return () => {
       current = false;
     };
-  }, [scrubber, page, search, sorting, reloads]);
+  }, [pages, query, reloads]);
 
-  // A new search, sort or refresh starts again from the first page of fresh results.
-  const startOver = (change: () => void) => {
-    scrubber?.resetDataArray();
-    setPage(1);
-    change();
+  const listing =
+    fetched !== undefined && fetched.pages === pages && fetched.query === query && fetched.reloads === reloads
+      ? fetched.listing
+      : LOADING;
+
+  const refresh = () => {
+    pages?.clear();
+    setReloads((count) => count + 1);
   };
 
   const enterApiKey = async () => {
@@ -130,12 +145,15 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
       <MainPage.Body className="h-full overflow-y-auto pt-6" ref={scrollRef}>
         <div className="space-y-3 p-6">
           <div className="flex items-start justify-between gap-x-2">
-            {scrubber !== undefined ? (
+            {pages !== undefined ? (
               <SearchField
                 label={t("Search mods")}
                 value={searchText}
                 onChange={setSearchText}
-                onSearch={() => startOver(() => setSearch(searchText))}
+                onSearch={() => {
+                  setPage(1);
+                  setSearch(searchText);
+                }}
               />
             ) : (
               <div />
@@ -170,17 +188,12 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
             />
           )}
 
-          {(access === undefined || scrubber !== undefined) && (
+          {(access === undefined || pages !== undefined) && (
             <>
-              {scrubber !== undefined && (
+              {pages !== undefined && (
                 <div className="flex justify-between">
                   <div className="flex items-center gap-x-2">
-                    <Button
-                      buttonStyle={ButtonStyle.Neutral}
-                      iconPath={mdiRefresh}
-                      title={t("Refresh")}
-                      onClick={() => startOver(() => setReloads((count) => count + 1))}
-                    />
+                    <Button buttonStyle={ButtonStyle.Neutral} iconPath={mdiRefresh} title={t("Refresh")} onClick={refresh} />
                     {listing.state === ListingState.Ready && (
                       <p className="text-body-sm text-translucent-moderate">
                         {t("{{count}} results", { count: listing.total })}
@@ -190,20 +203,22 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
                   <Picker
                     options={SORT_OPTIONS}
                     value={sorting}
-                    onChange={(value) => startOver(() => setSorting(value))}
+                    onChange={(value) => {
+                      setPage(1);
+                      setSorting(value);
+                    }}
                   />
                 </div>
               )}
               <WorkshopListing
                 fallbackImg={fallbackImg}
                 installedItemIds={installedItemIds}
-                listing={access === undefined ? { state: ListingState.Loading } : listing}
+                listing={access === undefined ? LOADING : listing}
                 page={page}
                 searching={search !== ""}
-                t={t}
                 onInstall={onModClick}
                 onPage={showPage}
-                onRetry={() => startOver(() => setReloads((count) => count + 1))}
+                onRetry={refresh}
               />
             </>
           )}
@@ -214,7 +229,6 @@ export default function WorkshopPage(props: IWorkshopPageProps) {
 }
 
 interface IWorkshopListingProps {
-  t: TFunction;
   listing: Listing;
   page: number;
   searching: boolean;
@@ -226,7 +240,8 @@ interface IWorkshopListingProps {
 }
 
 function WorkshopListing(props: IWorkshopListingProps) {
-  const { t, listing, page, searching, fallbackImg, installedItemIds, onInstall, onPage, onRetry } = props;
+  const { listing, page, searching, fallbackImg, installedItemIds, onInstall, onPage, onRetry } = props;
+  const { t } = useTranslation(NS);
   switch (listing.state) {
     case ListingState.Loading:
       return (
@@ -271,7 +286,6 @@ function WorkshopListing(props: IWorkshopListingProps) {
                 installed={installedItemIds.has(mod.publishedfileid)}
                 key={mod.publishedfileid}
                 mod={mod}
-                t={t}
                 onInstall={onInstall}
               />
             ))}
@@ -289,8 +303,8 @@ function WorkshopListing(props: IWorkshopListingProps) {
 }
 
 /** The game's logo, shown for a Workshop item without a preview image. */
-function gameImage(state: unknown, gameId: string | undefined): string {
-  const game = gameId !== undefined ? selectors.gameById(state, gameId) : undefined;
+function gameImage(state: unknown, gameId: string): string {
+  const game = selectors.gameById(state, gameId);
   return game?.extensionPath !== undefined && game?.logo !== undefined
     ? path.join(game.extensionPath, game.logo)
     : path.join(__dirname, "steam.jpg");

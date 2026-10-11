@@ -19,19 +19,23 @@ namespace DepotDownloader
     public static class Exec
     {
         /// <summary>The host of the current run.</summary>
-        internal static HostCallbacks Host { get; private set; }
+        internal static HostCallbacks? Host { get; private set; }
 
         /// <summary>Answers Steam's sign-in challenges for the current run.</summary>
-        internal static HostAuthenticator Authenticator { get; private set; }
+        internal static HostAuthenticator? Authenticator { get; private set; }
 
         /// <summary>Checks the installed files of each depot, while the current run verifies.</summary>
-        internal static LocalVerification Verification { get; private set; }
+        internal static LocalVerification? Verification { get; private set; }
 
         /// <summary>Passes the current run's download progress to the host.</summary>
-        internal static ProgressReporter Progress { get; private set; }
+        internal static ProgressReporter? Progress { get; private set; }
 
         /// <summary>Stops the current run when the host cancels it.</summary>
         internal static CancellationToken Cancellation { get; private set; }
+
+        /// <summary>Why a download stopped when Steam could not provide a file it needs.</summary>
+        internal const string DownloaderGaveUp =
+            "Steam could not provide every file the download needs; the Vortex log has the details";
 
         /// <summary>Starts a run that calls back into the given host.</summary>
         internal static void BeginRun(HostCallbacks host, bool verifying = false, CancellationToken cancellation = default)
@@ -100,12 +104,16 @@ namespace DepotDownloader
         }
 
         /// <summary>
-        /// Verifies a Steam app's installed files, or downloads a workshop item when PubFile is set. Starts
-        /// anonymously and asks the host to sign in if the app needs an account.
+        /// Verifies a Steam app's installed files, downloads its depots, or downloads a workshop item when PubFile
+        /// is set. Starts anonymously unless an account is known, and asks the host to sign in when needed.
         /// </summary>
-        public static async Task Run(RunParameters parameters, HostCallbacks host, CancellationToken cancellation = default)
+        /// <returns>
+        /// The files a verification restored: null when none differed, empty when the user restored none.
+        /// </returns>
+        public static async Task<string[]?> Run(RunParameters parameters, HostCallbacks host, CancellationToken cancellation = default)
         {
             BeginRun(host, verifying: parameters.ManifestOnly, cancellation);
+            var progress = Progress!;
 
             try
             {
@@ -119,18 +127,18 @@ namespace DepotDownloader
 
                 if (parameters.FileList != null)
                 {
-                    ApplyFileList(FileListEntries(parameters.FileList, parameters.InstallDirectory));
+                    ApplyFileList(FileListEntries(parameters.FileList, parameters.InstallDirectory ?? ""));
                 }
 
-                if (string.IsNullOrEmpty(parameters.AppId))
+                if (parameters.AppId == 0)
                 {
                     throw new ContentDownloaderException("No Steam app id was given");
                 }
 
-                var appId = uint.Parse(parameters.AppId);
+                var appId = parameters.AppId;
                 var depots = DepotsToRun(parameters, appId);
 
-                async Task SignInAndDownload()
+                async Task<string[]?> SignInAndDownload()
                 {
                     var credentials = await host.RequestCredentials(Cancellation);
                     if (credentials.Cancelled)
@@ -140,27 +148,33 @@ namespace DepotDownloader
 
                     ContentDownloader.Config.UseQrCode = credentials.UseQrCode;
                     ContentDownloader.Config.RememberPassword = credentials.Remember;
-                    await DownloadAsync(parameters, depots, appId, credentials.Username, credentials.Password);
+                    return await DownloadAsync(parameters, depots, appId, credentials.Username, credentials.Password);
+                }
+
+                // A known account without a token signs in, so a game it owns skips the anonymous attempt.
+                if (username == null && parameters.Account != null && parameters.PubFile == null)
+                {
+                    return await SignInAndDownload();
                 }
 
                 try
                 {
-                    await DownloadAsync(parameters, depots, appId, username, parameters.Password);
+                    return await DownloadAsync(parameters, depots, appId, username, parameters.Password);
                 }
                 catch (ContentDownloaderAccountException) when (username == null)
                 {
-                    await SignInAndDownload();
+                    return await SignInAndDownload();
                 }
-                catch (SignInFailedException) when (parameters.LoginToken != null)
+                catch (SignInFailedException) when (parameters.LoginToken != null && username != null)
                 {
                     // Steam rejected the remembered token: it expired or the user revoked it.
                     await host.ForgetLoginToken(username);
-                    await SignInAndDownload();
+                    return await SignInAndDownload();
                 }
             }
             finally
             {
-                await Progress.CompleteAsync();
+                await progress.CompleteAsync();
                 EndRun();
             }
         }
@@ -216,7 +230,7 @@ namespace DepotDownloader
 
         /// <summary>Starts the run's in-memory account store from the account the host remembers.</summary>
         /// <returns>Who to sign in as: the caller's username, else the remembered account when it has a token.</returns>
-        internal static string UseRememberedAccount(RunParameters parameters)
+        internal static string? UseRememberedAccount(RunParameters parameters)
         {
             AccountSettingsStore.UseInMemory(formerFileName: "account.config");
             var account = parameters.Account;
@@ -239,17 +253,17 @@ namespace DepotDownloader
         }
 
         /// <summary>Records a sign-in Steam accepted, and hands it to the host to keep.</summary>
-        internal static void SignedIn(string accountName, string refreshToken, string newGuardData)
+        internal static void SignedIn(string accountName, string refreshToken, string? newGuardData)
         {
             var remember = ContentDownloader.Config.RememberPassword;
             RecordSignIn(AccountSettingsStore.Instance, accountName, refreshToken, newGuardData, remember);
-            Host.RecordSignIn(accountName, remember ? refreshToken : null, newGuardData).ContinueWith(
+            Host?.RecordSignIn(accountName, remember ? refreshToken : null, newGuardData).ContinueWith(
                 failed => Console.WriteLine("The sign-in could not be kept: {0}", failed.Exception?.GetBaseException().Message),
                 TaskContinuationOptions.OnlyOnFaulted);
         }
 
         /// <summary>An account name as logged: its first letter.</summary>
-        internal static string Anonymise(string accountName) =>
+        internal static string? Anonymise(string? accountName) =>
             string.IsNullOrEmpty(accountName) ? accountName : accountName[0] + "***";
 
         /// <summary>
@@ -257,7 +271,7 @@ namespace DepotDownloader
         /// sign-in token only when the user asked to be remembered.
         /// </summary>
         internal static void RecordSignIn(
-            AccountSettingsStore account, string accountName, string refreshToken, string newGuardData, bool rememberPassword)
+            AccountSettingsStore account, string accountName, string refreshToken, string? newGuardData, bool rememberPassword)
         {
             if (newGuardData != null)
             {
@@ -283,7 +297,7 @@ namespace DepotDownloader
 
         internal static Exception SignInFailure(bool couldNotConnect)
         {
-            if (Authenticator.SignInCancelled)
+            if (Authenticator?.SignInCancelled == true)
             {
                 return new SignInCancelledException();
             }
@@ -296,32 +310,35 @@ namespace DepotDownloader
         /// <summary>
         /// Asks the host once which of the files that differ to restore, and limits the next download to them.
         /// </summary>
-        /// <returns>Whether there is anything to restore.</returns>
-        internal static async Task<bool> SelectFilesToRestoreAsync()
+        /// <returns>The files to restore: null when the run isn't verifying or none differ, empty when the user selects none.</returns>
+        internal static async Task<string[]?> SelectFilesToRestoreAsync()
         {
-            var mismatches = Verification.FindMismatches();
+            if (Verification is not { } verification || Host is not { } host)
+            {
+                return null;
+            }
+
+            var mismatches = verification.FindMismatches();
             if (mismatches.Count == 0)
             {
                 Console.WriteLine("All installed files match the manifest.");
-                return false;
+                return null;
             }
 
             var fileNames = mismatches.Select(file => file.FileName).ToArray();
             Console.WriteLine("{0} installed files differ from the manifest, including: {1}",
                 fileNames.Length, string.Join(", ", fileNames.Take(20)));
-            var selected = await Host.ReportMismatch(fileNames, Cancellation);
-            if (selected.Length == 0)
+            var selected = await host.ReportMismatch(fileNames, Cancellation);
+            if (selected.Length > 0)
             {
-                return false;
+                Verification = null;
+                ApplyFileList(selected);
             }
-
-            Verification = null;
-            ApplyFileList(selected);
-            return true;
+            return selected;
         }
 
-        static async Task DownloadAsync(
-            RunParameters parameters, List<(uint depotId, ulong manifestId)> depots, uint appId, string username, string password)
+        static async Task<string[]?> DownloadAsync(
+            RunParameters parameters, List<(uint depotId, ulong manifestId)> depots, uint appId, string? username, string? password)
         {
             SignedInAnonymously = username == null && !ContentDownloader.Config.UseQrCode;
             if (SignedInAnonymously)
@@ -337,22 +354,23 @@ namespace DepotDownloader
                 }
 
                 Cancellation.ThrowIfCancellationRequested();
-                if (parameters.PubFile != ContentDownloader.INVALID_MANIFEST_ID)
+                if (parameters.PubFile != null)
                 {
                     PrepareDownload();
-                    await ContentDownloader.DownloadPubfileAsync(appId, parameters.PubFile).ConfigureAwait(false);
+                    await ContentDownloader.DownloadPubfileAsync(appId, ulong.Parse(parameters.PubFile)).ConfigureAwait(false);
+                    return null;
                 }
-                else
-                {
-                    await DownloadAppAsync(appId, depots, parameters.Branch);
 
-                    // Verifying checks every depot first, then downloads the files the user selects.
-                    if (Verification != null && await SelectFilesToRestoreAsync())
-                    {
-                        Cancellation.ThrowIfCancellationRequested();
-                        await DownloadAppAsync(appId, depots, parameters.Branch);
-                    }
+                await DownloadAppAsync(appId, depots, parameters.Branch);
+
+                // Verifying checks every depot first, then downloads the files the user selects.
+                var restored = await SelectFilesToRestoreAsync();
+                if (restored is { Length: > 0 })
+                {
+                    Cancellation.ThrowIfCancellationRequested();
+                    await DownloadAppAsync(appId, depots, parameters.Branch);
                 }
+                return restored;
             }
             finally
             {
@@ -360,11 +378,12 @@ namespace DepotDownloader
             }
         }
 
-        static Task DownloadAppAsync(uint appId, List<(uint depotId, ulong manifestId)> depots, string branch)
+        // The downloader adds the depots it discovers to the list it is given, so each download gets a copy.
+        static Task DownloadAppAsync(uint appId, List<(uint depotId, ulong manifestId)> depots, string? branch)
         {
             PrepareDownload();
             return ContentDownloader.DownloadAppAsync(
-                appId, depots, branch ?? ContentDownloader.DEFAULT_BRANCH, null, null, null, false, false);
+                appId, depots.ToList(), branch ?? ContentDownloader.DEFAULT_BRANCH, null, null, null, false, false);
         }
 
         internal static List<(uint, ulong)> DepotManifestIds(RunParameters parameters)

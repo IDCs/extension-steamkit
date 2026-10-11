@@ -47,28 +47,16 @@ namespace DepotDownloaderNative
       }
     }
 
-    /// <summary>Verifies a Steam app's installed files when ManifestOnly is set, else downloads its depots.</summary>
+    /// <summary>
+    /// Verifies a Steam app's installed files when ManifestOnly is set, downloads a Workshop item when PubFile is
+    /// set, else downloads the app's depots.
+    /// </summary>
     /// <param name="cancellation">An AbortSignal from JavaScript; aborting it ends the run as cancelled.</param>
-    /// <returns>How the run ended; an unexpected failure throws.</returns>
+    /// <returns>How the run ended, with the files a verification restored; an unexpected failure throws.</returns>
     public static Task<RunResult> Run(
         RunParameters parameters, HostCallbacks host, CancellationToken cancellation = default)
     {
       return RunOffJsThread(() => Exec.Run(parameters, host, cancellation), cancellation);
-    }
-
-    /// <summary>Downloads a Steam Workshop item into a directory.</summary>
-    /// <param name="parameters">The app, install directory and account to download as.</param>
-    /// <param name="publishedFileId">Taken as a string so 64-bit ids survive JavaScript.</param>
-    /// <param name="cancellation">An AbortSignal from JavaScript; aborting it ends the run as cancelled.</param>
-    /// <returns>How the run ended; an unexpected failure throws.</returns>
-    public static Task<RunResult> DownloadWorkshopItem(
-        RunParameters parameters, string publishedFileId, HostCallbacks host, CancellationToken cancellation = default)
-    {
-      return RunOffJsThread(() =>
-      {
-        parameters.PubFile = ulong.Parse(publishedFileId);
-        return Exec.Run(parameters, host, cancellation);
-      }, cancellation);
     }
 
     /// <summary>The manifest each installed depot of a Steam app is at, per Steam's and steamkit's records.</summary>
@@ -119,14 +107,12 @@ namespace DepotDownloaderNative
 
     private static RunResult Cancelled() => new(RunOutcome.Cancelled, "The run was cancelled");
 
-    internal const string DownloaderGaveUp =
-      "Steam could not provide every file the download needs; the Vortex log has the details";
-
     /// <summary>
     /// The downloader blocks while it waits on Steam, and its callbacks into JS need the JS thread free.
     /// A run cancelled before its turn never starts; one cancelled while it runs ends as cancelled.
     /// </summary>
-    internal static Task<RunResult> RunOffJsThread(Func<Task> run, CancellationToken cancellation = default) => Task.Run(async () =>
+    internal static Task<RunResult> RunOffJsThread(
+        Func<Task<string[]?>> run, CancellationToken cancellation = default) => Task.Run(async () =>
     {
       try
       {
@@ -139,17 +125,11 @@ namespace DepotDownloaderNative
 
       try
       {
-        await run();
-        return new RunResult(RunOutcome.Completed);
+        return RunResult.Completed(await run());
       }
       catch (Exception) when (cancellation.IsCancellationRequested)
       {
         return Cancelled();
-      }
-      catch (OperationCanceledException)
-      {
-        // Not the user's cancellation, so the downloader's own: it stops when Steam can't provide a file.
-        return new RunResult(RunOutcome.Failed, DownloaderGaveUp);
       }
       catch (Exception exception) when (RunOutcome.Of(exception) is string outcome)
       {

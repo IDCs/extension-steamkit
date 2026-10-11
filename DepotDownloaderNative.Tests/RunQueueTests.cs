@@ -13,12 +13,13 @@ namespace DepotDownloaderNative.Tests
       {
         firstRunning.SetResult();
         await finishFirst.Task;
+        return null;
       });
       await firstRunning.Task;
       var second = NativeApi.RunOffJsThread(() =>
       {
         secondStarted = true;
-        return Task.CompletedTask;
+        return Task.FromResult<string[]?>(null);
       });
 
       await Task.Delay(50);
@@ -34,7 +35,7 @@ namespace DepotDownloaderNative.Tests
       var failed = NativeApi.RunOffJsThread(() => throw new InvalidOperationException("Unable to sign in"));
       await Assert.ThrowsAsync<InvalidOperationException>(() => failed);
 
-      await NativeApi.RunOffJsThread(() => Task.CompletedTask).WaitAsync(TimeSpan.FromSeconds(5));
+      await NativeApi.RunOffJsThread(() => Task.FromResult<string[]?>(null)).WaitAsync(TimeSpan.FromSeconds(5));
     }
   }
 }

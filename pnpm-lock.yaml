@@ -11,9 +11,6 @@ importers:
       '@mdi/js':
         specifier: 7.4.47
         version: 7.4.47
-      node-rest-client:
-        specifier: ^3.1.1
-        version: 3.1.1
       zod:
         specifier: ^4.6.5
         version: 4.6.5
@@ -42,9 +39,6 @@ importers:
       '@types/react-select':
         specifier: 1.3.6
         version: 1.3.6
-      '@types/shortid':
-        specifier: 2.2.0
-        version: 2.2.0
       copyfiles:
         specifier: 2.4.1
         version: 2.4.1
@@ -78,9 +72,6 @@ importers:
       rolldown:
         specifier: 1.1.4
         version: 1.1.4
-      shortid:
-        specifier: 2.2.17
-        version: 2.2.17
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -393,9 +384,6 @@ packages:
   '@types/react@18.3.31':
     resolution: {integrity: sha512-vfEqpXTvwT91yhmwdfouStN2hSKwTvyRs8qpLfADyrq/kxDw0hZM7Wk9Ug1FELj8hIby+S/+kQCSRFF32nv2Qw==}
 
-  '@types/shortid@2.2.0':
-    resolution: {integrity: sha512-jBG2FgBxcaSf0h662YloTGA32M8UtNbnTPekUr/eCmWXq0JWQXgNEQ/P5Gf05Cv66QZtE1Ttr83I1AJBPdzCBg==}
-
   '@vitest/expect@4.1.9':
     resolution: {integrity: sha512-vl/rYsUKcBr3SnQn166+XR5ZQcgMx3DQhFWdfli/cWpLnLUmbxZvyrJZotLFUryib+LtArYMSTJ5RbQ57ZqrlA==}
 
@@ -504,15 +492,6 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
-  debug@4.3.7:
-    resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
@@ -548,15 +527,6 @@ packages:
       picomatch: ^3 || ^4
     peerDependenciesMeta:
       picomatch:
-        optional: true
-
-  follow-redirects@1.16.0:
-    resolution: {integrity: sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
         optional: true
 
   fs-extra@9.1.0:
@@ -716,9 +686,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  ms@2.1.3:
-    resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-
   nanoid@3.3.19:
     resolution: {integrity: sha512-Y2tUNy4ouw6tq5oDSKeQYGOyhkUBhNOcGV/02KC+6kd9eDGqdZd++mjMiIDilrBYvjEnCYvVtsuHCuP+okSfug==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -730,9 +697,6 @@ packages:
 
   node-api-dotnet@0.9.27:
     resolution: {integrity: sha512-/B/qmOLOAh3SlAiCuJEh1UGfrgYA/4+kyL5pMV31k0seruCRjd9IpmWmujuzSTMLiPuvRwFiMa7yOhNUAdTcRQ==}
-
-  node-rest-client@3.1.1:
-    resolution: {integrity: sha512-O8RUGGhGLLbzlL7SFOBza1AgUWP3uITv4mas4f5Q7A87HAy6qtYpa8Sj5x4UG9cDf4374v7lWyvgWladI04zzQ==}
 
   node@runtime:24.20.0:
     resolution:
@@ -1037,9 +1001,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  shortid@2.2.17:
-    resolution: {integrity: sha512-GpbM3gLF1UUXZvQw6MCyulHkWbRseNO4cyBEZresZRorwl1+SLu1ZdqgVtuwqz8mB6RpwPkm541mYSqrKyJSaA==}
-
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
@@ -1232,10 +1193,6 @@ packages:
 
   xml2js@0.5.0:
     resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
-    engines: {node: '>=4.0.0'}
-
-  xml2js@0.6.2:
-    resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
     engines: {node: '>=4.0.0'}
 
   xmlbuilder@11.0.1:
@@ -1472,8 +1429,6 @@ snapshots:
       '@types/prop-types': 15.7.15
       csstype: 3.2.3
 
-  '@types/shortid@2.2.0': {}
-
   '@vitest/expect@4.1.9':
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -1588,10 +1543,6 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  debug@4.3.7:
-    dependencies:
-      ms: 2.1.3
-
   detect-libc@2.1.2: {}
 
   dom-helpers@3.4.0:
@@ -1615,10 +1566,6 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
-
-  follow-redirects@1.16.0(debug@4.3.7):
-    optionalDependencies:
-      debug: 4.3.7
 
   fs-extra@9.1.0:
     dependencies:
@@ -1751,8 +1698,6 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
-  ms@2.1.3: {}
-
   nanoid@3.3.19: {}
 
   node-api-dotnet-generator@0.9.27:
@@ -1760,14 +1705,6 @@ snapshots:
       node-api-dotnet: 0.9.27
 
   node-api-dotnet@0.9.27: {}
-
-  node-rest-client@3.1.1:
-    dependencies:
-      debug: 4.3.7
-      follow-redirects: 1.16.0(debug@4.3.7)
-      xml2js: 0.6.2
-    transitivePeerDependencies:
-      - supports-color
 
   node@runtime:24.20.0: {}
 
@@ -1990,10 +1927,6 @@ snapshots:
 
   semver@7.7.4: {}
 
-  shortid@2.2.17:
-    dependencies:
-      nanoid: 3.3.19
-
   siginfo@2.0.0: {}
 
   source-map-js@1.2.1: {}
@@ -2125,11 +2058,6 @@ snapshots:
   wrappy@1.0.2: {}
 
   xml2js@0.5.0:
-    dependencies:
-      sax: 1.6.1
-      xmlbuilder: 11.0.1
-
-  xml2js@0.6.2:
     dependencies:
       sax: 1.6.1
       xmlbuilder: 11.0.1
