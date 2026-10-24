@@ -234,6 +234,17 @@
       "steamAppId": 1091500,
       "versions": [
         {
+          "id": "build-26161058",
+          "label": "Build 26161058",
+          "depots": [{ "depotId": 1091501, "manifestId": "3524634124112875626" }]
+        },
+        {
+          "id": "2-31-old",
+          "label": "2_31_old",
+          "branch": "2_31_old",
+          "depots": [{ "depotId": 1091501, "manifestId": "4104611899910011352" }]
+        },
+        {
           "id": "3.0.80.51928",
           "label": "3.0.80.51928",
           "depots": [{ "depotId": 1091501, "manifestId": "3389237510439361019" }]
@@ -475,6 +486,11 @@
     "bladeandsorcery": {
       "steamAppId": 629730,
       "versions": [
+        {
+          "id": "build-25901209",
+          "label": "Build 25901209",
+          "depots": [{ "depotId": 629731, "manifestId": "6657940559984845004" }]
+        },
         {
           "id": "build-24471221",
           "label": "Build 24471221",
@@ -811,6 +827,17 @@
     "factorio": {
       "steamAppId": 427520,
       "versions": [
+        {
+          "id": "2.1.23-experimental",
+          "label": "2.1.23 (experimental)",
+          "depots": [{ "depotId": 427521, "manifestId": "1465536947685815302" }]
+        },
+        {
+          "id": "2.1.22-experimental",
+          "label": "2.1.22 (experimental)",
+          "branch": "2.1.22",
+          "depots": [{ "depotId": 427521, "manifestId": "1862731960189210935" }]
+        },
         {
           "id": "2.0.77",
           "label": "2.0.77",
@@ -2072,6 +2099,15 @@
       "steamAppId": 440,
       "versions": [
         {
+          "id": "build-25995694",
+          "label": "Build 25995694",
+          "depots": [
+            { "depotId": 440, "manifestId": "1118032470228587934" },
+            { "depotId": 441, "manifestId": "8116815534774807823" },
+            { "depotId": 232251, "manifestId": "3447145031938049636" }
+          ]
+        },
+        {
           "id": "build-25738890",
           "label": "Build 25738890",
           "depots": [
@@ -2085,6 +2121,11 @@
     "teso": {
       "steamAppId": 306130,
       "versions": [
+        {
+          "id": "build-25805223",
+          "label": "Build 25805223",
+          "depots": [{ "depotId": 306131, "manifestId": "276172747131781035" }]
+        },
         {
           "id": "build-23588301",
           "label": "Build 23588301",
@@ -2146,6 +2187,14 @@
     "warthunder": {
       "steamAppId": 236390,
       "versions": [
+        {
+          "id": "build-26166099",
+          "label": "Build 26166099",
+          "depots": [
+            { "depotId": 236391, "manifestId": "8675133900244270658" },
+            { "depotId": 236394, "manifestId": "444186442078958183" }
+          ]
+        },
         {
           "id": "build-25802948",
           "label": "Build 25802948",
