@@ -349,6 +349,11 @@
       "steamAppId": 251570,
       "versions": [
         {
+          "id": "3.4.0",
+          "label": "3.4.0",
+          "depots": [{ "depotId": 251576, "manifestId": "8023780291719147098" }]
+        },
+        {
           "id": "3.3.0",
           "label": "3.3.0",
           "depots": [{ "depotId": 251576, "manifestId": "1372257690212457713" }]
@@ -827,6 +832,11 @@
     "factorio": {
       "steamAppId": 427520,
       "versions": [
+        {
+          "id": "2.1.24",
+          "label": "2.1.24",
+          "depots": [{ "depotId": 427521, "manifestId": "422768584032543502" }]
+        },
         {
           "id": "2.1.23-experimental",
           "label": "2.1.23 (experimental)",
@@ -1510,6 +1520,11 @@
       "steamAppId": 275850,
       "versions": [
         {
+          "id": "build-26305319",
+          "label": "Build 26305319",
+          "depots": [{ "depotId": 275851, "manifestId": "7436204008759126530" }]
+        },
+        {
           "id": "build-25732212",
           "label": "Build 25732212",
           "depots": [{ "depotId": 275851, "manifestId": "9023685413768918978" }]
@@ -2099,6 +2114,15 @@
       "steamAppId": 440,
       "versions": [
         {
+          "id": "build-26334388",
+          "label": "Build 26334388",
+          "depots": [
+            { "depotId": 440, "manifestId": "1118032470228587934" },
+            { "depotId": 441, "manifestId": "1451099152040369643" },
+            { "depotId": 232251, "manifestId": "3447145031938049636" }
+          ]
+        },
+        {
           "id": "build-25995694",
           "label": "Build 25995694",
           "depots": [
@@ -2188,6 +2212,14 @@
       "steamAppId": 236390,
       "versions": [
         {
+          "id": "build-26292308",
+          "label": "Build 26292308",
+          "depots": [
+            { "depotId": 236391, "manifestId": "7461589110099034279" },
+            { "depotId": 236394, "manifestId": "3839604526498621503" }
+          ]
+        },
+        {
           "id": "build-26166099",
           "label": "Build 26166099",
           "depots": [
@@ -2236,6 +2268,19 @@
     "witcher3": {
       "steamAppId": 292030,
       "versions": [
+        {
+          "id": "build-26238013",
+          "label": "Build 26238013",
+          "depots": [
+            { "depotId": 292031, "manifestId": "7640729138264148143" },
+            { "depotId": 292032, "manifestId": "2256163960874529295" },
+            { "depotId": 292033, "manifestId": "5639169236463762487" },
+            { "depotId": 292034, "manifestId": "7682788265650954229" },
+            { "depotId": 292036, "manifestId": "1350518231851738693" },
+            { "depotId": 292042, "manifestId": "8938212801694946028" },
+            { "depotId": 370009, "manifestId": "6477146200145051414" }
+          ]
+        },
         {
           "id": "build-25773555",
           "label": "Build 25773555",
