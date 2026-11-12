@@ -644,6 +644,14 @@
       "steamAppId": 262060,
       "versions": [
         {
+          "id": "build-26437048",
+          "label": "Build 26437048",
+          "depots": [
+            { "depotId": 262061, "manifestId": "3770208380046727011" },
+            { "depotId": 262062, "manifestId": "4507281052667341665" }
+          ]
+        },
+        {
           "id": "build-25810065",
           "label": "Build 25810065",
           "depots": [
@@ -1520,6 +1528,11 @@
       "steamAppId": 275850,
       "versions": [
         {
+          "id": "build-26540391",
+          "label": "Build 26540391",
+          "depots": [{ "depotId": 275851, "manifestId": "80048799343616017" }]
+        },
+        {
           "id": "build-26386568",
           "label": "Build 26386568",
           "depots": [{ "depotId": 275851, "manifestId": "3089640147238314487" }]
@@ -2171,6 +2184,14 @@
       "steamAppId": 200710,
       "versions": [
         {
+          "id": "build-26319573",
+          "label": "Build 26319573",
+          "depots": [
+            { "depotId": 200711, "manifestId": "8446039731117254159" },
+            { "depotId": 200713, "manifestId": "1937744461698132231" }
+          ]
+        },
+        {
           "id": "build-24292952",
           "label": "Build 24292952",
           "depots": [
@@ -2211,6 +2232,14 @@
     "warthunder": {
       "steamAppId": 236390,
       "versions": [
+        {
+          "id": "build-26599741",
+          "label": "Build 26599741",
+          "depots": [
+            { "depotId": 236391, "manifestId": "468496507152953742" },
+            { "depotId": 236394, "manifestId": "4567330055366881724" }
+          ]
+        },
         {
           "id": "build-26405937",
           "label": "Build 26405937",
@@ -2645,6 +2674,14 @@
     "mountandblade2bannerlord": {
       "steamAppId": 261550,
       "versions": [
+        {
+          "id": "1.5.7",
+          "label": "1.5.7",
+          "depots": [
+            { "depotId": 261551, "manifestId": "2753104758070879179" },
+            { "depotId": 261552, "manifestId": "9221865806457642695" }
+          ]
+        },
         {
           "id": "1.4.8",
           "label": "1.4.8",
