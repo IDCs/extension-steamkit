@@ -620,6 +620,15 @@
       "steamAppId": 440900,
       "versions": [
         {
+          "id": "build-26551968",
+          "label": "Build 26551968",
+          "depots": [
+            { "depotId": 440901, "manifestId": "2048187231614425140" },
+            { "depotId": 440902, "manifestId": "1577265733204746841" },
+            { "depotId": 440903, "manifestId": "4117553855113091513" }
+          ]
+        },
+        {
           "id": "build-25791535",
           "label": "Build 25791535",
           "depots": [
@@ -2232,6 +2241,14 @@
     "warthunder": {
       "steamAppId": 236390,
       "versions": [
+        {
+          "id": "build-26645180",
+          "label": "Build 26645180",
+          "depots": [
+            { "depotId": 236391, "manifestId": "2399792843388606621" },
+            { "depotId": 236394, "manifestId": "3803707214152493687" }
+          ]
+        },
         {
           "id": "build-26599741",
           "label": "Build 26599741",
