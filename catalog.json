@@ -620,6 +620,15 @@
       "steamAppId": 440900,
       "versions": [
         {
+          "id": "build-26668213",
+          "label": "Build 26668213",
+          "depots": [
+            { "depotId": 440901, "manifestId": "8494026180236670224" },
+            { "depotId": 440902, "manifestId": "5874991478724812229" },
+            { "depotId": 440903, "manifestId": "4117553855113091513" }
+          ]
+        },
+        {
           "id": "build-26551968",
           "label": "Build 26551968",
           "depots": [
@@ -850,6 +859,11 @@
       "steamAppId": 427520,
       "versions": [
         {
+          "id": "2.1.25-experimental",
+          "label": "2.1.25 (experimental)",
+          "depots": [{ "depotId": 427521, "manifestId": "7402997010850313780" }]
+        },
+        {
           "id": "2.1.24",
           "label": "2.1.24",
           "depots": [{ "depotId": 427521, "manifestId": "422768584032543502" }]
@@ -1061,6 +1075,11 @@
     "grimdawn": {
       "steamAppId": 219990,
       "versions": [
+        {
+          "id": "build-26655545",
+          "label": "Build 26655545",
+          "depots": [{ "depotId": 219991, "manifestId": "8464398994049966088" }]
+        },
         {
           "id": "build-25813250",
           "label": "Build 25813250",
@@ -1537,6 +1556,11 @@
       "steamAppId": 275850,
       "versions": [
         {
+          "id": "build-26924890",
+          "label": "Build 26924890",
+          "depots": [{ "depotId": 275851, "manifestId": "9003219725584814391" }]
+        },
+        {
           "id": "build-26540391",
           "label": "Build 26540391",
           "depots": [{ "depotId": 275851, "manifestId": "80048799343616017" }]
@@ -1741,6 +1765,11 @@
       "steamAppId": 457140,
       "versions": [
         {
+          "id": "build-26935396",
+          "label": "Build 26935396",
+          "depots": [{ "depotId": 457141, "manifestId": "5153386320445224495" }]
+        },
+        {
           "id": "build-24423041",
           "label": "Build 24423041",
           "depots": [{ "depotId": 457141, "manifestId": "4837644823067158760" }]
@@ -1870,6 +1899,29 @@
     "pillarsofeternity2": {
       "steamAppId": 560130,
       "versions": [
+        {
+          "id": "build-26326487",
+          "label": "Build 26326487",
+          "depots": [
+            { "depotId": 560131, "manifestId": "2140319774941062854" },
+            { "depotId": 812211, "manifestId": "7793235349351306936" },
+            { "depotId": 812237, "manifestId": "1216853061996828151" },
+            { "depotId": 812238, "manifestId": "5433399161169684718" },
+            { "depotId": 812239, "manifestId": "1868576862701102676" },
+            { "depotId": 812241, "manifestId": "61627058436756915" },
+            { "depotId": 812242, "manifestId": "8128757184136440836" },
+            { "depotId": 812243, "manifestId": "2991966289149468536" },
+            { "depotId": 812251, "manifestId": "1624777655558257931" },
+            { "depotId": 812254, "manifestId": "272507515472291188" },
+            { "depotId": 812257, "manifestId": "846217069547439411" },
+            { "depotId": 812261, "manifestId": "5066153019694411133" },
+            { "depotId": 812262, "manifestId": "2684730521298609783" },
+            { "depotId": 812263, "manifestId": "135054638718580364" },
+            { "depotId": 812264, "manifestId": "9140973938774917736" },
+            { "depotId": 812265, "manifestId": "7728266835374401313" },
+            { "depotId": 812271, "manifestId": "6508604224088293696" }
+          ]
+        },
         {
           "id": "build-12181035",
           "label": "Build 12181035",
@@ -2136,6 +2188,15 @@
       "steamAppId": 440,
       "versions": [
         {
+          "id": "build-26937511",
+          "label": "Build 26937511",
+          "depots": [
+            { "depotId": 440, "manifestId": "1118032470228587934" },
+            { "depotId": 441, "manifestId": "3768543557605727197" },
+            { "depotId": 232251, "manifestId": "405062544455734512" }
+          ]
+        },
+        {
           "id": "build-26334388",
           "label": "Build 26334388",
           "depots": [
@@ -2193,6 +2254,14 @@
       "steamAppId": 200710,
       "versions": [
         {
+          "id": "build-26774977",
+          "label": "Build 26774977",
+          "depots": [
+            { "depotId": 200711, "manifestId": "8302638119996664232" },
+            { "depotId": 200713, "manifestId": "1937744461698132231" }
+          ]
+        },
+        {
           "id": "build-26319573",
           "label": "Build 26319573",
           "depots": [
@@ -2241,6 +2310,14 @@
     "warthunder": {
       "steamAppId": 236390,
       "versions": [
+        {
+          "id": "build-26942825",
+          "label": "Build 26942825",
+          "depots": [
+            { "depotId": 236391, "manifestId": "4647724560126899178" },
+            { "depotId": 236394, "manifestId": "7255466551770940377" }
+          ]
+        },
         {
           "id": "build-26645180",
           "label": "Build 26645180",
@@ -2314,6 +2391,19 @@
     "witcher3": {
       "steamAppId": 292030,
       "versions": [
+        {
+          "id": "build-26940956",
+          "label": "Build 26940956",
+          "depots": [
+            { "depotId": 292031, "manifestId": "7928192657969230626" },
+            { "depotId": 292032, "manifestId": "1142296228915209742" },
+            { "depotId": 292033, "manifestId": "5639169236463762487" },
+            { "depotId": 292034, "manifestId": "4301163518701837783" },
+            { "depotId": 292036, "manifestId": "4837588545923117219" },
+            { "depotId": 292042, "manifestId": "2000557428830649838" },
+            { "depotId": 370009, "manifestId": "3282150273169308540" }
+          ]
+        },
         {
           "id": "build-26238013",
           "label": "Build 26238013",
